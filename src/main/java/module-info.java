@@ -1,6 +1,7 @@
 module com.charlymech.anyteeth {
     requires javafx.controls;
     requires javafx.fxml;
+    requires mongo.java.driver;
 
 
     opens com.charlymech.anyteeth to javafx.fxml;
