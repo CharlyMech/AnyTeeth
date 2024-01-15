@@ -11,7 +11,7 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.charlymech.anyteeth.controller.LogInController">
    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="225.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
-      <Image url="@../img/any_teeth_icon_dark.png" />
+      <Image url="@../img/dark/any_teeth_tray_icon.png" />
    </ImageView>
    <Label alignment="CENTER" layoutY="225.0" prefHeight="116.0" prefWidth="600.0" text="AnyTeeth" textFill="#368f80">
       <font>
