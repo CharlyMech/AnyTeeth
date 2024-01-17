@@ -6,6 +6,8 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -22,9 +24,6 @@ public class LogInController {
 	@FXML
 	TextField email, passwd;
 
-	private Stage stage;
-	private Scene scene;
-	private Parent root;
 	private static final String emailRegex = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$"; // Variable estática ya que posiblemente se necesite más adelante
 
 	public void login(ActionEvent event) throws IOException {
@@ -34,21 +33,6 @@ public class LogInController {
 		} else if (!email.getText().trim().matches(emailRegex)) { // Comprobar que el email es válido mediante una expresión regular
 			App.showWarningAlert("ERROR", "Error en el Log In", "El email introducido no es válido");
 		} else { // Los parámetros son correctos
-			//* Código para iniciar el panel principal  // OLD //
-//			System.out.println(email.getText() + "\t" + email.getText().trim());
-//			System.out.println(passwd.getText() + "\t" + passwd.getText().trim());
-//
-//			FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/charlymech/guiviewtest/fxml/mainpane.fxml"));
-//			this.root = loader.load();
-//
-//			MainPaneController main = loader.getController();
-//			main.setEmail(email.getText());
-//
-//			this.stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-//			this.scene = new Scene(root);
-//			this.stage.setScene(scene);
-//			this.stage.show();
-
 			// Verificar los datos con la Base de Datos
 			MongoDatabase db = Conn.mongo.getDatabase("test_login"); // Especificar la base de datos a usar
 			MongoCollection<Document> collection = db.getCollection("users"); // Especificar la colección
@@ -60,8 +44,17 @@ public class LogInController {
 
 			// Verificar si se encontró un usuario
 			if (result != null) {
-				System.out.println("Inicio de sesión exitoso. Usuario encontrado: " + result.toJson());
-				System.exit(0);
+				// Ejecutar la pantalla principal y asignar el email de usuario
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/charlymech/anyteeth/layout/main.fxml"));
+				Parent root = loader.load();
+				MainController mainController = loader.getController(); // Cargar el controlador de la vista
+				mainController.setEmail(email.getText()); // Asignar el email del usuario mediante el controlador de la vista principal
+				Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+				Scene scene = new Scene(root);
+				stage.setScene(scene);
+				stage.setTitle("AnyTeeth");
+				stage.setResizable(true);
+				stage.show();
 			} else {
 				App.showWarningAlert("ERROR", "Error en el Log In", "El email o la contraseña introducidos no son válidos");
 				// Reset text fields
