@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.calendarfx.view.CalendarView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.charlymech.anyteeth.controller.MainController">
+    <top>
+        <MenuBar BorderPane.alignment="CENTER">
+            <menus>
+                <Menu mnemonicParsing="false" text="Archivo">
+               <items>
+                  <Menu mnemonicParsing="false" text="Importar">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Desde JSON" />
+                        <MenuItem mnemonicParsing="false" text="Desde MONGO" />
+                    </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Exportar">
+                     <items>
+                        <MenuItem mnemonicParsing="false" text="Desde JSON" />
+                        <MenuItem mnemonicParsing="false" text="Desde MONGO" />
+                     </items>
+                  </Menu>
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="Configuración" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="Cerrar" />
+               </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Editar">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Delete" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Pantalla">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Pantalla completa" />
+                        <MenuItem mnemonicParsing="false" text="Ventana" />
+                        <CheckMenuItem mnemonicParsing="false" text="Escalable" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <RadioMenuItem mnemonicParsing="false" text="Tema Claro">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="theme" />
+                            </toggleGroup>
+                        </RadioMenuItem>
+                        <RadioMenuItem mnemonicParsing="false" text="Tema Oscuro" toggleGroup="$theme" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Sesión">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Ver sesión de usuario" />
+                        <MenuItem mnemonicParsing="false" text="Cerrar sesión" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Crear">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Nueva cita" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Nuevo paciente" />
+                        <MenuItem mnemonicParsing="false" text="Nuevo cliente" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem disable="true" mnemonicParsing="false" text="Nuevo presupuesto" />
+                        <MenuItem disable="true" mnemonicParsing="false" text="Nuevo plan económico" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem disable="true" mnemonicParsing="false" text="Nuevo ticket" />
+                        <MenuItem disable="true" mnemonicParsing="false" text="Nueva factura" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" text="Nuevo empleado" visible="false" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Ayuda">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Sobre AnyTeeth" />
+                        <MenuItem mnemonicParsing="false" text="Documentación" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="Contactar administrador" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+    <left>
+        <VBox prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+            <HBox prefHeight="50.0" prefWidth="200.0">
+               <children>
+                      <Button fx:id="appointment_btn" mnemonicParsing="false" onAction="#showAppointments" prefHeight="50.0" prefWidth="150.0" text="Citas">
+                          <font>
+                              <Font name="Verdana" size="20.0" />
+                          </font>
+                      </Button>
+                  <Button fx:id="add_appointment" mnemonicParsing="false" onAction="#addNewAppointment" prefHeight="50.0" prefWidth="50.0" text="+">
+                     <font>
+                        <Font name="Verdana" size="20.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+                <Button fx:id="patients_btn" mnemonicParsing="false" onAction="#showPatiens" prefHeight="50.0" prefWidth="721.0" text="Pacientes">
+                    <font>
+                        <Font name="Verdana" size="20.0" />
+                    </font>
+                </Button>
+                <Button fx:id="budgets_btn" disable="true" mnemonicParsing="false" onAction="#showBudgets" prefHeight="50.0" prefWidth="721.0" text="Presupuestos">
+                    <font>
+                        <Font name="Verdana" size="20.0" />
+                    </font>
+                </Button>
+                <Button fx:id="plans_btn" disable="true" mnemonicParsing="false" onAction="#showPlans" prefHeight="50.0" prefWidth="721.0" text="Planes">
+                    <font>
+                        <Font name="Verdana" size="20.0" />
+                    </font>
+                </Button>
+                <Button fx:id="documents_btn" disable="true" mnemonicParsing="false" onAction="#showDocuments" prefHeight="50.0" prefWidth="721.0" text="Documentos">
+                    <font>
+                        <Font name="Verdana" size="20.0" />
+                    </font>
+                </Button>
+            </children>
+        </VBox>
+    </left>
+    <center>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <children>
+                <ImageView fx:id="bg_logo" fitHeight="247.0" fitWidth="239.0" layoutX="429.0" layoutY="223.0" opacity="0.3" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="224.0" AnchorPane.leftAnchor="429.0" AnchorPane.rightAnchor="430.4639129638672" AnchorPane.topAnchor="223.0">
+                    <image>
+                        <Image url="@../img/light/any_teeth_icon.png" />
+                    </image>
+                </ImageView>
+            <CalendarView fx:id="appointments_pane" prefHeight="744.0" prefWidth="1080.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                <TabPane fx:id="patients_tab_pane" layoutX="-1.0" prefHeight="694.0" prefWidth="1081.0" tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="0.0">
+                    <tabs>
+                        <Tab text="Pacientes">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="639.0" prefWidth="1081.0" />
+                            </content>
+                        </Tab>
+                        <Tab text="Clientes">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                            </content>
+                        </Tab>
+                    </tabs>
+                </TabPane>
+                <TabPane fx:id="budgets_tab_pane" prefHeight="694.0" prefWidth="1081.0" tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <tabs>
+                        <Tab text="Presupuestos activos">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="639.0" prefWidth="1081.0" />
+                            </content>
+                        </Tab>
+                        <Tab text="Plantillas de presupuestos">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                            </content>
+                        </Tab>
+                        <Tab text="Crear nuevo presupuesto">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                            </content>
+                        </Tab>
+                    </tabs>
+                </TabPane>
+                <TabPane fx:id="plans_tab_pane" prefHeight="694.0" prefWidth="1081.0" tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <tabs>
+                        <Tab text="Planes activos">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="639.0" prefWidth="1081.0" />
+                            </content>
+                        </Tab>
+                        <Tab text="Nuevo plan">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                            </content>
+                        </Tab>
+                    </tabs>
+                </TabPane>
+                <TabPane fx:id="documents_tab_pane" prefHeight="694.0" prefWidth="1081.0" tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <tabs>
+                        <Tab text="Tickets">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="639.0" prefWidth="1081.0" />
+                            </content>
+                        </Tab>
+                        <Tab text="Facturas">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                            </content>
+                        </Tab>
+                        <Tab text="Otros">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                            </content>
+                        </Tab>
+                    </tabs>
+                </TabPane>
+            </children>
+        </AnchorPane>
+    </center>
+</BorderPane>
