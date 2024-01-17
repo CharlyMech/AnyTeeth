@@ -23,14 +23,14 @@
          <Font name="Verdana" size="24.0" />
       </font>
    </TextField>
-   <Button fx:id="login" layoutX="200.0" layoutY="675.0" mnemonicParsing="false" onAction="#login" prefHeight="75.0" prefWidth="200.0" text="Aceptar" textAlignment="CENTER">
-      <font>
-         <Font name="Verdana" size="32.0" />
-      </font>
-   </Button>
    <PasswordField fx:id="passwd" layoutX="50.0" layoutY="525.0" prefHeight="75.0" prefWidth="500.0" promptText="Contraseña">
       <font>
          <Font name="Verdana" size="24.0" />
       </font>
    </PasswordField>
+   <Button fx:id="login" layoutX="200.0" layoutY="675.0" mnemonicParsing="false" onAction="#login" prefHeight="75.0" prefWidth="200.0" text="Aceptar" textAlignment="CENTER">
+      <font>
+         <Font name="Verdana" size="32.0" />
+      </font>
+   </Button>
 </AnchorPane>
