@@ -32,6 +32,12 @@
             <version>3.12.11</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.calendarfx</groupId>
+            <artifactId>view</artifactId>
+            <version>11.12.6</version>
+        </dependency>
+
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>
