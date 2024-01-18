@@ -17,6 +17,8 @@ import org.bson.Document;
 
 import java.io.IOException;
 
+import static com.charlymech.anyteeth.App.rb;
+
 public class LogInController {
 	// Inyecciones FXML
 	@FXML
@@ -44,6 +46,7 @@ public class LogInController {
 
 			// Verificar si se encontró un usuario
 			if (result != null) {
+				System.out.println(rb.getString("welcome"));
 				// Ejecutar la pantalla principal y asignar el email de usuario
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/charlymech/anyteeth/layout/main.fxml"));
 				Parent root = loader.load();
@@ -62,5 +65,12 @@ public class LogInController {
 				passwd.setText("");
 			}
 		}
+	}
+
+	// Método para aplicar las propiedades de idioma a los elementos gráficos
+	public void setLanguageProperties() {
+		email.setPromptText(rb.getString("loginEmailPrompt"));
+		passwd.setPromptText(rb.getString("loginPasswdPrompt"));
+		login.setText(rb.getString("loginBtn"));
 	}
 }

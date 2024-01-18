@@ -4,31 +4,31 @@ import com.charlymech.anyteeth.db.Conn;
 import com.charlymech.anyteeth.gui.LoadApp;
 import com.mongodb.lang.NonNull;
 import javafx.application.Application;
-import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.Properties;
+import java.util.ResourceBundle;
 
 public class App {
-	private static File serverFile;
+	// Variables de clase
 	@NonNull
 	private static String serverIP;
 	@NonNull
 	private static int port;
-	private static Parent root;
+	@NonNull
+	public static ResourceBundle rb;
 
 	// Esta clase únicamente está pensada para establecer la conexión a la base de datos y llamar al Log In
 	public static void main(String[] args) {
 		// Leer las configuraciones iniciales de los archivos
-		serverFile = new File("./target/classes/com/charlymech/anyteeth/config/server");
-		try (FileReader reader = new FileReader(serverFile)) {
+		try (FileInputStream fis = new FileInputStream("./target/classes/com/charlymech/anyteeth/config/server")) {
 			Properties properties = new Properties();
-			properties.load(reader);
+			properties.load(fis);
 			// Asignar las propiedades a las variables
 			serverIP = properties.getProperty("serverIp");
 			port = Integer.parseInt(properties.getProperty("port"));
@@ -36,8 +36,10 @@ public class App {
 			e.printStackTrace();
 		}
 
+		// Cargar las propiedades del idioma del sistema
+		i18n();
+
 		// Una vez cargadas las configuraciones, se inicia la aplicación
-		System.out.println("BIENVENIDO A ANYTEETH"); // TEST
 		Application.launch(LoadApp.class, args);
 	}
 
@@ -62,10 +64,23 @@ public class App {
 
 	// Método para finalizar la aplicación por completo
 	public static void closeApp(Stage stage) {
-		System.out.println("Nos vemos pronto desde AnyTeeth :)");
+		System.out.println(rb.getString("goodbye"));
 		Conn.closeConnection();
 		stage.close();
 		System.exit(0); // Por si acaso
+	}
+
+	// Método para cargar las propiedades de idioma de la aplicación
+	private static void i18n() {
+		// Obtener el objeto Locale del sistema y asignar el bundle correspondiente
+		Locale locale = Locale.getDefault();
+
+		if (locale.toString().matches("^ca_ES$")) { // Caso especial: Sistema Operativo en Catalán -> Idioma al Español
+			Locale.setDefault(new Locale("es"));
+		} else if (!locale.toString().matches("^es_") && !locale.toString().matches("^en_")) { // Cualquier Locale diferente a es_ o en_ se ajusta el idioma a Inglés
+			Locale.setDefault(new Locale("en"));
+		}
+		rb = ResourceBundle.getBundle("com/charlymech/anyteeth/lang/language");
 	}
 
 	// GETTERS

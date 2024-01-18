@@ -18,17 +18,17 @@
          <Font name="Verdana Bold" size="96.0" />
       </font>
    </Label>
-   <TextField fx:id="email" layoutX="50.0" layoutY="400.0" prefHeight="75.0" prefWidth="500.0" promptText="Email corporativo">
+   <TextField fx:id="email" layoutX="50.0" layoutY="400.0" prefHeight="75.0" prefWidth="500.0">
       <font>
          <Font name="Verdana" size="24.0" />
       </font>
    </TextField>
-   <PasswordField fx:id="passwd" layoutX="50.0" layoutY="525.0" prefHeight="75.0" prefWidth="500.0" promptText="Contraseña">
+   <PasswordField fx:id="passwd" layoutX="50.0" layoutY="525.0" prefHeight="75.0" prefWidth="500.0">
       <font>
          <Font name="Verdana" size="24.0" />
       </font>
    </PasswordField>
-   <Button fx:id="login" layoutX="200.0" layoutY="675.0" mnemonicParsing="false" onAction="#login" prefHeight="75.0" prefWidth="200.0" text="Aceptar" textAlignment="CENTER">
+   <Button fx:id="login" layoutX="200.0" layoutY="675.0" mnemonicParsing="false" onAction="#login" prefHeight="75.0" prefWidth="200.0" textAlignment="CENTER">
       <font>
          <Font name="Verdana" size="32.0" />
       </font>

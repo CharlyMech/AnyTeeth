@@ -1,6 +1,7 @@
 package com.charlymech.anyteeth.gui;
 
 import com.charlymech.anyteeth.App;
+import com.charlymech.anyteeth.controller.LogInController;
 import com.charlymech.anyteeth.db.Conn;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -14,6 +15,8 @@ import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.util.Optional;
+
+import static com.charlymech.anyteeth.App.rb;
 
 public class LoadApp extends Application {
 	public static void main(String[] args) {
@@ -53,11 +56,23 @@ public class LoadApp extends Application {
 	// Método para iniciar la interfaz del LogIn y cerrar la de carga del programa
 	private void launchLogIn(Stage stage) {
 		try {
-			LogIn logIn = new LogIn(); // Instanciar el objeto del LogIn
-			Stage logInStage = new Stage(); // Crear un Stage para el LogIn
-			logIn.start(logInStage);
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/charlymech/anyteeth/layout/login.fxml"));
+			Parent root = loader.load();
+			Stage loginStage = new Stage();
+			Scene loginScene = new Scene(root);
+			loginStage.setScene(loginScene);
+			loginStage.setTitle("AnyTeeth - Log In");
+			loginStage.setResizable(false);
+			loginStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+				@Override
+				public void handle(WindowEvent windowEvent) {
+					App.closeApp(loginStage);
+				}
+			});
+			loginStage.show();
 
-			stage.close(); // Cerrar el Stage de la anterior ventana
+			LogInController loginController = loader.getController();
+			loginController.setLanguageProperties();
 		} catch (IOException e) {
 			System.out.println("Error intentando abrir el LogIn");
 			System.out.println(e.getMessage());
