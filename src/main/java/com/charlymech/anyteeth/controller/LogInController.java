@@ -17,6 +17,7 @@ import org.bson.Document;
 
 import java.io.IOException;
 
+import static com.charlymech.anyteeth.App.main;
 import static com.charlymech.anyteeth.App.rb;
 
 public class LogInController {
@@ -58,6 +59,7 @@ public class LogInController {
 				stage.setTitle("AnyTeeth");
 				stage.setResizable(true);
 				stage.show();
+				mainController.setLanguageProperties(); // Llamar al método para aplicar las propiedades de idioma
 			} else {
 				App.showWarningAlert("ERROR", "Error en el Log In", "El email o la contraseña introducidos no son válidos");
 				// Reset text fields

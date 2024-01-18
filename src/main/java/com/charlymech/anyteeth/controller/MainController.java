@@ -3,18 +3,21 @@ package com.charlymech.anyteeth.controller;
 import com.calendarfx.view.CalendarView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+
+import static com.charlymech.anyteeth.App.rb;
 
 public class MainController {
 	// Inyecciones FXML
 	@FXML
-	public MenuItem nueva_cita;
+	private Menu menuBarFile, menuBarFileImport, menuBarFileExport, menuBarEdit, menuBarWindow, menuBarSession, menuBarCreate, menuBarHelp;
 	@FXML
-	private Button appointment_btn, add_appointment, patients_btn, budgets_btn, plans_btn, documents_btn;
+	private MenuItem menuBarFileImportJson, menuBarFileImportMongo, menuBarFileExportJson, menuBarFileExportMongo, menuBarFileSettings, menuBarFileClose, menuBarWindowFullScreen, menuBarWindowWindowed, menuBarSessionUser, menuBarSessionClose, menuBarCreateAppointment, menuBarCreatePatient, menuBarCreateClient, menuBarCreateBudget, menuBarCreatePlan, menuBarCreateTicket, menuBarCreateInvoice, menuBarCreateStaff, menuBarHelpAbout, menuBarHelpDocumentation, menuBarHelpAdmin;
+	@FXML
+	private RadioMenuItem menuBarWindowLightTheme, menuBarWindowDarkTheme;
+	@FXML
+	private Button asideAppointments, asidePatients, asideBudgets, asidePlans, asideDocuments, asideStaff;
 	@FXML
 	private ImageView bg_logo;
 	@FXML
@@ -24,9 +27,58 @@ public class MainController {
 	// Variables de clase
 	public static String email; // Static por si se intenta abrir una nueva instancia del programa, que inicie sesión directamente
 
-	// SETTERS
-	public void setEmail(String email) {
-		this.email = email;
+	// Método para aplicar las propiedades de idioma a los elementos gráficos
+	public void setLanguageProperties() {
+		// Menu Bar //
+		// Archivo / File
+		this.menuBarFile.setText(rb.getString("menuBarFile"));
+		this.menuBarFileImport.setText(rb.getString("menuBarFileImport"));
+		this.menuBarFileImportJson.setText(rb.getString("menuBarFileImportJson"));
+		this.menuBarFileImportMongo.setText(rb.getString("menuBarFileImportMongo"));
+		this.menuBarFileExport.setText(rb.getString("menuBarFileExport"));
+		this.menuBarFileExportJson.setText(rb.getString("menuBarFileExportJson"));
+		this.menuBarFileExportMongo.setText(rb.getString("menuBarFileExportMongo"));
+		this.menuBarFileSettings.setText(rb.getString("menuBarFileSettings"));
+		this.menuBarFileClose.setText(rb.getString("menuBarFileClose"));
+		// Editar / Edit
+		this.menuBarEdit.setText(rb.getString("menuBarEdit"));
+		//TODO -> Más elementos aquí, decidir
+
+		// Ventana / Window
+		this.menuBarWindow.setText(rb.getString("menuBarWindow"));
+		this.menuBarWindowFullScreen.setText(rb.getString("menuBarWindowFullScreen"));
+		this.menuBarWindowWindowed.setText(rb.getString("menuBarWindowWindowed"));
+		this.menuBarWindowLightTheme.setText(rb.getString("menuBarWindowLightTheme"));
+		this.menuBarWindowDarkTheme.setText(rb.getString("menuBarWindowDarkTheme"));
+		// Sesión / Session
+		this.menuBarSession.setText(rb.getString("menuBarSession"));
+		this.menuBarSessionUser.setText(rb.getString("menuBarSessionUser"));
+		this.menuBarSessionClose.setText(rb.getString("menuBarSessionClose"));
+		// Crear / Create
+		this.menuBarCreate.setText(rb.getString("menuBarCreate"));
+		this.menuBarCreateAppointment.setText(rb.getString("menuBarCreateAppointment"));
+		this.menuBarCreatePatient.setText(rb.getString("menuBarCreatePatient"));
+		this.menuBarCreateClient.setText(rb.getString("menuBarCreateClient"));
+		this.menuBarCreateBudget.setText(rb.getString("menuBarCreateBudget"));
+		this.menuBarCreatePlan.setText(rb.getString("menuBarCreatePlan"));
+		this.menuBarCreateTicket.setText(rb.getString("menuBarCreateTicket"));
+		this.menuBarCreateInvoice.setText(rb.getString("menuBarCreateInvoice"));
+		this.menuBarCreateStaff.setText(rb.getString("menuBarCreateStaff"));
+		// Ayuda / Help
+		this.menuBarHelp.setText(rb.getString("menuBarHelp"));
+		this.menuBarHelpAbout.setText(rb.getString("menuBarHelpAbout"));
+		this.menuBarHelpDocumentation.setText(rb.getString("menuBarHelpDocumentation"));
+		this.menuBarHelpAdmin.setText(rb.getString("menuBarHelpAdmin"));
+
+		// Menu lateral
+		this.asideAppointments.setText(rb.getString("asideAppointments"));
+		this.asidePatients.setText(rb.getString("asidePatients"));
+		this.asideBudgets.setText(rb.getString("asideBudgets"));
+		this.asidePlans.setText(rb.getString("asidePlans"));
+		this.asideDocuments.setText(rb.getString("asideDocuments"));
+		this.asideStaff.setText(rb.getString("asideStaff"));
+
+		// Contenido principal
 	}
 
 	// Método para mostrar el panel de Citas
@@ -86,6 +138,14 @@ public class MainController {
 
 	public void addNewAppointment(ActionEvent event) {
 		System.out.println("NEW APPOINTMENT");
+	}
+
+	public void openStaffManagement(ActionEvent event) {
+	}
+
+	// SETTERS
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }
 // TODO -> center bg logo
