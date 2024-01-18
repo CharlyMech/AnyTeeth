@@ -4,11 +4,13 @@ import com.charlymech.anyteeth.App;
 import com.charlymech.anyteeth.db.Conn;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -25,6 +27,12 @@ public class LoadApp extends Application {
 		stage.setTitle("AnyTeeth");
 		stage.setResizable(false);
 		stage.show();
+		stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			@Override
+			public void handle(WindowEvent windowEvent) {
+				App.closeApp(stage);
+			}
+		});
 
 		// Crear nuevo hilo para realizar la conexión a la base de datos mientras se ejecuta la vista de carga
 		new Thread(() -> {
