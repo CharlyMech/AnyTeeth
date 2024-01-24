@@ -57,7 +57,7 @@ public class Staff extends Person {
 	}
 
 	// Clase enumerada privada para delimitar los roles de los empleados en la aplicación
-	private enum Role {
+	public enum Role {
 		ADMIN, CLINIC_ADMIN, STAFF
 	}
 }
