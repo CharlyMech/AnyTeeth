@@ -35,10 +35,17 @@ public class Person {
 	/*
 	 * Métodos de la clase
 	 */
+	public void addComment(String comment) {
+		this.comments.add(comment);
+	}
 
 	// GETTERS //
 	public String getIdentification() {
 		return identification;
+	}
+
+	public Identification getIdentificationType() {
+		return this.identificationType;
 	}
 
 	public String getFullName() {
@@ -74,6 +81,10 @@ public class Person {
 		this.identification = identification;
 	}
 
+	public void setIdentificationType(Identification identificationType) {
+		this.identificationType = identificationType;
+	}
+
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
 	}
@@ -88,6 +99,10 @@ public class Person {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public void setComments(ArrayList<String> comments) {
+		this.comments = comments;
 	}
 
 	public void setActive(boolean active) {
