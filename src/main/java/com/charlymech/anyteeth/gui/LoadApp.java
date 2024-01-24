@@ -73,6 +73,8 @@ public class LoadApp extends Application {
 
 			LogInController loginController = loader.getController();
 			loginController.setLanguageProperties();
+
+			stage.close(); // Cerrar el stage de la pantalla de carga
 		} catch (IOException e) {
 			System.out.println("Error intentando abrir el LogIn");
 			System.out.println(e.getMessage());
