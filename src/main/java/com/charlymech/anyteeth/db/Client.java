@@ -8,8 +8,8 @@ public class Client extends Person {
 	private String bankAcc; // IBAN
 
 	// Constructores
-	public Client(String identification, Identification identificationType, String fullName, String telephoneNumber, String email, String address, String bankAcc) {
-		super(identification, identificationType, fullName, telephoneNumber, email, address); // Llamar al constructor de la clase padre
+	public Client(String identification, Identification identificationType, String fullName, Gender gender, String telephoneNumber, String email, String address, String bankAcc) {
+		super(identification, identificationType, fullName, gender, telephoneNumber, email, address); // Llamar al constructor de la clase padre
 		this.clientID = this.generateClientID();
 		this.bankAcc = bankAcc;
 	}

@@ -7,6 +7,7 @@ public class Person {
 	protected String identification;
 	protected Identification identificationType;
 	protected String fullName;
+	protected Gender gender;
 	protected String telephoneNumber;
 	protected String telephoneNumberRegex = "^(\\+\\d{1,3})? (\\d ?){1,14}$";
 	protected String email;
@@ -16,9 +17,11 @@ public class Person {
 	protected boolean active;
 
 	// Constructores
-	public Person(String identification, Identification identificationType, String fullName, String telephoneNumber, String email, String address) {
+	public Person(String identification, Identification identificationType, String fullName, Gender gender, String telephoneNumber, String email, String address) {
 		this.identification = identification;
+		this.identificationType = identificationType;
 		this.fullName = fullName;
+		this.gender = gender;
 		this.telephoneNumber = telephoneNumber;
 		this.email = email;
 		this.address = address;
@@ -62,6 +65,10 @@ public class Person {
 		return active;
 	}
 
+	public Gender getGender() {
+		return this.gender;
+	}
+
 	// SETTERS //
 	public void setIdentification(String identification) {
 		this.identification = identification;
@@ -85,6 +92,15 @@ public class Person {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
+
+	// Clase enumerada para distinguir los dos únicos géneros
+	public enum Gender {
+		MALE, FEMALE;
 	}
 
 	// Clase enumerada para almacenar los tipos de identificación y sus métodos necesarios

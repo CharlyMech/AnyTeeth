@@ -8,8 +8,8 @@ public class Staff extends Person {
 	private Role role;
 
 	// Constructores
-	public Staff(String identification, Identification identificationType, String fullName, String telephoneNumber, String email, String password, String address, Role role) {
-		super(identification, identificationType, fullName, telephoneNumber, email, address); // Llamar al constructor de la clase padre
+	public Staff(String identification, Identification identificationType, String fullName, Gender gender, String telephoneNumber, String email, String password, String address, Role role) {
+		super(identification, identificationType, fullName, gender, telephoneNumber, email, address); // Llamar al constructor de la clase padre
 		this.staffID = this.generateStaffID();
 		this.password = password;
 		this.role = role;

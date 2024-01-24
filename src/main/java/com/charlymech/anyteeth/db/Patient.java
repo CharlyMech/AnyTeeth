@@ -10,10 +10,10 @@ public class Patient extends Person{
 	private ArrayList<Alert> alerts;
 
 	// Constructors
-	public Patient(String identification, Identification identificationType, String fullName, String telephoneNumber, String email, String address, Client defaultClient, ArrayList<Alert> alerts) {
+	public Patient(String identification, Identification identificationType, String fullName, Gender gender, String telephoneNumber, String email, String address, Client defaultClient, ArrayList<Alert> alerts) {
 		// En este constructor no considero que haya una lista de más de 1 Cliente ya que por defecto el propio paciente es el mismo Cliente y este constructor será llamado en la creación de nuevos Pacientes
 		// Se añaden Clientes a la lista inicializada mediante el método correspondiente
-		super(identification, identificationType, fullName, telephoneNumber, email, address); // Llamar al constructor de la clase padre
+		super(identification, identificationType, fullName, gender, telephoneNumber, email, address); // Llamar al constructor de la clase padre
 		this.patientID = this.generatePatientID();
 		this.defaultClient = defaultClient;
 		this.clients = new ArrayList<Client>();
