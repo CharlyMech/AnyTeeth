@@ -21,6 +21,8 @@ public class App {
 	@NonNull
 	private static int port;
 	@NonNull
+	private static String database;
+	@NonNull
 	public static ResourceBundle rb;
 
 	// Esta clase únicamente está pensada para establecer la conexión a la base de datos y llamar al Log In
@@ -32,6 +34,7 @@ public class App {
 			// Asignar las propiedades a las variables
 			serverIP = properties.getProperty("serverIp");
 			port = Integer.parseInt(properties.getProperty("port"));
+			database = properties.getProperty("database");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -90,5 +93,9 @@ public class App {
 
 	public static int getPort() {
 		return port;
+	}
+
+	public static String getDatabase() {
+		return database;
 	}
 }
