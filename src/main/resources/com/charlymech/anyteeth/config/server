@@ -1,2 +1,3 @@
 serverIp=192.168.56.10
 port=27017
+database=anyteeth_test
