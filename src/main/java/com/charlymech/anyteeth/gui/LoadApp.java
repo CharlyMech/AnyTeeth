@@ -10,13 +10,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ButtonType;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.util.Optional;
-
-import static com.charlymech.anyteeth.App.rb;
 
 public class LoadApp extends Application {
 	public static void main(String[] args) {
@@ -73,12 +73,23 @@ public class LoadApp extends Application {
 
 			LogInController loginController = loader.getController();
 			loginController.setLanguageProperties();
+			loginScene.setOnKeyPressed(new EventHandler<KeyEvent>() { // Añadir una escucha a la tecla de "ENTER" para ejecutar el método de login
+				@Override
+				public void handle(KeyEvent ke) {
+					if(ke.getCode() == KeyCode.ENTER) {
+						try {
+							loginController.login(loginStage);
+						} catch (IOException e) {
+							throw new RuntimeException(e);
+						}
+					}
+				}
+			});
 
 			stage.close(); // Cerrar el stage de la pantalla de carga
 		} catch (IOException e) {
-			System.out.println("Error intentando abrir el LogIn");
+			System.err.println("Error intentando abrir el LogIn");
 			System.out.println(e.getMessage());
-			throw new RuntimeException(e);
 		}
 
 	}
