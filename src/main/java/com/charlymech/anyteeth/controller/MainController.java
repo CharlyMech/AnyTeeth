@@ -1,6 +1,7 @@
 package com.charlymech.anyteeth.controller;
 
 import com.calendarfx.view.CalendarView;
+import com.charlymech.anyteeth.db.Staff;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -25,7 +26,7 @@ public class MainController {
 	@FXML
 	private CalendarView appointments_pane;
 	// Variables de clase
-	public static String email; // Static por si se intenta abrir una nueva instancia del programa, que inicie sesión directamente
+	public Staff userSession;
 
 	// Método para aplicar las propiedades de idioma a los elementos gráficos
 	public void setLanguageProperties() {
@@ -144,8 +145,8 @@ public class MainController {
 	}
 
 	// SETTERS
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUserSession(Staff staff) {
+		this.userSession = staff;
 	}
 }
 // TODO -> center bg logo
