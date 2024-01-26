@@ -4,10 +4,12 @@ import com.charlymech.anyteeth.App;
 import com.charlymech.anyteeth.db.Conn;
 import com.charlymech.anyteeth.db.Person;
 import com.charlymech.anyteeth.db.Staff;
+import com.charlymech.anyteeth.gui.LoadApp;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -17,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import org.bson.Document;
 
 import java.io.IOException;
@@ -97,6 +100,10 @@ public class LogInController {
 				stage.setScene(scene);
 				stage.setTitle("AnyTeeth");
 				stage.setResizable(true);
+				stage.setOnCloseRequest(event -> { // Asignar el método de cierre -> Cerrar sesión
+					event.consume(); // Si se presiona "Cancelar" no se cierra el Stage
+					mainController.logout(stage); // Llamar al método para salir de la sesión de usuario
+				});
 				stage.show();
 				mainController.setLanguageProperties(); // Llamar al método para aplicar las propiedades de idioma
 			} else {

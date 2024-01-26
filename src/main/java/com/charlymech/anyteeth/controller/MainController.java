@@ -1,11 +1,23 @@
 package com.charlymech.anyteeth.controller;
 
 import com.calendarfx.view.CalendarView;
+import com.charlymech.anyteeth.App;
 import com.charlymech.anyteeth.db.Staff;
+import com.charlymech.anyteeth.gui.LoadApp;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+
+import java.io.IOException;
 
 import static com.charlymech.anyteeth.App.rb;
 
@@ -147,6 +159,17 @@ public class MainController {
 	// SETTERS
 	public void setUserSession(Staff staff) {
 		this.userSession = staff;
+	}
+
+	public void logout(Stage stage) {
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION); // Crear la alerta de tipo confirmación
+		alert.setTitle("TITLE");
+		alert.setHeaderText("Header");
+		alert.setContentText("This is the alert content");
+
+		if (alert.showAndWait().get() == ButtonType.OK) { // El usuario desea salir de la app
+			LoadApp.launchLogIn(stage);
+		}
 	}
 }
 // TODO -> center bg logo
