@@ -4,18 +4,19 @@ import com.charlymech.anyteeth.App;
 import com.charlymech.anyteeth.db.Conn;
 import com.charlymech.anyteeth.db.Person;
 import com.charlymech.anyteeth.db.Staff;
+import com.charlymech.anyteeth.gui.LoadApp;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.bson.Document;
 
@@ -29,9 +30,13 @@ import static com.charlymech.anyteeth.App.rb;
 public class LogInController {
 	// Inyecciones FXML
 	@FXML
-	Button login;
+	private Button login;
 	@FXML
-	TextField email, passwd;
+	private ToggleButton showPasswordToggle;
+	@FXML
+	private TextField email, passwdTf;
+	@FXML
+	private PasswordField passwd;
 
 	// Método lanzado desde el evento del botón para acceder al método de comprobación del login
 	public void tryLaunchLogin(ActionEvent event) throws IOException {
@@ -111,10 +116,37 @@ public class LogInController {
 		}
 	}
 
+	// Método para aplicar propiedades gráficas
+	public void setGraphics() {
+		// ToggleButton contraseña
+		this.showPasswordToggle.setCursor(Cursor.HAND);
+	}
+
 	// Método para aplicar las propiedades de idioma a los elementos gráficos
 	public void setLanguageProperties() {
 		email.setPromptText(rb.getString("loginEmailPrompt"));
 		passwd.setPromptText(rb.getString("loginPasswdPrompt"));
 		login.setText(rb.getString("loginBtn"));
+
+
+	}
+
+	public void passwordToggle(ActionEvent event) {
+		// Crear ImageView para cada uno de los iconos
+		ImageView show = new ImageView(String.valueOf(LoadApp.class.getResource("/com/charlymech/anyteeth/img/light/show_password_light_30.png")));
+		ImageView hide = new ImageView(String.valueOf(LoadApp.class.getResource("/com/charlymech/anyteeth/img/light/show_password_active_light_30.png")));
+		String passwdString;
+		// Cuando suceda el evento -> Comprobar el estado y asignar el icono pertinente
+		if (this.showPasswordToggle.isSelected()) { // Toggle seleccionado -> Mostrar contraseña
+			this.showPasswordToggle.setGraphic(hide);
+			passwdString = this.passwd.getText();
+			this.passwd.setVisible(false);
+			this.passwdTf.setText(passwdString);
+			this.passwdTf.setVisible(true);
+		} else { // Toggle no seleccionado -> Ocultar contraseña
+			this.showPasswordToggle.setGraphic(show);
+			this.passwd.setVisible(true);
+			this.passwdTf.setVisible(false);
+		}
 	}
 }

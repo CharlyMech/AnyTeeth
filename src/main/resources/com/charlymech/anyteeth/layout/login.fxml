@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -33,4 +34,18 @@
          <Font name="Verdana" size="32.0" />
       </font>
    </Button>
+   <TextField fx:id="passwdTf" layoutX="50.0" layoutY="525.0" prefHeight="75.0" prefWidth="500.0" visible="false">
+      <font>
+         <Font name="Verdana" size="24.0" />
+      </font>
+   </TextField>
+   <ToggleButton fx:id="showPasswordToggle" layoutX="488.0" layoutY="538.0" mnemonicParsing="false" onAction="#passwordToggle" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: transparent;">
+      <graphic>
+         <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../img/light/show_password_light_30.png" />
+            </image>
+         </ImageView>
+      </graphic>
+   </ToggleButton>
 </AnchorPane>
