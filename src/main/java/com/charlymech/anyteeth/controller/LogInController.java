@@ -45,9 +45,9 @@ public class LogInController {
 	public void login(Stage loginStage) throws IOException {
 		// Únicamente se modificará el mensaje del error
 		if (email.getText().trim().isEmpty() || passwd.getText().trim().isEmpty()) { // En caso de que alguno de los campos no esté rellenado
-			App.showWarningAlert("ERROR", "Error en el Log In", "Debe de rellenar ambos campos para poder entrar al panel principal");
+			App.showWarningAlert(rb.getString("alertTitle"), rb.getString("warningLogin"), rb.getString("warningLoginEmpty"));
 		} else if (!email.getText().trim().matches(emailRegex)) { // Comprobar que el email es válido mediante una expresión regular
-			App.showWarningAlert("ERROR", "Error en el Log In", "El email introducido no es válido");
+			App.showWarningAlert(rb.getString("alertTitle"), rb.getString("warningLogin"), rb.getString("warningLoginBadEmail"));
 		} else { // Los parámetros son correctos
 			// Verificar los datos con la Base de Datos
 			MongoDatabase db = Conn.mongo.getDatabase(App.getDatabase()); // Especificar la base de datos a usar
@@ -63,7 +63,7 @@ public class LogInController {
 				if (!result.getBoolean("active")) { // Comprobar que el usuario esté activo
 					// Lo compruebo de forma separada para proporcionar un mensaje de error personalizado
 					Platform.runLater(() -> {
-						Optional<ButtonType> choice = App.showErrorAlert("ERROR", "Error en la cuenta de usuario", "La cuenta de usuario con la que está intentando acceder está actualmente deshabilidata. Contacte con el administrador de la clínica");
+						Optional<ButtonType> choice = App.showErrorAlert(rb.getString("alertTitle"), rb.getString("errorAccount"), rb.getString("errorAccountContent"));
 						if (choice.get() == ButtonType.OK){
 							App.closeApp(loginStage);
 						}
@@ -104,7 +104,7 @@ public class LogInController {
 				stage.show();
 				mainController.setLanguageProperties(); // Llamar al método para aplicar las propiedades de idioma
 			} else {
-				App.showWarningAlert("ERROR", "Error en el Log In", "El email o la contraseña introducidos no son válidos");
+				App.showWarningAlert(rb.getString("alertTitle"), rb.getString("warningLogin"), rb.getString("warningLoginBadUserEmail"));
 				// Reset text fields
 				email.setText("");
 				passwd.setText("");

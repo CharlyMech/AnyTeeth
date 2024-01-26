@@ -18,6 +18,8 @@ import javafx.stage.WindowEvent;
 import java.io.IOException;
 import java.util.Optional;
 
+import static com.charlymech.anyteeth.App.rb;
+
 public class LoadApp extends Application {
 	public static void main(String[] args) {
 		launch(args);
@@ -44,7 +46,7 @@ public class LoadApp extends Application {
 					Platform.runLater(() -> launchLogIn(stage));
 				} else {
 					Platform.runLater(() -> {
-						Optional<ButtonType> choice = App.showErrorAlert("ERROR", "Error ejecutando el programa", "No se ha podido ejecutar correctamente el programa debido a un error con el servidor. Póngase en contacto con su administrador");
+						Optional<ButtonType> choice = App.showErrorAlert(rb.getString("alertTitle"), rb.getString("errrorExecution"), rb.getString("errorExecutionContent"));
 						if (choice.get() == ButtonType.OK){
 							App.closeApp(stage);
 						}

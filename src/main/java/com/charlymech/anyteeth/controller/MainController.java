@@ -153,9 +153,9 @@ public class MainController {
 
 	public void logout(Stage stage) {
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION); // Crear la alerta de tipo confirmación
-		alert.setTitle("TITLE");
-		alert.setHeaderText("Header");
-		alert.setContentText("This is the alert content");
+		alert.setTitle(rb.getString("alertTitle"));
+		alert.setHeaderText(rb.getString("logoutAlert"));
+		alert.setContentText(rb.getString("logoutAlertContent"));
 
 		if (alert.showAndWait().get() == ButtonType.OK) { // El usuario desea salir de la app
 			LoadApp.launchLogIn(stage);
