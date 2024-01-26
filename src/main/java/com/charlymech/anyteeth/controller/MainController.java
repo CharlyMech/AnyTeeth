@@ -35,7 +35,10 @@ public class MainController {
 	// Método para leer el tipo de usuario y mostrar el contenido acorde a sus permisos
 	public void setUserSessionPermissions() {
 		// En este punto el usuario Staff ya ha sido asignado
-		System.out.println(this.userSession.getRole());
+		if(userSession.getRole() == Staff.Role.ADMIN || userSession.getRole() == Staff.Role.CLINIC_ADMIN) {
+			this.asideStaff.setVisible(true);
+			this.menuBarCreateStaff.setVisible(true);
+		}
 	}
 
 	// Método para aplicar las propiedades de idioma a los elementos gráficos

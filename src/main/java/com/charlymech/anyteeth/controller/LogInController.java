@@ -101,6 +101,7 @@ public class LogInController {
 				});
 				stage.show();
 				mainController.setLanguageProperties(); // Llamar al método para aplicar las propiedades de idioma
+				mainController.setUserSessionPermissions(); // Llamar al método para que se lea el tipo de usuario y muestre el contenido acorde a los permisos
 			} else {
 				App.showWarningAlert(rb.getString("alertTitle"), rb.getString("warningLogin"), rb.getString("warningLoginBadUserEmail"));
 				// Reset text fields
