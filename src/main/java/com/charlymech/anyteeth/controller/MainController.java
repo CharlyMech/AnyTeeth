@@ -16,23 +16,31 @@ public class MainController {
 	@FXML
 	private Menu menuBarFile, menuBarFileImport, menuBarFileExport, menuBarEdit, menuBarWindow, menuBarSession, menuBarCreate, menuBarHelp;
 	@FXML
-	private MenuItem menuBarFileImportJson, menuBarFileImportMongo, menuBarFileExportJson, menuBarFileExportMongo, menuBarFileSettings, menuBarFileClose, menuBarWindowFullScreen, menuBarWindowWindowed, menuBarSessionUser, menuBarSessionClose, menuBarCreateAppointment, menuBarCreatePatient, menuBarCreateClient, menuBarCreateBudget, menuBarCreatePlan, menuBarCreateTicket, menuBarCreateInvoice, menuBarCreateStaff, menuBarHelpAbout, menuBarHelpDocumentation, menuBarHelpAdmin;
+	private MenuItem menuBarFileImportJson, menuBarFileImportMongo, menuBarFileExportJson, menuBarFileExportMongo, menuBarFileSettings, menuBarFileClose, menuBarWindowFullScreen, menuBarWindowWindowed, menuBarSessionUser, menuBarSessionClose, menuBarCreateAppointment, menuBarCreatePatient, menuBarCreateClient, menuBarCreateBudget, menuBarCreatePlan, menuBarCreateTicket, menuBarCreateInvoice, menuBarCreateReport, menuBarCreateStaff, menuBarHelpAbout, menuBarHelpDocumentation, menuBarHelpAdmin;
 	@FXML
 	private RadioMenuItem menuBarWindowLightTheme, menuBarWindowDarkTheme;
 	@FXML
 	private Button asideAppointments, asidePatients, asideBudgets, asidePlans, asideDocuments, asideStaff;
 	@FXML
-	private ImageView bg_logo;
+	private ImageView bgLogo;
 	@FXML
-	private TabPane patients_tab_pane, budgets_tab_pane, plans_tab_pane, documents_tab_pane;
+	private TabPane patientsTabPane, budgetsTabPane, plansTabPane, documentsTabPane;
 	@FXML
-	private CalendarView appointments_pane;
+	private Tab patientsPatients, patientsClients, budgetsActive, budgetsTemplates, budgetsNew, plansActive, plansNew, documentsTickets, documentsInvoices, documentsReports, documentsOthers;
+	@FXML
+	private CalendarView appointmentsPane;
 	// Variables de clase
 	public Staff userSession;
 
+	// Método para leer el tipo de usuario y mostrar el contenido acorde a sus permisos
+	public void setUserSessionPermissions() {
+		// En este punto el usuario Staff ya ha sido asignado
+		System.out.println(this.userSession.getRole());
+	}
+
 	// Método para aplicar las propiedades de idioma a los elementos gráficos
 	public void setLanguageProperties() {
-		// Menu Bar //
+		// Menu Bar -//
 		// Archivo / File
 		this.menuBarFile.setText(rb.getString("menuBarFile"));
 		this.menuBarFileImport.setText(rb.getString("menuBarFileImport"));
@@ -66,77 +74,97 @@ public class MainController {
 		this.menuBarCreatePlan.setText(rb.getString("menuBarCreatePlan"));
 		this.menuBarCreateTicket.setText(rb.getString("menuBarCreateTicket"));
 		this.menuBarCreateInvoice.setText(rb.getString("menuBarCreateInvoice"));
+		this.menuBarCreateReport.setText(rb.getString("menuBarCreateReport"));
 		this.menuBarCreateStaff.setText(rb.getString("menuBarCreateStaff"));
 		// Ayuda / Help
 		this.menuBarHelp.setText(rb.getString("menuBarHelp"));
 		this.menuBarHelpAbout.setText(rb.getString("menuBarHelpAbout"));
 		this.menuBarHelpDocumentation.setText(rb.getString("menuBarHelpDocumentation"));
 		this.menuBarHelpAdmin.setText(rb.getString("menuBarHelpAdmin"));
+		//- Menu Bar //
 
-		// Menu lateral
+		// Menu lateral -//
 		this.asideAppointments.setText(rb.getString("asideAppointments"));
 		this.asidePatients.setText(rb.getString("asidePatients"));
 		this.asideBudgets.setText(rb.getString("asideBudgets"));
 		this.asidePlans.setText(rb.getString("asidePlans"));
 		this.asideDocuments.setText(rb.getString("asideDocuments"));
 		this.asideStaff.setText(rb.getString("asideStaff"));
+		//- Menu lateral //
 
-		// Contenido principal
+		// Contenido principal -//
+		// Pacientes / Patients TabPane
+		this.patientsPatients.setText(rb.getString("patientsPatientsTab"));
+		this.patientsClients.setText(rb.getString("patientsClientsTab"));
+
+		// Presupuestos / Budgets TabPane
+		//? No necesario por el momento
+
+		// Planes / Plans TabPane
+		//? No necesario por el momento
+
+		// Documentos / Documents TabPane
+		this.documentsTickets.setText(rb.getString("documentsTicketsTab"));
+		this.documentsInvoices.setText(rb.getString("documentsInvoicesTab"));
+		this.documentsReports.setText(rb.getString("documentsReportsTab"));
+		this.documentsOthers.setText(rb.getString("documentsOthersTab"));
+
+		//- Contenido principal //
 	}
 
 	// Método para mostrar el panel de Citas
 	public void showAppointments(ActionEvent event) {
-		this.appointments_pane.setVisible(true); // Panel de Citas visible
+		this.appointmentsPane.setVisible(true); // Panel de Citas visible
 		// Resto de paneles invisibles
-		this.patients_tab_pane.setVisible(false);
-		this.budgets_tab_pane.setVisible(false);
-		this.plans_tab_pane.setVisible(false);
-		this.documents_tab_pane.setVisible(false);
-		this.bg_logo.setVisible(false);
+		this.patientsTabPane.setVisible(false);
+		this.budgetsTabPane.setVisible(false);
+		this.plansTabPane.setVisible(false);
+		this.documentsTabPane.setVisible(false);
+		this.bgLogo.setVisible(false);
 	}
 
 	// Método para mostrar el panel de Pacientes
 	public void showPatiens(ActionEvent event) {
-		this.patients_tab_pane.setVisible(true); // Panel de Pacientes visible
+		this.patientsTabPane.setVisible(true); // Panel de Pacientes visible
 		// Resto de paneles invisibles
-		this.appointments_pane.setVisible(false);
-		this.budgets_tab_pane.setVisible(false);
-		this.plans_tab_pane.setVisible(false);
-		this.documents_tab_pane.setVisible(false);
-		this.bg_logo.setVisible(false);
+		this.appointmentsPane.setVisible(false);
+		this.budgetsTabPane.setVisible(false);
+		this.plansTabPane.setVisible(false);
+		this.documentsTabPane.setVisible(false);
+		this.bgLogo.setVisible(false);
 	}
 
 	// Método para mostrar el panel de Presupuestos
 	public void showBudgets(ActionEvent event) {
-		this.budgets_tab_pane.setVisible(true); // Panel de Presupuestos visible
+		this.budgetsTabPane.setVisible(true); // Panel de Presupuestos visible
 		// Resto de paneles invisibles
-		this.appointments_pane.setVisible(false);
-		this.patients_tab_pane.setVisible(false);
-		this.plans_tab_pane.setVisible(false);
-		this.documents_tab_pane.setVisible(false);
-		this.bg_logo.setVisible(false);
+		this.appointmentsPane.setVisible(false);
+		this.patientsTabPane.setVisible(false);
+		this.plansTabPane.setVisible(false);
+		this.documentsTabPane.setVisible(false);
+		this.bgLogo.setVisible(false);
 	}
 
 	// Método para mostrar el panel de Planes
 	public void showPlans(ActionEvent event) {
-		this.plans_tab_pane.setVisible(true); // Panel de Planes visible
+		this.plansTabPane.setVisible(true); // Panel de Planes visible
 		// Resto de paneles invisibles
-		this.appointments_pane.setVisible(false);
-		this.patients_tab_pane.setVisible(false);
-		this.budgets_tab_pane.setVisible(false);
-		this.documents_tab_pane.setVisible(false);
-		this.bg_logo.setVisible(false);
+		this.appointmentsPane.setVisible(false);
+		this.patientsTabPane.setVisible(false);
+		this.budgetsTabPane.setVisible(false);
+		this.documentsTabPane.setVisible(false);
+		this.bgLogo.setVisible(false);
 	}
 
 	// Método para mostrar el panel de Documentos
 	public void showDocuments(ActionEvent event) {
-		this.documents_tab_pane.setVisible(true); // Panel de Planes visible
+		this.documentsTabPane.setVisible(true); // Panel de Planes visible
 		// Resto de paneles invisibles
-		this.appointments_pane.setVisible(false);
-		this.patients_tab_pane.setVisible(false);
-		this.budgets_tab_pane.setVisible(false);
-		this.plans_tab_pane.setVisible(false);
-		this.bg_logo.setVisible(false);
+		this.appointmentsPane.setVisible(false);
+		this.patientsTabPane.setVisible(false);
+		this.budgetsTabPane.setVisible(false);
+		this.plansTabPane.setVisible(false);
+		this.bgLogo.setVisible(false);
 	}
 
 	public void addNewAppointment(ActionEvent event) {

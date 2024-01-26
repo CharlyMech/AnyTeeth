@@ -14,7 +14,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -74,6 +73,7 @@
 						<SeparatorMenuItem mnemonicParsing="false" />
 						<MenuItem fx:id="menuBarCreateTicket" disable="true" mnemonicParsing="false" />
 						<MenuItem fx:id="menuBarCreateInvoice" disable="true" mnemonicParsing="false" />
+                  <MenuItem fx:id="menuBarCreateReport" mnemonicParsing="false" />
 						<SeparatorMenuItem mnemonicParsing="false" />
 						<MenuItem fx:id="menuBarCreateStaff" mnemonicParsing="false" visible="false" />
 					</items>
@@ -92,20 +92,11 @@
 	<left>
 		<VBox prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
 			<children>
-				<HBox prefHeight="50.0" prefWidth="200.0">
-					<children>
-						<Button fx:id="asideAppointments" mnemonicParsing="false" onAction="#showAppointments" prefHeight="50.0" prefWidth="150.0">
+						<Button fx:id="asideAppointments" mnemonicParsing="false" onAction="#showAppointments" prefHeight="50.0" prefWidth="201.0">
 							<font>
 								<Font name="Verdana" size="20.0" />
 							</font>
 						</Button>
-						<Button fx:id="add_appointment" mnemonicParsing="false" onAction="#addNewAppointment" prefHeight="50.0" prefWidth="50.0" text="+">
-							<font>
-								<Font name="Verdana" size="20.0" />
-							</font>
-						</Button>
-					</children>
-				</HBox>
 				<Button fx:id="asidePatients" mnemonicParsing="false" onAction="#showPatiens" prefHeight="50.0" prefWidth="721.0">
 					<font>
 						<Font name="Verdana" size="20.0" />
@@ -121,7 +112,7 @@
 						<Font name="Verdana" size="20.0" />
 					</font>
 				</Button>
-				<Button fx:id="asideDocuments" disable="true" mnemonicParsing="false" onAction="#showDocuments" prefHeight="50.0" prefWidth="721.0">
+				<Button fx:id="asideDocuments" mnemonicParsing="false" onAction="#showDocuments" prefHeight="50.0" prefWidth="721.0">
 					<font>
 						<Font name="Verdana" size="20.0" />
 					</font>
@@ -137,72 +128,77 @@
 	<center>
 		<AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
 			<children>
-				<ImageView fx:id="bg_logo" fitHeight="247.0" fitWidth="239.0" layoutX="429.0" layoutY="223.0" opacity="0.3" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="224.0" AnchorPane.leftAnchor="429.0" AnchorPane.rightAnchor="430.4639129638672" AnchorPane.topAnchor="223.0">
+				<ImageView fx:id="bgLogo" fitHeight="247.0" fitWidth="239.0" layoutX="429.0" layoutY="223.0" opacity="0.3" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="224.0" AnchorPane.leftAnchor="429.0" AnchorPane.rightAnchor="430.4639129638672" AnchorPane.topAnchor="223.0">
 					<image>
 						<Image url="@../img/light/any_teeth_icon.png" />
 					</image>
 				</ImageView>
-				<CalendarView fx:id="appointments_pane" prefHeight="744.0" prefWidth="1080.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-				<TabPane fx:id="patients_tab_pane" layoutX="-1.0" prefHeight="694.0" prefWidth="1081.0" tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="0.0">
+				<CalendarView fx:id="appointmentsPane" prefHeight="744.0" prefWidth="1080.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+				<TabPane fx:id="patientsTabPane" layoutX="-1.0" prefHeight="694.0" prefWidth="1081.0" tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="0.0">
 					<tabs>
-						<Tab text="Pacientes">
+						<Tab fx:id="patientsPatients" closable="false">
 							<content>
 								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="639.0" prefWidth="1081.0" />
 							</content>
 						</Tab>
-						<Tab text="Clientes">
+						<Tab fx:id="patientsClients">
 							<content>
 								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
 							</content>
 						</Tab>
 					</tabs>
 				</TabPane>
-				<TabPane fx:id="budgets_tab_pane" prefHeight="694.0" prefWidth="1081.0" tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+				<TabPane fx:id="budgetsTabPane" prefHeight="694.0" prefWidth="1081.0" tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 					<tabs>
-						<Tab text="Presupuestos activos">
+						<Tab fx:id="budgetsActive">
 							<content>
 								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="639.0" prefWidth="1081.0" />
 							</content>
 						</Tab>
-						<Tab text="Plantillas de presupuestos">
+						<Tab fx:id="budgetsTemplates">
 							<content>
 								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
 							</content>
 						</Tab>
-						<Tab text="Crear nuevo presupuesto">
+						<Tab fx:id="budgetsNew">
 							<content>
 								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
 							</content>
 						</Tab>
 					</tabs>
 				</TabPane>
-				<TabPane fx:id="plans_tab_pane" prefHeight="694.0" prefWidth="1081.0" tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+				<TabPane fx:id="plansTabPane" prefHeight="694.0" prefWidth="1081.0" tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 					<tabs>
-						<Tab text="Planes activos">
+						<Tab fx:id="plansActive">
 							<content>
 								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="639.0" prefWidth="1081.0" />
 							</content>
 						</Tab>
-						<Tab text="Nuevo plan">
+						<Tab fx:id="plansNew">
 							<content>
 								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
 							</content>
 						</Tab>
 					</tabs>
 				</TabPane>
-				<TabPane fx:id="documents_tab_pane" prefHeight="694.0" prefWidth="1081.0" tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+				<TabPane fx:id="documentsTabPane" prefHeight="694.0" prefWidth="1081.0" tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 					<tabs>
-						<Tab text="Tickets">
+						<Tab fx:id="documentsTickets" closable="false" disable="true">
 							<content>
 								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="639.0" prefWidth="1081.0" />
 							</content>
 						</Tab>
-						<Tab text="Facturas">
+						<Tab fx:id="documentsInvoices" closable="false" disable="true">
 							<content>
 								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
 							</content>
 						</Tab>
-						<Tab text="Otros">
+                  <Tab fx:id="documentsReports" closable="false">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                     </content>
+                  </Tab>
+						<Tab fx:id="documentsOthers" closable="false">
 							<content>
 								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
 							</content>
