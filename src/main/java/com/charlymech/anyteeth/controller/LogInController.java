@@ -33,8 +33,6 @@ public class LogInController {
 	@FXML
 	TextField email, passwd;
 
-	private static final String emailRegex = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$"; // Variable estática ya que posiblemente se necesite más adelante
-
 	// Método lanzado desde el evento del botón para acceder al método de comprobación del login
 	public void tryLaunchLogin(ActionEvent event) throws IOException {
 		Stage loginStage = (Stage)((Node)event.getSource()).getScene().getWindow(); // Coger el Stage del evento
@@ -46,7 +44,7 @@ public class LogInController {
 		// Únicamente se modificará el mensaje del error
 		if (email.getText().trim().isEmpty() || passwd.getText().trim().isEmpty()) { // En caso de que alguno de los campos no esté rellenado
 			App.showWarningAlert(rb.getString("alertTitle"), rb.getString("warningLogin"), rb.getString("warningLoginEmpty"));
-		} else if (!email.getText().trim().matches(emailRegex)) { // Comprobar que el email es válido mediante una expresión regular
+		} else if (!email.getText().trim().matches(Staff.corporationEmailRegex)) { // Comprobar que el email corporativo es válido mediante una expresión regular
 			App.showWarningAlert(rb.getString("alertTitle"), rb.getString("warningLogin"), rb.getString("warningLoginBadEmail"));
 		} else { // Los parámetros son correctos
 			// Verificar los datos con la Base de Datos
