@@ -102,7 +102,7 @@ public class LogInController {
 				stage.setResizable(true);
 				stage.setOnCloseRequest(event -> { // Asignar el método de cierre -> Cerrar sesión
 					event.consume(); // Si se presiona "Cancelar" no se cierra el Stage
-					mainController.logout(stage); // Llamar al método para salir de la sesión de usuario
+					mainController.logout(); // Llamar al método para salir de la sesión de usuario
 				});
 				stage.centerOnScreen();
 				stage.show();

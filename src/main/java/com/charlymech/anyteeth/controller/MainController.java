@@ -20,6 +20,8 @@ import static com.charlymech.anyteeth.App.rb;
 public class MainController {
 	// Inyecciones FXML
 	@FXML
+	private BorderPane main;
+	@FXML
 	private Menu menuBarFile, menuBarFileImport, menuBarFileExport, menuBarEdit, menuBarWindow, menuBarSession, menuBarCreate, menuBarHelp;
 	@FXML
 	private MenuItem menuBarFileImportJson, menuBarFileImportMongo, menuBarFileExportJson, menuBarFileExportMongo, menuBarFileSettings, menuBarFileClose, menuBarWindowFullScreen, menuBarWindowWindowed, menuBarSessionUser, menuBarSessionClose, menuBarCreateAppointment, menuBarCreatePatient, menuBarCreateClient, menuBarCreateBudget, menuBarCreatePlan, menuBarCreateTicket, menuBarCreateInvoice, menuBarCreateReport, menuBarCreateStaff, menuBarHelpAbout, menuBarHelpDocumentation, menuBarHelpAdmin;
@@ -228,14 +230,22 @@ public class MainController {
 		this.userSession = staff;
 	}
 
-	public void logout(Stage stage) {
+	// Método para los botones que pueden cerrar la aplicación
+	public void logoutActionEvent(ActionEvent event) {
+		logout(); // Llamar al método de logout()
+	}
+
+	// Método para cerrar la sesión de usuario
+	public void logout() {
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION); // Crear la alerta de tipo confirmación
 		alert.setTitle(rb.getString("alertTitle"));
 		alert.setHeaderText(rb.getString("logoutAlert"));
 		alert.setContentText(rb.getString("logoutAlertContent"));
 
 		if (alert.showAndWait().get() == ButtonType.OK) { // El usuario desea salir de la app
-			LoadApp.launchLogIn(stage);
+			Stage mainStage = (Stage)this.main.getScene().getWindow();
+			mainStage.close();
+			LoadApp.launchLogIn();
 		}
 	}
 

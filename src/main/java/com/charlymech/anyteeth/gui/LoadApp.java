@@ -43,7 +43,10 @@ public class LoadApp extends Application {
 		new Thread(() -> {
 				boolean connected = Conn.connectDB(App.getServerIP(), App.getPort()); // Llamar al método para la conexión y verificar que se ha conectado o no
 				if(connected) {
-					Platform.runLater(() -> launchLogIn(stage));
+					Platform.runLater(() -> {
+						launchLogIn();
+						stage.close();
+					});
 				} else {
 					Platform.runLater(() -> {
 						Optional<ButtonType> choice = App.showErrorAlert(rb.getString("alertTitle"), rb.getString("errrorExecution"), rb.getString("errorExecutionContent"));
@@ -56,7 +59,7 @@ public class LoadApp extends Application {
 	}
 
 	// Método para iniciar la interfaz del LogIn y cerrar la de carga del programa
-	public static void launchLogIn(Stage stage) {
+	public static void launchLogIn() {
 		try {
 			FXMLLoader loader = new FXMLLoader(LoadApp.class.getResource("/com/charlymech/anyteeth/layout/login.fxml"));
 			Parent root = loader.load();
@@ -90,7 +93,7 @@ public class LoadApp extends Application {
 				}
 			});
 
-			stage.close(); // Cerrar el stage de la pantalla de carga
+//			stage.close(); // Cerrar el stage de la pantalla de carga
 		} catch (IOException e) {
 			System.err.println("Error intentando abrir el LogIn");
 			System.out.println(e.getMessage());
