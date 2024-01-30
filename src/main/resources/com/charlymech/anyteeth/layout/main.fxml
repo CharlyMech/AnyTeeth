@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.calendarfx.view.CalendarView?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.RadioMenuItem?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -90,7 +95,7 @@
 		</MenuBar>
 	</top>
 	<left>
-		<VBox prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+		<VBox prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #6096BA;" BorderPane.alignment="CENTER">
 			<children>
 						<Button fx:id="asideAppointments" mnemonicParsing="false" onAction="#showAppointments" prefHeight="50.0" prefWidth="201.0">
 							<font>
@@ -117,7 +122,7 @@
 						<Font name="Verdana" size="20.0" />
 					</font>
 				</Button>
-				<Button fx:id="asideStaff" mnemonicParsing="false" onAction="#openStaffManagement" prefHeight="50.0" prefWidth="721.0" visible="false">
+				<Button fx:id="asideStaff" mnemonicParsing="false" onAction="#showStaff" prefHeight="50.0" prefWidth="721.0" visible="false">
 					<font>
 						<Font name="Verdana" size="20.0" />
 					</font>
@@ -205,6 +210,34 @@
 						</Tab>
 					</tabs>
 				</TabPane>
+            <BorderPane fx:id="staffPane" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <top>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Button fx:id="addStaffBtn" mnemonicParsing="false" onAction="#addNewStaff" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #6096BA; -fx-border-radius: 20px;">
+                           <graphic>
+                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-radius: 20px;">
+                                 <image>
+                                    <Image url="@../img/light/add_user_light_30.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <TextField fx:id="staffSearchBar" prefHeight="50.0" prefWidth="833.0" style="-fx-border-color: #358F80; -fx-border-width: 2px; -fx-border-radius: 20px; -fx-background-color: transparent;">
+                           <font>
+                              <Font name="Verdana" size="18.0" />
+                           </font></TextField>
+                        <ComboBox fx:id="staffSearchFilter" prefHeight="50.0" prefWidth="117.0" style="-fx-background-color: #6096BA; -fx-border-radius: 20px;" />
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                  </HBox>
+               </top>
+               <center>
+                  <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+               </center>
+            </BorderPane>
 			</children>
 		</AnchorPane>
 	</center>

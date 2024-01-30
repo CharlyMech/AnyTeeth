@@ -1,12 +1,18 @@
 package com.charlymech.anyteeth.controller;
 
 import com.calendarfx.view.CalendarView;
+import com.charlymech.anyteeth.App;
 import com.charlymech.anyteeth.db.Staff;
 import com.charlymech.anyteeth.gui.LoadApp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import static com.charlymech.anyteeth.App.rb;
@@ -20,29 +26,50 @@ public class MainController {
 	@FXML
 	private RadioMenuItem menuBarWindowLightTheme, menuBarWindowDarkTheme;
 	@FXML
-	private Button asideAppointments, asidePatients, asideBudgets, asidePlans, asideDocuments, asideStaff;
+	private Button asideAppointments, asidePatients, asideBudgets, asidePlans, asideDocuments, asideStaff, addStaffBtn;
 	@FXML
 	private ImageView bgLogo;
+	@FXML
+	private BorderPane staffPane;
 	@FXML
 	private TabPane patientsTabPane, budgetsTabPane, plansTabPane, documentsTabPane;
 	@FXML
 	private Tab patientsPatients, patientsClients, budgetsActive, budgetsTemplates, budgetsNew, plansActive, plansNew, documentsTickets, documentsInvoices, documentsReports, documentsOthers;
 	@FXML
+	private TextField staffSearchBar;
+	@FXML
+	private ComboBox staffSearchFilter;
+	@FXML
 	private CalendarView appointmentsPane;
 	// Variables de clase
 	public Staff userSession;
+	private boolean windowOpened = false; // Variable indicativa de una ventana externa abierta -> Inicializada en falso
+
+	// Método para aplicar todas las propiedades necesarias en el programa principal
+	public void setProperties() {
+		this.setUserSessionPermissions(); // Asignar los permisos de usuario
+		this.setLanguageProperties(); // Cargar los elementos de idioma
+		this.setGraphics(); // Cargar las propiedades gráficas
+	}
+
+	// Método para cargar propiedades gráficas
+	private void setGraphics() {
+		// STAFF //
+		this.addStaffBtn.setCursor(Cursor.HAND);
+		this.staffSearchFilter.setCursor(Cursor.HAND);
+	}
 
 	// Método para leer el tipo de usuario y mostrar el contenido acorde a sus permisos
-	public void setUserSessionPermissions() {
+	private void setUserSessionPermissions() {
 		// En este punto el usuario Staff ya ha sido asignado
-		if(userSession.getRole() == Staff.Role.ADMIN || userSession.getRole() == Staff.Role.CLINIC_ADMIN) {
+		if (userSession.getRole() == Staff.Role.ADMIN || userSession.getRole() == Staff.Role.CLINIC_ADMIN) {
 			this.asideStaff.setVisible(true);
 			this.menuBarCreateStaff.setVisible(true);
 		}
 	}
 
 	// Método para aplicar las propiedades de idioma a los elementos gráficos
-	public void setLanguageProperties() {
+	private void setLanguageProperties() {
 		// Menu Bar -//
 		// Archivo / File
 		this.menuBarFile.setText(rb.getString("menuBarFile"));
@@ -123,6 +150,7 @@ public class MainController {
 		this.budgetsTabPane.setVisible(false);
 		this.plansTabPane.setVisible(false);
 		this.documentsTabPane.setVisible(false);
+		this.staffPane.setVisible(false);
 		this.bgLogo.setVisible(false);
 	}
 
@@ -134,6 +162,7 @@ public class MainController {
 		this.budgetsTabPane.setVisible(false);
 		this.plansTabPane.setVisible(false);
 		this.documentsTabPane.setVisible(false);
+		this.staffPane.setVisible(false);
 		this.bgLogo.setVisible(false);
 	}
 
@@ -145,6 +174,7 @@ public class MainController {
 		this.patientsTabPane.setVisible(false);
 		this.plansTabPane.setVisible(false);
 		this.documentsTabPane.setVisible(false);
+		this.staffPane.setVisible(false);
 		this.bgLogo.setVisible(false);
 	}
 
@@ -156,6 +186,7 @@ public class MainController {
 		this.patientsTabPane.setVisible(false);
 		this.budgetsTabPane.setVisible(false);
 		this.documentsTabPane.setVisible(false);
+		this.staffPane.setVisible(false);
 		this.bgLogo.setVisible(false);
 	}
 
@@ -167,14 +198,29 @@ public class MainController {
 		this.patientsTabPane.setVisible(false);
 		this.budgetsTabPane.setVisible(false);
 		this.plansTabPane.setVisible(false);
+		this.staffPane.setVisible(false);
 		this.bgLogo.setVisible(false);
+	}
+
+	public void showStaff(ActionEvent event) {
+		this.staffPane.setVisible(true);
+		// Resto de paneles invisibles
+		this.documentsTabPane.setVisible(false); // Panel de Planes visible
+		this.appointmentsPane.setVisible(false);
+		this.patientsTabPane.setVisible(false);
+		this.budgetsTabPane.setVisible(false);
+		this.plansTabPane.setVisible(false);
+		this.bgLogo.setVisible(false);
+	}
+
+	// Método de muestra del error de ventana externa en ejecución
+	private void showExecutingWindowAlert() {
+		// Como este mismo código puede verse repetido (es el mismo mensaje) lo agrupo en la función
+		App.showWarningAlert(rb.getString("executingWindowTitle"),  rb.getString("executingWindowHead"), rb.getString("executingWindowContent"));
 	}
 
 	public void addNewAppointment(ActionEvent event) {
 		System.out.println("NEW APPOINTMENT");
-	}
-
-	public void openStaffManagement(ActionEvent event) {
 	}
 
 	// SETTERS
@@ -190,6 +236,26 @@ public class MainController {
 
 		if (alert.showAndWait().get() == ButtonType.OK) { // El usuario desea salir de la app
 			LoadApp.launchLogIn(stage);
+		}
+	}
+
+	public void addNewStaff(ActionEvent event) {
+		System.out.println("Open create staff window");
+		if (!this.windowOpened) { // No existe ventana externa abierta -> Ejecutar nueva ventana
+			this.windowOpened = true;
+			try {
+				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/charlymech/anyteeth/layout/new-staff.fxml"));
+				Parent root = (Parent) fxmlLoader.load();
+				Stage stage = new Stage();
+				stage.setTitle("Second Window");
+				stage.setScene(new Scene(root));
+				stage.show();
+			} catch (Exception e) {
+				App.showErrorAlert("ERROR", "Error trying to open the window", "The new Staff window couldn't be opened");
+				System.out.println("Cant load new window");
+			}
+		} else { // Existe una ventana externa en ejecución -> Monstrar mensaje de error
+			this.showExecutingWindowAlert();
 		}
 	}
 }
