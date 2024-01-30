@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.charlymech.anyteeth.controller.LogInController">
+<AnchorPane prefHeight="700.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.charlymech.anyteeth.controller.LogInController">
    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="225.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
       <Image url="@../img/dark/any_teeth_tray_icon.png" />
    </ImageView>
@@ -19,33 +19,30 @@
          <Font name="Verdana Bold" size="96.0" />
       </font>
    </Label>
-   <TextField fx:id="email" layoutX="50.0" layoutY="400.0" prefHeight="75.0" prefWidth="500.0">
+   <TextField fx:id="email" layoutX="50.0" layoutY="400.0" prefHeight="50.0" prefWidth="500.0">
       <font>
          <Font name="Verdana" size="24.0" />
       </font>
    </TextField>
-   <PasswordField fx:id="passwd" layoutX="50.0" layoutY="525.0" prefHeight="75.0" prefWidth="500.0">
+   <PasswordField fx:id="passwd" layoutX="50.0" layoutY="500.0" prefHeight="50.0" prefWidth="500.0">
       <font>
          <Font name="Verdana" size="24.0" />
       </font>
    </PasswordField>
-   <Button fx:id="login" layoutX="200.0" layoutY="675.0" mnemonicParsing="false" onAction="#tryLaunchLogin" prefHeight="75.0" prefWidth="200.0" textAlignment="CENTER">
+   <Button fx:id="login" layoutX="225.0" layoutY="615.0" mnemonicParsing="false" onAction="#tryLaunchLogin" prefHeight="50.0" prefWidth="150.0" textAlignment="CENTER">
       <font>
-         <Font name="Verdana" size="32.0" />
+         <Font name="Verdana" size="28.0" />
       </font>
    </Button>
-   <TextField fx:id="passwdTf" layoutX="50.0" layoutY="525.0" prefHeight="75.0" prefWidth="500.0" visible="false">
+   <TextField fx:id="passwdTf" layoutX="50.0" layoutY="500.0" prefHeight="50.0" prefWidth="500.0" visible="false">
       <font>
          <Font name="Verdana" size="24.0" />
       </font>
    </TextField>
-   <ToggleButton fx:id="showPasswordToggle" layoutX="488.0" layoutY="538.0" mnemonicParsing="false" onAction="#passwordToggle" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: transparent;">
-      <graphic>
-         <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-               <Image url="@../img/light/show_password_light_30.png" />
-            </image>
-         </ImageView>
-      </graphic>
-   </ToggleButton>
+   <ToggleButton fx:id="showPasswordToggle" layoutX="488.0" layoutY="538.0" mnemonicParsing="false" onAction="#passwordToggle" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: transparent;" />
+   <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="500.0" layoutY="510.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../img/light/show_password_light_30.png" />
+      </image>
+   </ImageView>
 </AnchorPane>
