@@ -39,10 +39,12 @@
          <Font name="Verdana" size="24.0" />
       </font>
    </TextField>
-   <ToggleButton fx:id="showPasswordToggle" layoutX="488.0" layoutY="538.0" mnemonicParsing="false" onAction="#passwordToggle" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: transparent;" />
-   <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="500.0" layoutY="510.0" pickOnBounds="true" preserveRatio="true">
-      <image>
-         <Image url="@../img/light/show_password_light_30.png" />
-      </image>
-   </ImageView>
+   <ToggleButton fx:id="showPasswordToggle" layoutX="497.0" layoutY="500.0" mnemonicParsing="false" onAction="#passwordToggle" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: transparent;">
+      <graphic>
+         <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../img/light/show_password_light_30.png" />
+            </image>
+         </ImageView>
+      </graphic></ToggleButton>
 </AnchorPane>
