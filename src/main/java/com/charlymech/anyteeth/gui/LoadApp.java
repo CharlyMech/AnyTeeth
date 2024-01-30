@@ -71,6 +71,7 @@ public class LoadApp extends Application {
 					App.closeApp(loginStage);
 				}
 			});
+			loginStage.centerOnScreen();
 			loginStage.show();
 
 			LogInController loginController = loader.getController();

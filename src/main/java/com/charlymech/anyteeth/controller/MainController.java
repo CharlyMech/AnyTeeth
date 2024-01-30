@@ -249,6 +249,7 @@ public class MainController {
 				Stage stage = new Stage();
 				stage.setTitle("Second Window");
 				stage.setScene(new Scene(root));
+				stage.centerOnScreen();
 				stage.show();
 			} catch (Exception e) {
 				App.showErrorAlert("ERROR", "Error trying to open the window", "The new Staff window couldn't be opened");

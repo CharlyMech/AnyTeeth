@@ -104,6 +104,7 @@ public class LogInController {
 					event.consume(); // Si se presiona "Cancelar" no se cierra el Stage
 					mainController.logout(stage); // Llamar al método para salir de la sesión de usuario
 				});
+				stage.centerOnScreen();
 				stage.show();
 				mainController.setProperties(); // Llamar al método para aplicar las propiedades de idioma
 			} else {
