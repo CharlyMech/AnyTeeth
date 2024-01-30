@@ -105,8 +105,7 @@ public class LogInController {
 					mainController.logout(stage); // Llamar al método para salir de la sesión de usuario
 				});
 				stage.show();
-				mainController.setLanguageProperties(); // Llamar al método para aplicar las propiedades de idioma
-				mainController.setUserSessionPermissions(); // Llamar al método para que se lea el tipo de usuario y muestre el contenido acorde a los permisos
+				mainController.setProperties(); // Llamar al método para aplicar las propiedades de idioma
 			} else {
 				App.showWarningAlert(rb.getString("alertTitle"), rb.getString("warningLogin"), rb.getString("warningLoginBadUserEmail"));
 				// Reset text fields
@@ -118,6 +117,8 @@ public class LogInController {
 
 	// Método para aplicar propiedades gráficas
 	public void setGraphics() {
+		// Login Button
+		this.login.setCursor(Cursor.HAND);
 		// ToggleButton contraseña
 		this.showPasswordToggle.setCursor(Cursor.HAND);
 	}
