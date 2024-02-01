@@ -78,7 +78,7 @@ public class LoadApp extends Application {
 			loginStage.show();
 
 			LogInController loginController = loader.getController();
-			loginController.setLanguageProperties();
+			loginController.setLanguage();
 			loginController.setGraphics();
 			loginScene.setOnKeyPressed(new EventHandler<KeyEvent>() { // Añadir una escucha a la tecla de "ENTER" para ejecutar el método de login
 				@Override

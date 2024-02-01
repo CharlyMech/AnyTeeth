@@ -25,9 +25,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static com.charlymech.anyteeth.App.main;
 import static com.charlymech.anyteeth.App.rb;
 
-public class LogInController {
+public class LogInController implements Properties {
 	// Inyecciones FXML
 	@FXML
 	private Button login;
@@ -106,7 +107,10 @@ public class LogInController {
 				});
 				stage.centerOnScreen();
 				stage.show();
-				mainController.setProperties(); // Llamar al método para aplicar las propiedades de idioma
+				// Asignas las propiedades necesarias para la GUI
+				mainController.setLanguage();
+				mainController.setGraphics();
+				mainController.setUserSession(userSession);
 			} else {
 				App.showWarningAlert(rb.getString("alertTitle"), rb.getString("warningLogin"), rb.getString("warningLoginBadUserEmail"));
 				// Reset text fields
@@ -116,7 +120,7 @@ public class LogInController {
 		}
 	}
 
-	// Método para aplicar propiedades gráficas
+	@Override
 	public void setGraphics() {
 		// Login Button
 		this.login.setCursor(Cursor.HAND);
@@ -124,13 +128,11 @@ public class LogInController {
 		this.showPasswordToggle.setCursor(Cursor.HAND);
 	}
 
-	// Método para aplicar las propiedades de idioma a los elementos gráficos
-	public void setLanguageProperties() {
+	@Override
+	public void setLanguage() {
 		email.setPromptText(rb.getString("loginEmailPrompt"));
 		passwd.setPromptText(rb.getString("loginPasswdPrompt"));
 		login.setText(rb.getString("loginBtn"));
-
-
 	}
 
 	public void passwordToggle(ActionEvent event) {
