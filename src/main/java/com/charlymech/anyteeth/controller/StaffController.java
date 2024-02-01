@@ -5,7 +5,7 @@ import javafx.event.ActionEvent;
 public class StaffController implements Properties {
 	// Método para comprobar los cambios en la ventana emergente y modificar el valor de ventana en ejecución en el cierre
 	public void checkCloseEvent() {
-		MainController.windowOpened = false;
+
 	}
 
 	public void saveChanges(ActionEvent event) {

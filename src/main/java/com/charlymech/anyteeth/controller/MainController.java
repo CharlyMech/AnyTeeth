@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import static com.charlymech.anyteeth.App.rb;
@@ -45,7 +46,7 @@ public class MainController implements Properties {
 	private CalendarView appointmentsPane;
 	// Variables de clase
 	public Staff userSession;
-	public static boolean windowOpened = false; // Variable indicativa de una ventana externa abierta -> Inicializada en falso
+	private Stage staffStage;
 
 	@Override
 	public void setGraphics() {
@@ -129,7 +130,7 @@ public class MainController implements Properties {
 	}
 
 	// Método para leer el tipo de usuario y mostrar el contenido acorde a sus permisos
-	private void setUserSessionPermissions() {
+	public void setUserSessionPermissions() {
 		// En este punto el usuario Staff ya ha sido asignado
 		if (userSession.getRole() == Staff.Role.ADMIN || userSession.getRole() == Staff.Role.CLINIC_ADMIN) {
 			this.asideStaff.setVisible(true);
@@ -218,11 +219,6 @@ public class MainController implements Properties {
 		System.out.println("NEW APPOINTMENT");
 	}
 
-	// SETTERS
-	public void setUserSession(Staff staff) {
-		this.userSession = staff;
-	}
-
 	// Método para los botones que pueden cerrar la aplicación
 	public void logoutActionEvent(ActionEvent event) {
 		logout(); // Llamar al método de logout()
@@ -244,28 +240,32 @@ public class MainController implements Properties {
 
 	public void addNewStaff(ActionEvent event) {
 		System.out.println("Open create staff window");
-		if (!windowOpened) { // No existe ventana externa abierta -> Ejecutar nueva ventana
-			windowOpened = true; // Cambiar el valor para indicar que se ha abierto una nueva ventana
+		if (this.staffStage == null || !this.staffStage.isShowing()) { // No existe ventana externa abierta -> Ejecutar nueva ventana
 			try {
 				StaffController newStaffController = new StaffController();
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/charlymech/anyteeth/layout/staff.fxml"));
-				Parent root = (Parent) fxmlLoader.load();
-				Stage stage = new Stage();
-				stage.setTitle("Second Window");
-				stage.setScene(new Scene(root));
-				stage.centerOnScreen();
-				stage.setOnCloseRequest(evt -> { // Asignar el método de cierre de la ventana
+				Parent root = fxmlLoader.load();
+				this.staffStage = new Stage();
+				this.staffStage.setTitle("");
+				this.staffStage.setScene(new Scene(root));
+				this.staffStage.centerOnScreen();
+				this.staffStage.setOnCloseRequest(evt -> { // Asignar el método de cierre de la ventana
 					evt.consume(); // Si se presiona "Cancelar" no se cierra el Stage
 					newStaffController.checkCloseEvent();
 				});
-				stage.show();
+				this.staffStage.show();
 			} catch (Exception e) {
 				App.showErrorAlert("ERROR", "Error trying to open the window", "The new Staff window couldn't be opened");
 				System.out.println("Cant load new window");
 			}
-		} else { // Existe una ventana externa en ejecución -> Monstrar mensaje de error
-			this.showExecutingWindowAlert();
+		} else { // Existe una ventana externa en ejecución -> Traerla al frente
+			this.staffStage.toFront();
 		}
+	}
+
+	// SETTERS
+	public void setUserSession(Staff staff) {
+		this.userSession = staff;
 	}
 }
 // TODO -> center bg logo
