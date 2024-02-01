@@ -111,6 +111,7 @@ public class LogInController implements Properties {
 				mainController.setLanguage();
 				mainController.setGraphics();
 				mainController.setUserSession(userSession);
+				mainController.setUserSessionPermissions();
 			} else {
 				App.showWarningAlert(rb.getString("alertTitle"), rb.getString("warningLogin"), rb.getString("warningLoginBadUserEmail"));
 				// Reset text fields
