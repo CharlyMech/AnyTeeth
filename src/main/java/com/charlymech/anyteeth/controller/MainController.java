@@ -7,6 +7,7 @@ import com.charlymech.anyteeth.gui.LoadApp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,9 +17,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import static com.charlymech.anyteeth.App.rb;
 
-public class MainController implements Properties {
+public class MainController implements Initializable {
 	// Inyecciones FXML
 	@FXML
 	private BorderPane main;
@@ -49,13 +53,17 @@ public class MainController implements Properties {
 	private Stage staffStage;
 
 	@Override
+	public void initialize(URL url, ResourceBundle resourceBundle) {
+		setLanguage();
+		setGraphics();
+	}
+
 	public void setGraphics() {
 		// STAFF //
 		this.addStaffBtn.setCursor(Cursor.HAND);
 		this.staffSearchFilter.setCursor(Cursor.HAND);
 	}
 
-	@Override
 	public void setLanguage() {
 		// Menu Bar -//
 		// Archivo / File
@@ -242,7 +250,7 @@ public class MainController implements Properties {
 		System.out.println("Open create staff window");
 		if (this.staffStage == null || !this.staffStage.isShowing()) { // No existe ventana externa abierta -> Ejecutar nueva ventana
 			try {
-				StaffController newStaffController = new StaffController();
+				StaffController staffController = new StaffController();
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/charlymech/anyteeth/layout/staff.fxml"));
 				Parent root = fxmlLoader.load();
 				this.staffStage = new Stage();
@@ -251,12 +259,14 @@ public class MainController implements Properties {
 				this.staffStage.centerOnScreen();
 				this.staffStage.setOnCloseRequest(evt -> { // Asignar el método de cierre de la ventana
 					evt.consume(); // Si se presiona "Cancelar" no se cierra el Stage
-					newStaffController.checkCloseEvent();
+					staffController.checkCloseEvent();
 				});
+				staffController.setStaffStage(this.staffStage);
 				this.staffStage.show();
 			} catch (Exception e) {
 				App.showErrorAlert("ERROR", "Error trying to open the window", "The new Staff window couldn't be opened");
-				System.out.println("Cant load new window");
+				System.out.println("Cant load new window:");
+				e.printStackTrace();
 			}
 		} else { // Existe una ventana externa en ejecución -> Traerla al frente
 			this.staffStage.toFront();

@@ -12,6 +12,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -22,14 +23,16 @@ import javafx.stage.Stage;
 import org.bson.Document;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 import static com.charlymech.anyteeth.App.main;
 import static com.charlymech.anyteeth.App.rb;
 
-public class LogInController implements Properties {
+public class LogInController implements Initializable {
 	// Inyecciones FXML
 	@FXML
 	private Button login;
@@ -114,10 +117,6 @@ public class LogInController implements Properties {
 				});
 				stage.centerOnScreen();
 				stage.show();
-				// Asignas las propiedades necesarias para la GUI
-				mainController.setLanguage();
-				mainController.setGraphics();
-				mainController.setUserSession(userSession);
 				mainController.setUserSessionPermissions();
 			} else {
 				App.showWarningAlert(rb.getString("alertTitle"), rb.getString("warningLogin"), rb.getString("warningLoginBadUserEmail"));
@@ -128,7 +127,6 @@ public class LogInController implements Properties {
 		}
 	}
 
-	@Override
 	public void setGraphics() {
 		// Login Button
 		this.login.setCursor(Cursor.HAND);
@@ -136,7 +134,6 @@ public class LogInController implements Properties {
 		this.showPasswordToggle.setCursor(Cursor.HAND);
 	}
 
-	@Override
 	public void setLanguage() {
 		email.setPromptText(rb.getString("loginEmailPrompt"));
 		passwd.setPromptText(rb.getString("loginPasswdPrompt"));
@@ -160,5 +157,10 @@ public class LogInController implements Properties {
 			this.passwd.setVisible(true);
 			this.passwdTf.setVisible(false);
 		}
+	}
+
+	@Override
+	public void initialize(URL url, ResourceBundle resourceBundle) {
+
 	}
 }
