@@ -1,6 +1,12 @@
 package com.charlymech.anyteeth.db;
 
+import com.charlymech.anyteeth.Enums.Gender;
+import com.charlymech.anyteeth.Enums.Identification;
+import com.charlymech.anyteeth.Enums.MaritalStatus;
+import com.charlymech.anyteeth.Enums.Province;
+
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Patient extends Person{
 	// Variables de clase
@@ -10,10 +16,10 @@ public class Patient extends Person{
 	private ArrayList<Alert> alerts;
 
 	// Constructors
-	public Patient(String identification, Identification identificationType, String fullName, Gender gender, String telephoneNumber, String email, String address, Client defaultClient, ArrayList<Alert> alerts) {
-		// En este constructor no considero que haya una lista de más de 1 Cliente ya que por defecto el propio paciente es el mismo Cliente y este constructor será llamado en la creación de nuevos Pacientes
+	public Patient(String identification, Identification identificationType, String fullName, Gender gender, Date birthDate, int cp, String population, Province province, MaritalStatus maritalStatus, Date registrationDate, String telephoneNumber, String email, String address, Client defaultClient, ArrayList<Alert> alerts) {
+		// En este constructor no considero que haya una lista de más de 1 Cliente, ya que por defecto el propio paciente es el mismo Cliente y este constructor será llamado en la creación de nuevos Pacientes
 		// Se añaden Clientes a la lista inicializada mediante el método correspondiente
-		super(identification, identificationType, fullName, gender, telephoneNumber, email, address); // Llamar al constructor de la clase padre
+		super(identification, identificationType, fullName, gender, birthDate, telephoneNumber, email, address, cp, population, province, maritalStatus, registrationDate); // Llamar al constructor de la clase padre
 		this.patientID = this.generatePatientID();
 		this.defaultClient = defaultClient;
 		this.clients = new ArrayList<Client>();

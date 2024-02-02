@@ -1,6 +1,7 @@
 package com.charlymech.anyteeth.controller;
 
 import com.charlymech.anyteeth.App;
+import com.charlymech.anyteeth.Enums.Gender;
 import com.charlymech.anyteeth.db.Conn;
 import com.charlymech.anyteeth.db.Person;
 import com.charlymech.anyteeth.db.Staff;
@@ -41,7 +42,7 @@ public class LogInController implements Properties {
 
 	// Método lanzado desde el evento del botón para acceder al método de comprobación del login
 	public void tryLaunchLogin(ActionEvent event) throws IOException {
-		Stage loginStage = (Stage)((Node)event.getSource()).getScene().getWindow(); // Coger el Stage del evento
+		Stage loginStage = (Stage) ((Node) event.getSource()).getScene().getWindow(); // Coger el Stage del evento
 		login(loginStage); // Lanzar el método de comprobación
 	}
 
@@ -68,7 +69,7 @@ public class LogInController implements Properties {
 					// Lo compruebo de forma separada para proporcionar un mensaje de error personalizado
 					Platform.runLater(() -> {
 						Optional<ButtonType> choice = App.showErrorAlert(rb.getString("alertTitle"), rb.getString("errorAccount"), rb.getString("errorAccountContent"));
-						if (choice.get() == ButtonType.OK){
+						if (choice.get() == ButtonType.OK) {
 							App.closeApp(loginStage);
 						}
 					});
@@ -80,10 +81,16 @@ public class LogInController implements Properties {
 				userSession.setIdentification(identificationDocument.getString("type"));
 				userSession.setIdentification(identificationDocument.getString("idNumber"));
 				userSession.setFullName(result.getString("name"));
-				userSession.setGender(Person.Gender.valueOf(result.getString("gender")));
+				userSession.setGender(Gender.valueOf(result.getString("gender")));
+// 			userSession.setBirthDate(result.getDate("birthDate")); //! Not implemented in DB TODO
 				userSession.setEmail(result.getString("email"));
 				userSession.setTelephoneNumber(result.getString("phone"));
 				userSession.setAddress(result.getString("address"));
+//				userSession.setCp(result.getInteger("cp")); //! Not implemented in DB TODO
+//				userSession.setCp(result.getString("population")); //! Not implemented in DB TODO
+//				userSession.setCp(result.getString("province")); //! Not implemented in DB TODO
+// 			userSession.setCp(result.getString("maritalStatus")); //! Not implemented in DB TODO
+//				userSession.setBirthDate(result.getDate("registrationDate")); //! Not implemented in DB TODO
 				userSession.setRole(Staff.Role.valueOf(result.getString("role")));
 				userSession.setPassword(result.getString("password"));
 				List<String> comments = result.getList("comments", String.class);
