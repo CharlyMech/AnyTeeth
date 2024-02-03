@@ -1,5 +1,7 @@
 package com.charlymech.anyteeth.Enums;
 
+import java.util.ArrayList;
+
 public enum Province {
 	//? Tener en cuenta que está pensado por el momento para España -> Se puede escalar a diferentes paises
 	ALAVA("Álava"), ALBACETE("Albacete"), ALICANTE("Alicante"), ALMERIA("Almería"),
@@ -16,13 +18,21 @@ public enum Province {
 	TERUEL("Teruel"), TOLEDO("Toledo"), VALENCIA("Valencia"), VALLADOLID("Valladolid"),
 	VIZCAYA("Vizcaya"), ZAMORA("Zamora"), ZARAGOZA("Zaragoza");
 
-	private final String nombreProvincia;
+	private final String province;
 
-	Province(String nombreProvincia) {
-		this.nombreProvincia = nombreProvincia;
+	Province(String province) {
+		this.province = province;
 	}
 
-	public String getNombreProvincia() {
-		return nombreProvincia;
+	public String getProvince() {
+		return this.province;
 	}
+
+	public static ArrayList<String> getProvincesNames() {
+		ArrayList<String> provincesNames = new ArrayList<>();
+		for(Province p : Province.values()) {
+			provincesNames.add(p.getProvince());
+		}
+		return provincesNames;
+ 	}
 }
