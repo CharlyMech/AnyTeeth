@@ -2,6 +2,8 @@ package com.charlymech.anyteeth.controller;
 
 import com.charlymech.anyteeth.Enums.Gender;
 import com.charlymech.anyteeth.Enums.Identification;
+import com.charlymech.anyteeth.Enums.MaritalStatus;
+import com.charlymech.anyteeth.Enums.Province;
 import com.charlymech.anyteeth.db.Staff;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import static com.charlymech.anyteeth.App.rb;
@@ -43,10 +46,10 @@ public class StaffController implements Initializable {
 	// Variables de clase
 	private Stage staffStage;
 	private final ObservableList<Identification> identifications = FXCollections.observableArrayList(Identification.DNI, Identification.NIE);
-	private final ObservableList<Gender> genders = FXCollections.observableArrayList(Gender.MALE, Gender.FEMALE);
-	//	private final ObservableList<Person.Gender> maritalStatus = FXCollections.observableArrayList(Person.Gender.MALE, Person.Gender.FEMALE); // TODO -> Crear clase enumerada
+	private final ObservableList<String> genders = FXCollections.observableArrayList(Gender.MALE.toString(), Gender.FEMALE.toString());
+	private final ObservableList<String> maritalStatus = FXCollections.observableArrayList(MaritalStatus.SINGLE.toString(), MaritalStatus.MARRIED_JOINTLY.toString(), MaritalStatus.MARRIED_SEPARATELY.toString(), MaritalStatus.HEAD_FAMILY.toString(), MaritalStatus.WIDOWER_DEPENDENT_CHILD.toString());
 	private final ObservableList<Staff.Role> roles = FXCollections.observableArrayList(Staff.Role.STAFF, Staff.Role.CLINIC_ADMIN, Staff.Role.ADMIN);
-	private final ObservableList<String> provinces = FXCollections.observableArrayList("Álava", "Albacete", "Alicante", "Almería", "Asturias ", "Avila", "Badajoz", "Barcelona", " Burgos", "Cáceres", "Cádiz", "Cantabria", "Castellón", "Ciudad Real", "Córdoba", "La Coruña", "Cuenca", "Gerona", "Granada", "Guadalajara", "Guipúzcoa", "Huelva", "Huesca", "Balearic Islands", "Jaén", "León", "Lérida", "Lugo", "Madrid", "Málaga", "Murcia", "Navarra", "Orense", "Palencia", "Las Palmas", "Pontevedra", "La Rioja", "Salamanca", "Segovia", "Seville", "Soria", "Tarragona", "Santa Cruz de Tenerife", "Teruel", "Toledo", "Valencia", "Valladolid", "Vizcaya", "Zamora", "Zaragoza");
+	private final ObservableList<String> provinces = FXCollections.observableArrayList(Province.getProvincesNames());
 	private Staff staff;
 
 	// Método para comprobar los cambios en la ventana emergente y modificar el valor de ventana en ejecución en el cierre
@@ -73,14 +76,25 @@ public class StaffController implements Initializable {
 	}
 
 	public void setGraphics() {
+		// Tipo de ID ComboBox
+		this.idTypeComboBox.setValue(Identification.DNI);
+		this.idTypeComboBox.setItems(this.identifications);
 		Staff staff = new Staff(); //* Test
 		// Staff ID
 		String id = staff.generateStaffID();
 		System.out.println(id);
 		this.staffIdNumberTextField.setText(id);
+		// Género ComboBox
+		this.genreComboBox.setItems(this.genders);
+		// Estado civil ComboBox
+		this.maritalStatusComboBox.setItems(this.maritalStatus);
 		// Día de Registro -> En el caso de que sea un nuevo Objeto hoy
 		LocalDate today = LocalDate.now();
 		this.registrationDateDatePicker.setValue(today);
+		// Provincias ComboBox
+		this.provinceComboBox.setItems(this.provinces);
+		// Roles ComboBox
+		this.roleComboBox.setItems(this.roles);
 	}
 
 	public void setLanguage() {
