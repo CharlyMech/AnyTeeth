@@ -49,7 +49,7 @@ public class LoadApp extends Application {
 					});
 				} else {
 					Platform.runLater(() -> {
-						Optional<ButtonType> choice = App.showErrorAlert(rb.getString("alertTitle"), rb.getString("errrorExecution"), rb.getString("errorExecutionContent"));
+						Optional<ButtonType> choice = App.showErrorAlert(rb.getString("alertTitle"), rb.getString("errorExecution"), rb.getString("errorExecutionContent"));
 						if (choice.get() == ButtonType.OK){
 							App.closeApp(stage);
 						}
