@@ -62,8 +62,8 @@
 				</Menu>
 				<Menu fx:id="menuBarSession" mnemonicParsing="false">
 					<items>
-						<MenuItem fx:id="menuBarSessionUser" mnemonicParsing="false" text="Ver sesión de usuario" />
-						<MenuItem fx:id="menuBarSessionClose" mnemonicParsing="false" text="Cerrar sesión" />
+						<MenuItem fx:id="menuBarSessionUser" mnemonicParsing="false" />
+						<MenuItem fx:id="menuBarSessionClose" mnemonicParsing="false" onAction="#logoutActionEvent" />
 					</items>
 				</Menu>
 				<Menu fx:id="menuBarCreate" mnemonicParsing="false">
