@@ -13,7 +13,10 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
+
+import static com.charlymech.anyteeth.App.rb;
 
 public class StaffController implements Initializable {
 	// Inyecciones FXML
@@ -70,15 +73,47 @@ public class StaffController implements Initializable {
 	}
 
 	public void setGraphics() {
-		Staff staff = new Staff();
+		Staff staff = new Staff(); //* Test
 		// Staff ID
 		String id = staff.generateStaffID();
 		System.out.println(id);
 		this.staffIdNumberTextField.setText(id);
+		// Día de Registro -> En el caso de que sea un nuevo Objeto hoy
+		LocalDate today = LocalDate.now();
+		this.registrationDateDatePicker.setValue(today);
 	}
 
 	public void setLanguage() {
-
+		this.isActive.setText(rb.getString("staffActiveCheckBox"));
+		// Personal Data //
+		this.personalDataTitle.setText(rb.getString("staffPersonalDataTitle"));
+		this.fullNameLabel.setText(rb.getString("staffPersonaDataFullName"));
+		this.idTypeLabel.setText(rb.getString("staffPersonalDataIDType"));
+		this.idNumberLabel.setText(rb.getString("staffPersonalDataIDNumber"));
+		this.staffIdNumberLabel.setText(rb.getString("staffPersonalDataStaffIDNumber"));
+		this.birthDateLabel.setText(rb.getString("staffPersonalDataBirthDate"));
+		this.ageLabel.setText(rb.getString("staffPersonalDataAge"));
+		this.genreLabel.setText(rb.getString("staffPersonalDataGenre"));
+		this.maritalStatusLabel.setText(rb.getString("staffPersonalDataMaritalStatus"));
+		this.registrationDateLabel.setText(rb.getString("staffPersonalDataRegistrationDate"));
+		this.corporationEmailLabel.setText(rb.getString("staffPersonalDataCorporationEmail"));
+		this.personalEmailLabel.setText(rb.getString("staffPersonalDataPersonalEmail"));
+		this.telephoneLabel.setText(rb.getString("staffPersonalDataTelephone"));
+		this.addressLabel.setText(rb.getString("staffPersonalDataAddress"));
+		this.cpLabel.setText(rb.getString("staffPersonalDataCP"));
+		this.populationLabel.setText(rb.getString("staffPersonalDataPopulation"));
+		this.provinceLabel.setText(rb.getString("staffPersonalDataProvince"));
+		this.countryLabel.setText(rb.getString("staffPersonalDataCountry"));
+		// User Data //
+		this.userDataTitle.setText(rb.getString("staffUserDataTitle"));
+		this.roleLabel.setText(rb.getString("staffUserDataRole"));
+		this.passwordLabel.setText(rb.getString("staffUserDataCurrentPassword"));
+		this.changePasswordBtn.setText(rb.getString("staffUserDataCurrentPassword"));
+		// Other //
+		this.otherTitle.setText(rb.getString("staffOtherTitle"));
+		this.commentsLabel.setText(rb.getString("staffOtherComments"));
+		// Save //
+		this.saveChanges.setText(rb.getString("staffSave"));
 	}
 
 	@Override

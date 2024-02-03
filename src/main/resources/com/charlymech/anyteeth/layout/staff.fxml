@@ -19,226 +19,303 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="main" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
-   <bottom>
-      <HBox alignment="CENTER_RIGHT" prefHeight="80.0" prefWidth="1000.0" style="-fx-padding: 0 25;" BorderPane.alignment="CENTER_RIGHT">
-         <children>
-            <Button fx:id="saveChanges" mnemonicParsing="false" onAction="#saveChanges" prefHeight="50.0" prefWidth="100.0">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <font>
-                  <Font name="Verdana" size="18.0" />
-               </font>
-            </Button>
-         </children>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </HBox>
-   </bottom>
-   <center>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="665.0" prefWidth="1000.0">
-               <children>
-                  <Pane prefHeight="295.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="375.0">
-               <children>
-                  <Label fx:id="userDataTitle" layoutX="25.0" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: #358F80; -fx-padding: 0 10;" textFill="#e7ecef">
-                     <opaqueInsets>
-                        <Insets left="10.0" />
-                     </opaqueInsets>
-                     <font>
-                        <Font name="Verdana Bold" size="20.0" />
-                     </font>
-                  </Label>
-                  <ComboBox fx:id="roleComboBox" layoutX="25.0" layoutY="58.0" prefHeight="30.0" prefWidth="125.0" style="-fx-background-color: #358F80;" />
-                  <Label fx:id="roleLabel" layoutX="25.0" layoutY="44.0" prefWidth="125.0" textFill="#274c77" />
-                  <Label fx:id="passwordLabel" layoutX="170.0" layoutY="44.0" prefWidth="300.0" textFill="#274c77" />
-                  <PasswordField fx:id="passwordPasswordField" layoutX="170.0" layoutY="58.0" prefHeight="30.0" prefWidth="300.0" style="-fx-border-color: #358F80;">
-                     <font>
-                        <Font name="Verdana" size="16.0" />
-                     </font>
-                  </PasswordField>
-                  <TextField fx:id="passwordTextField" layoutX="170.0" layoutY="58.0" prefHeight="30.0" prefWidth="300.0" style="-fx-border-color: #358F80;">
-                     <font>
-                        <Font name="Verdana" size="16.0" />
-                     </font>
-                  </TextField>
-                  <ToggleButton fx:id="showPasswordToggleBtn" layoutX="430.0" layoutY="60.0" mnemonicParsing="false" onAction="#showHidePassword" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;">
-                     <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../img/light/show_password_light_30.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </ToggleButton>
-                  <Button fx:id="changePasswordBtn" layoutX="490.0" layoutY="58.0" mnemonicParsing="false" onAction="#launchChangePassword" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #6096BA;" textFill="#e7ecef">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Button>
-                  <Label fx:id="otherTitle" layoutX="25.0" layoutY="115.0" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: #358F80; -fx-padding: 0 10;" textFill="#e7ecef">
-                     <opaqueInsets>
-                        <Insets left="10.0" />
-                     </opaqueInsets>
-                     <font>
-                        <Font name="Verdana Bold" size="20.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="commentsLabel" layoutX="25.0" layoutY="159.0" prefWidth="125.0" textFill="#274c77" />
-                  <ListView fx:id="commentsListView" layoutX="25.0" layoutY="175.0" prefHeight="100.0" prefWidth="950.0" />
-               </children></Pane>
-                  <Pane prefHeight="350.0" prefWidth="250.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <ImageView fx:id="staffPhoto" fitHeight="225.0" fitWidth="200.0" layoutX="25.0" layoutY="25.0" pickOnBounds="true" smooth="false">
-                           <image>
-                              <Image url="@../img/gojo_serious.jpg" />
-                           </image></ImageView>
-                        <Button fx:id="takePhotoBtn" layoutX="25.0" layoutY="260.0" mnemonicParsing="false" onAction="#takePhoto" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #6096BA;">
-                           <graphic>
-                              <ImageView fitHeight="35.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../img/light/take_photo_light.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic></Button>
-                        <Button fx:id="searchPhotoBtn" layoutX="99.0" layoutY="260.0" mnemonicParsing="false" onAction="#searchPhoto" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #6096BA;">
-                           <graphic>
-                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../img/light/search_photo_light.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic></Button>
-                        <Button fx:id="removePhotoBtn" layoutX="175.0" layoutY="260.0" mnemonicParsing="false" onAction="#removePhoto" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #6096BA;">
-                           <graphic>
-                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../img/light/dele_photo_light.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic></Button>
-                        <CheckBox fx:id="isActive" layoutX="25.0" layoutY="327.0" mnemonicParsing="false" text="Active">
-                           <font>
-                              <Font name="Verdana" size="14.0" />
-                           </font>
-                        </CheckBox>
-                     </children>
-                  </Pane>
-                  <Pane layoutX="250.0" prefHeight="350.0" prefWidth="750.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <Label fx:id="fullNameLabel" layoutX="62.0" layoutY="67.0" prefWidth="250.0" textFill="#274c77" />
-                        <TextField fx:id="fullNameTextField" layoutX="62.0" layoutY="81.0" prefHeight="30.0" prefWidth="250.0" style="-fx-border-color: #358F80;">
-                           <font>
-                              <Font name="Verdana" size="16.0" />
-                           </font>
-                        </TextField>
-                        <Label fx:id="idTypeLabel" layoutX="332.0" layoutY="67.0" prefWidth="88.0" textFill="#274c77" />
-                        <ComboBox fx:id="idTypeComboBox" layoutX="332.0" layoutY="81.0" prefHeight="30.0" prefWidth="88.0" style="-fx-background-color: #358F80;" />
-                        <Label fx:id="idNumberLabel" layoutX="440.0" layoutY="67.0" prefWidth="125.0" textFill="#274c77" />
-                        <TextField fx:id="idNumberTextField" layoutX="440.0" layoutY="81.0" prefHeight="30.0" prefWidth="125.0" style="-fx-border-color: #358F80;">
-                           <font>
-                              <Font name="Verdana" size="16.0" />
-                           </font>
-                        </TextField>
-                        <Label fx:id="staffIdNumberLabel" layoutX="585.0" layoutY="67.0" prefWidth="125.0" textFill="#274c77" />
-                        <TextField fx:id="staffIdNumberTextField" disable="true" layoutX="585.0" layoutY="81.0" prefHeight="30.0" prefWidth="125.0" style="-fx-border-color: #358F80;">
-                           <font>
-                              <Font name="Verdana" size="16.0" />
-                           </font>
-                        </TextField>
-                        <Label fx:id="birthDateLabel" layoutX="62.0" layoutY="123.0" prefWidth="140.0" textFill="#274c77" />
-                        <DatePicker fx:id="birthDateDatePicker" layoutX="62.0" layoutY="137.0" prefHeight="30.0" prefWidth="140.0" style="-fx-border-color: #358F80;" />
-                        <Label fx:id="ageLabel" layoutX="221.0" layoutY="123.0" prefWidth="39.0" textFill="#274c77" />
-                        <TextField fx:id="ageTextField" layoutX="221.0" layoutY="137.0" prefHeight="30.0" prefWidth="39.0" style="-fx-border-color: #358F80;">
-                           <font>
-                              <Font name="Verdana" size="16.0" />
-                           </font>
-                        </TextField>
-                        <Label fx:id="genreLabel" layoutX="280.0" layoutY="123.0" prefWidth="100.0" textFill="#274c77" />
-                        <ComboBox fx:id="genreComboBox" layoutX="280.0" layoutY="137.0" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #358F80;" />
-                        <Label fx:id="genreLabel1" layoutX="400.0" layoutY="123.0" prefWidth="150.0" textFill="#274c77" />
-                        <ComboBox fx:id="maritalStatusComboBox" layoutX="400.0" layoutY="137.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #358F80;" />
-                        <Label fx:id="registrationDateLabel" layoutX="570.0" layoutY="123.0" prefWidth="140.0" textFill="#274c77" />
-                        <DatePicker fx:id="registrationDateDatePicker" disable="true" layoutX="570.0" layoutY="137.0" prefHeight="30.0" prefWidth="140.0" style="-fx-border-color: #358F80;" />
-                        <Label fx:id="corporationEmailLabel" layoutX="62.0" layoutY="181.0" prefWidth="200.0" textFill="#274c77" />
-                        <TextField fx:id="corporationEmailTextField" layoutX="62.0" layoutY="195.0" prefHeight="30.0" prefWidth="200.0" style="-fx-border-color: #358F80;">
-                           <font>
-                              <Font name="Verdana" size="16.0" />
-                           </font>
-                        </TextField>
-                        <Label fx:id="personalEmailLabel" layoutX="282.0" layoutY="181.0" prefWidth="200.0" textFill="#274c77" />
-                        <TextField fx:id="personalEmailTextField" layoutX="282.0" layoutY="195.0" prefHeight="30.0" prefWidth="200.0" style="-fx-border-color: #358F80;">
-                           <font>
-                              <Font name="Verdana" size="16.0" />
-                           </font>
-                        </TextField>
-                        <Label fx:id="telephoneLabel" layoutX="560.0" layoutY="181.0" prefWidth="150.0" textFill="#274c77" />
-                        <TextField fx:id="telephoneTextField" layoutX="560.0" layoutY="193.0" prefHeight="30.0" prefWidth="150.0" style="-fx-border-color: #358F80;">
-                           <font>
-                              <Font name="Verdana" size="16.0" />
-                           </font>
-                        </TextField>
-                        <Label fx:id="addressLabel" layoutX="62.0" layoutY="235.0" prefWidth="528.0" textFill="#274c77" />
-                        <TextField fx:id="addressTextField" layoutX="62.0" layoutY="249.0" prefHeight="30.0" prefWidth="528.0" style="-fx-border-color: #358F80;">
-                           <font>
-                              <Font name="Verdana" size="16.0" />
-                           </font>
-                        </TextField>
-                        <Label fx:id="cpLabel" layoutX="610.0" layoutY="235.0" prefWidth="100.0" textFill="#274c77" />
-                        <TextField fx:id="cpTextField" layoutX="610.0" layoutY="249.0" prefHeight="30.0" prefWidth="100.0" style="-fx-border-color: #358F80;">
-                           <font>
-                              <Font name="Verdana" size="16.0" />
-                           </font>
-                        </TextField>
-                        <Label fx:id="populationLabel" layoutX="62.0" layoutY="291.0" prefWidth="300.0" textFill="#274c77" />
-                        <TextField fx:id="populationTextField" layoutX="62.0" layoutY="305.0" prefHeight="30.0" prefWidth="300.0" style="-fx-border-color: #358F80;">
-                           <font>
-                              <Font name="Verdana" size="16.0" />
-                           </font>
-                        </TextField>
-                        <Label fx:id="provinceLabel" layoutX="382.0" layoutY="291.0" prefWidth="209.0" textFill="#274c77" />
-                        <TextField fx:id="provinceTextField" layoutX="382.0" layoutY="305.0" prefHeight="30.0" prefWidth="209.0" style="-fx-border-color: #358F80;">
-                           <font>
-                              <Font name="Verdana" size="16.0" />
-                           </font>
-                        </TextField>
-                        <Label fx:id="countryLabel" layoutX="610.0" layoutY="291.0" prefWidth="100.0" textFill="#274c77" />
-                        <TextField fx:id="countryTextField" layoutX="610.0" layoutY="305.0" prefHeight="30.0" prefWidth="100.0" style="-fx-border-color: #358F80;">
-                           <font>
-                              <Font name="Verdana" size="16.0" />
-                           </font>
-                        </TextField>
-                        <ImageView fitHeight="36.0" fitWidth="32.0" layoutX="10.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../img/light/user_icon_light.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="36.0" fitWidth="32.0" layoutX="10.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../img/light/mail_icon_light.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="36.0" fitWidth="32.0" layoutX="513.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../img/light/phone_icon_light.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="36.0" fitWidth="32.0" layoutX="10.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../img/light/address_icon_light.png" />
-                           </image>
-                        </ImageView>
-                        <Label fx:id="personalDataTitle" layoutY="25.0" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: #358F80; -fx-padding: 0 10;" textFill="#e7ecef">
-                           <opaqueInsets>
-                              <Insets left="10.0" />
-                           </opaqueInsets>
-                           <font>
-                              <Font name="Verdana Bold" size="20.0" />
-                           </font>
-                        </Label>
-                     </children></Pane>
-               </children>
-            </AnchorPane>
-   </center>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.charlymech.anyteeth.controller.StaffController">
+	<center>
+		<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="665.0" prefWidth="1000.0">
+			<children>
+				<Pane prefHeight="350.0" prefWidth="250.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+					<children>
+						<ImageView fx:id="staffPhoto" fitHeight="225.0" fitWidth="200.0" layoutX="25.0" layoutY="25.0" pickOnBounds="true" smooth="false">
+							<image>
+								<Image url="@../img/gojo_serious.jpg" />
+							</image>
+						</ImageView>
+						<Button fx:id="takePhotoBtn" layoutX="25.0" layoutY="260.0" mnemonicParsing="false" onAction="#takePhoto" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #6096BA;">
+							<graphic>
+								<ImageView fitHeight="35.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+									<image>
+										<Image url="@../img/light/take_photo_light.png" />
+									</image>
+								</ImageView>
+							</graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+						</Button>
+						<Button fx:id="searchPhotoBtn" layoutX="99.0" layoutY="260.0" mnemonicParsing="false" onAction="#searchPhoto" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #6096BA;">
+							<graphic>
+								<ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+									<image>
+										<Image url="@../img/light/search_photo_light.png" />
+									</image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+								</ImageView>
+							</graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+						</Button>
+						<Button fx:id="removePhotoBtn" layoutX="175.0" layoutY="260.0" mnemonicParsing="false" onAction="#removePhoto" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #6096BA;">
+							<graphic>
+								<ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+									<image>
+										<Image url="@../img/light/dele_photo_light.png" />
+									</image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+								</ImageView>
+							</graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+						</Button>
+						<CheckBox fx:id="isActive" layoutX="25.0" layoutY="327.0" mnemonicParsing="false" textFill="#274c77">
+							<font>
+								<Font name="Verdana" size="14.0" />
+							</font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+						</CheckBox>
+					</children>
+				</Pane>
+				<Pane layoutX="250.0" prefHeight="350.0" prefWidth="750.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+					<children>
+						<Label fx:id="fullNameLabel" layoutX="62.0" layoutY="67.0" prefWidth="250.0" textFill="#274c77" />
+						<TextField fx:id="fullNameTextField" layoutX="62.0" layoutY="81.0" prefHeight="30.0" prefWidth="250.0" style="-fx-border-color: #358F80;">
+							<font>
+								<Font name="Verdana" size="16.0" />
+							</font>
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+						</TextField>
+						<Label fx:id="idTypeLabel" layoutX="332.0" layoutY="67.0" prefWidth="88.0" textFill="#274c77" />
+						<ComboBox fx:id="idTypeComboBox" layoutX="332.0" layoutY="81.0" prefHeight="30.0" prefWidth="88.0" style="-fx-background-color: #358F80;">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></ComboBox>
+						<Label fx:id="idNumberLabel" layoutX="440.0" layoutY="67.0" prefWidth="125.0" textFill="#274c77" />
+						<TextField fx:id="idNumberTextField" layoutX="440.0" layoutY="81.0" prefHeight="30.0" prefWidth="125.0" style="-fx-border-color: #358F80;">
+							<font>
+								<Font name="Verdana" size="16.0" />
+							</font>
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+						</TextField>
+						<Label fx:id="staffIdNumberLabel" layoutX="585.0" layoutY="67.0" prefWidth="125.0" textFill="#274c77" />
+						<TextField fx:id="staffIdNumberTextField" editable="false" layoutX="585.0" layoutY="81.0" prefHeight="30.0" prefWidth="125.0" style="-fx-border-color: #358F80;">
+							<font>
+								<Font name="Verdana" size="16.0" />
+							</font>
+						</TextField>
+						<Label fx:id="birthDateLabel" layoutX="62.0" layoutY="123.0" prefWidth="140.0" textFill="#274c77" />
+						<DatePicker fx:id="birthDateDatePicker" layoutX="62.0" layoutY="137.0" prefHeight="30.0" prefWidth="140.0" style="-fx-border-color: #358F80;">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor></DatePicker>
+						<Label fx:id="ageLabel" layoutX="221.0" layoutY="123.0" prefWidth="39.0" textFill="#274c77" />
+						<TextField fx:id="ageTextField" editable="false" layoutX="221.0" layoutY="137.0" prefHeight="30.0" prefWidth="39.0" style="-fx-border-color: #358F80;">
+							<font>
+								<Font name="Verdana" size="16.0" />
+							</font>
+						</TextField>
+						<Label fx:id="genreLabel" layoutX="280.0" layoutY="123.0" prefWidth="100.0" textFill="#274c77" />
+						<ComboBox fx:id="genreComboBox" layoutX="280.0" layoutY="137.0" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #358F80;">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></ComboBox>
+						<Label fx:id="maritalStatusLabel" layoutX="400.0" layoutY="123.0" prefWidth="150.0" textFill="#274c77" />
+						<ComboBox fx:id="maritalStatusComboBox" layoutX="400.0" layoutY="137.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #358F80;">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></ComboBox>
+						<Label fx:id="registrationDateLabel" layoutX="570.0" layoutY="123.0" prefWidth="140.0" textFill="#274c77" />
+						<DatePicker fx:id="registrationDateDatePicker" disable="true" editable="false" layoutX="570.0" layoutY="137.0" prefHeight="30.0" prefWidth="140.0" style="-fx-border-color: #358F80; -fx-opacity: 1;" />
+						<Label fx:id="corporationEmailLabel" layoutX="62.0" layoutY="181.0" prefWidth="200.0" textFill="#274c77" />
+						<TextField fx:id="corporationEmailTextField" layoutX="62.0" layoutY="195.0" prefHeight="30.0" prefWidth="200.0" style="-fx-border-color: #358F80;">
+							<font>
+								<Font name="Verdana" size="16.0" />
+							</font>
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+						</TextField>
+						<Label fx:id="personalEmailLabel" layoutX="282.0" layoutY="181.0" prefWidth="200.0" textFill="#274c77" />
+						<TextField fx:id="personalEmailTextField" layoutX="282.0" layoutY="195.0" prefHeight="30.0" prefWidth="200.0" style="-fx-border-color: #358F80;">
+							<font>
+								<Font name="Verdana" size="16.0" />
+							</font>
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+						</TextField>
+						<Label fx:id="telephoneLabel" layoutX="560.0" layoutY="181.0" prefWidth="150.0" textFill="#274c77" />
+						<TextField fx:id="telephoneTextField" layoutX="560.0" layoutY="195.0" prefHeight="30.0" prefWidth="150.0" style="-fx-border-color: #358F80;">
+							<font>
+								<Font name="Verdana" size="16.0" />
+							</font>
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+						</TextField>
+						<Label fx:id="addressLabel" layoutX="62.0" layoutY="235.0" prefWidth="528.0" textFill="#274c77" />
+						<TextField fx:id="addressTextField" layoutX="62.0" layoutY="249.0" prefHeight="30.0" prefWidth="528.0" style="-fx-border-color: #358F80;">
+							<font>
+								<Font name="Verdana" size="16.0" />
+							</font>
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+						</TextField>
+						<Label fx:id="cpLabel" layoutX="610.0" layoutY="235.0" prefWidth="100.0" textFill="#274c77" />
+						<TextField fx:id="cpTextField" layoutX="610.0" layoutY="249.0" prefHeight="30.0" prefWidth="100.0" style="-fx-border-color: #358F80;">
+							<font>
+								<Font name="Verdana" size="16.0" />
+							</font>
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+						</TextField>
+						<Label fx:id="populationLabel" layoutX="62.0" layoutY="291.0" prefWidth="300.0" textFill="#274c77" />
+						<TextField fx:id="populationTextField" layoutX="62.0" layoutY="305.0" prefHeight="30.0" prefWidth="300.0" style="-fx-border-color: #358F80;">
+							<font>
+								<Font name="Verdana" size="16.0" />
+							</font>
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+						</TextField>
+						<Label fx:id="provinceLabel" layoutX="382.0" layoutY="291.0" prefWidth="209.0" textFill="#274c77" />
+                  <ComboBox fx:id="provinceComboBox" layoutX="382.0" layoutY="305.0" prefHeight="30.0" prefWidth="209.0" style="-fx-background-color: #358F80;">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></ComboBox>
+						<Label fx:id="countryLabel" layoutX="610.0" layoutY="291.0" prefWidth="100.0" textFill="#274c77" />
+						<TextField fx:id="countryTextField" editable="false" layoutX="610.0" layoutY="305.0" prefHeight="30.0" prefWidth="100.0" style="-fx-border-color: #358F80;">
+							<font>
+								<Font name="Verdana" size="16.0" />
+							</font>
+						</TextField>
+						<ImageView fitHeight="36.0" fitWidth="32.0" layoutX="10.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+							<image>
+								<Image url="@../img/light/user_icon_light.png" />
+							</image>
+						</ImageView>
+						<ImageView fitHeight="36.0" fitWidth="32.0" layoutX="10.0" layoutY="199.0" pickOnBounds="true" preserveRatio="true">
+							<image>
+								<Image url="@../img/light/mail_icon_light.png" />
+							</image>
+						</ImageView>
+						<ImageView fitHeight="36.0" fitWidth="32.0" layoutX="513.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true">
+							<image>
+								<Image url="@../img/light/phone_icon_light.png" />
+							</image>
+						</ImageView>
+						<ImageView fitHeight="36.0" fitWidth="32.0" layoutX="10.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true">
+							<image>
+								<Image url="@../img/light/address_icon_light.png" />
+							</image>
+						</ImageView>
+						<Label fx:id="personalDataTitle" layoutY="25.0" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: #358F80; -fx-padding: 0 10;" textFill="#e7ecef">
+							<opaqueInsets>
+								<Insets left="10.0" />
+							</opaqueInsets>
+							<font>
+								<Font name="Verdana Bold" size="20.0" />
+							</font>
+						</Label>
+					</children>
+				</Pane>
+				<Pane prefHeight="295.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="375.0">
+					<children>
+						<Label fx:id="userDataTitle" layoutX="25.0" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: #358F80; -fx-padding: 0 10;" textFill="#e7ecef">
+							<opaqueInsets>
+								<Insets left="10.0" />
+							</opaqueInsets>
+							<font>
+								<Font name="Verdana Bold" size="20.0" />
+							</font>
+						</Label>
+						<ComboBox fx:id="roleComboBox" layoutX="25.0" layoutY="58.0" prefHeight="30.0" prefWidth="125.0" style="-fx-background-color: #358F80;">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></ComboBox>
+						<Label fx:id="roleLabel" layoutX="25.0" layoutY="44.0" prefWidth="125.0" textFill="#274c77" />
+						<Label fx:id="passwordLabel" layoutX="170.0" layoutY="44.0" prefWidth="300.0" textFill="#274c77" />
+						<PasswordField fx:id="passwordPasswordField" editable="false" layoutX="170.0" layoutY="58.0" prefHeight="30.0" prefWidth="300.0" style="-fx-border-color: #358F80;">
+							<font>
+								<Font name="Verdana" size="16.0" />
+							</font>
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+						</PasswordField>
+						<TextField fx:id="passwordTextField" editable="false" layoutX="170.0" layoutY="58.0" prefHeight="30.0" prefWidth="300.0" style="-fx-border-color: #358F80;" visible="false">
+							<font>
+								<Font name="Verdana" size="16.0" />
+							</font>
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+						</TextField>
+						<ToggleButton fx:id="showPasswordToggleBtn" layoutX="430.0" layoutY="60.0" mnemonicParsing="false" onAction="#showHidePassword" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent;">
+							<graphic>
+								<ImageView fitHeight="20.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+									<image>
+										<Image url="@../img/light/show_password_light_30.png" />
+									</image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+								</ImageView>
+							</graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+						</ToggleButton>
+						<Button fx:id="changePasswordBtn" layoutX="490.0" layoutY="58.0" mnemonicParsing="false" onAction="#launchChangePassword" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #6096BA;" textFill="#e7ecef">
+							<font>
+								<Font name="Verdana" size="14.0" />
+							</font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+						</Button>
+						<Label fx:id="otherTitle" layoutX="25.0" layoutY="115.0" prefHeight="35.0" prefWidth="250.0" style="-fx-background-color: #358F80; -fx-padding: 0 10;" textFill="#e7ecef">
+							<opaqueInsets>
+								<Insets left="10.0" />
+							</opaqueInsets>
+							<font>
+								<Font name="Verdana Bold" size="20.0" />
+							</font>
+						</Label>
+						<Label fx:id="commentsLabel" layoutX="25.0" layoutY="159.0" prefWidth="125.0" textFill="#274c77" />
+						<ListView fx:id="commentsListView" disable="true" layoutX="25.0" layoutY="175.0" prefHeight="100.0" prefWidth="950.0" />
+					</children>
+				</Pane>
+			</children>
+		</AnchorPane>
+	</center>
+	<bottom>
+		<HBox alignment="CENTER_RIGHT" prefHeight="80.0" prefWidth="1000.0" style="-fx-padding: 0 25;" BorderPane.alignment="CENTER_RIGHT">
+			<children>
+				<Button fx:id="saveChanges" mnemonicParsing="false" onAction="#saveChanges" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: #6096BA;" textFill="#e7ecef">
+					<cursor>
+						<Cursor fx:constant="HAND" />
+					</cursor>
+					<font>
+						<Font name="Verdana Bold" size="20.0" />
+					</font>
+				</Button>
+			</children>
+			<opaqueInsets>
+				<Insets />
+			</opaqueInsets>
+		</HBox>
+	</bottom>
 </BorderPane>

@@ -80,7 +80,7 @@
 						<MenuItem fx:id="menuBarCreateInvoice" disable="true" mnemonicParsing="false" />
                   <MenuItem fx:id="menuBarCreateReport" mnemonicParsing="false" />
 						<SeparatorMenuItem mnemonicParsing="false" />
-						<MenuItem fx:id="menuBarCreateStaff" mnemonicParsing="false" visible="false" />
+						<MenuItem fx:id="menuBarCreateStaff" mnemonicParsing="false" onAction="#addNewStaff" visible="false" />
 					</items>
 				</Menu>
 				<Menu fx:id="menuBarHelp" mnemonicParsing="false">
