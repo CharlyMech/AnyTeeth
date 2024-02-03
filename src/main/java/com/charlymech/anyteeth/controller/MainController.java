@@ -263,6 +263,7 @@ public class MainController implements Initializable {
 				});
 				staffController.setStaffStage(this.staffStage);
 				this.staffStage.show();
+				this.staffStage.setResizable(false);
 			} catch (Exception e) {
 				App.showErrorAlert("ERROR", "Error trying to open the window", "The new Staff window couldn't be opened");
 				System.out.println("Cant load new window:");
