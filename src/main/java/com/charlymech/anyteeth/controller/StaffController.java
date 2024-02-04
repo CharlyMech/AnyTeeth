@@ -16,7 +16,6 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import static com.charlymech.anyteeth.App.rb;
@@ -51,10 +50,21 @@ public class StaffController implements Initializable {
 	private final ObservableList<Staff.Role> roles = FXCollections.observableArrayList(Staff.Role.STAFF, Staff.Role.CLINIC_ADMIN, Staff.Role.ADMIN);
 	private final ObservableList<String> provinces = FXCollections.observableArrayList(Province.getProvincesNames());
 	private Staff staff;
+	private static boolean madeChanges = false; // Variable para manejar si el usuario modifica la información del formulario
 
 	// Método para comprobar los cambios en la ventana emergente y modificar el valor de ventana en ejecución en el cierre
 	public void checkCloseEvent() {
-		this.staffStage.close();
+		if (madeChanges) {
+			Alert alert = new Alert(Alert.AlertType.CONFIRMATION); // Crear la alerta de tipo confirmación
+			alert.setTitle("SAVE ALERT");
+			alert.setHeaderText("There are changes");
+			alert.setContentText("Are you sure?");
+
+			if (alert.showAndWait().get() == ButtonType.OK) { // El usuario desea salir de la app
+				Stage stage = (Stage) this.staffStage.getScene().getWindow();
+				stage.close();
+			}
+		}
 	}
 
 	public void saveChanges(ActionEvent event) {
@@ -76,14 +86,26 @@ public class StaffController implements Initializable {
 	}
 
 	public void setGraphics() {
+		// Campo de texto para el nombre completo
+		this.fullNameTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+			madeChanges = true;
+		});
 		// Tipo de ID ComboBox
 		this.idTypeComboBox.setValue(Identification.DNI);
 		this.idTypeComboBox.setItems(this.identifications);
 		Staff staff = new Staff(); //* Test
+		// Campo de texto para el número de ID
+		this.idNumberTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+			madeChanges = true;
+		});
 		// Staff ID
 		String id = staff.generateStaffID();
 		System.out.println(id);
 		this.staffIdNumberTextField.setText(id);
+		// DatePicker de la fecha de nacimiento
+		this.birthDateDatePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
+			madeChanges = true;
+		});
 		// Género ComboBox
 		this.genreComboBox.setItems(this.genders);
 		// Estado civil ComboBox
@@ -91,6 +113,26 @@ public class StaffController implements Initializable {
 		// Día de Registro -> En el caso de que sea un nuevo Objeto hoy
 		LocalDate today = LocalDate.now();
 		this.registrationDateDatePicker.setValue(today);
+		// Campo de texto de Email Corporativo
+		this.corporationEmailTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+			madeChanges = true;
+		});
+		// Campo de texto de Email Personal
+		this.personalEmailTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+			madeChanges = true;
+		});
+		// Campo de texto de Dirección
+		this.addressTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+			madeChanges = true;
+		});
+		// Campo de texto de CP
+		this.cpTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+			madeChanges = true;
+		});
+		// Campo de texto de Población
+		this.populationTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+			madeChanges = true;
+		});
 		// Provincias ComboBox
 		this.provinceComboBox.setItems(this.provinces);
 		// Roles ComboBox
@@ -122,7 +164,7 @@ public class StaffController implements Initializable {
 		this.userDataTitle.setText(rb.getString("staffUserDataTitle"));
 		this.roleLabel.setText(rb.getString("staffUserDataRole"));
 		this.passwordLabel.setText(rb.getString("staffUserDataCurrentPassword"));
-		this.changePasswordBtn.setText(rb.getString("staffUserDataCurrentPassword"));
+		this.changePasswordBtn.setText(rb.getString("staffUserDataChangePassword"));
 		// Other //
 		this.otherTitle.setText(rb.getString("staffOtherTitle"));
 		this.commentsLabel.setText(rb.getString("staffOtherComments"));
@@ -145,5 +187,7 @@ public class StaffController implements Initializable {
 		this.staff = staff;
 	}
 
-
+	public void setMadeChanges(ActionEvent event) {
+		madeChanges = true;
+	}
 }
