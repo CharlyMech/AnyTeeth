@@ -56,9 +56,9 @@ public class StaffController implements Initializable {
 	public void checkCloseEvent() {
 		if (madeChanges) {
 			Alert alert = new Alert(Alert.AlertType.CONFIRMATION); // Crear la alerta de tipo confirmación
-			alert.setTitle("SAVE ALERT");
-			alert.setHeaderText("There are changes");
-			alert.setContentText("Are you sure?");
+			alert.setTitle(rb.getString("staffChangesTitle"));
+			alert.setHeaderText(rb.getString("staffChangesHeader"));
+			alert.setContentText(rb.getString("staffChangesContent"));
 
 			if (alert.showAndWait().get() == ButtonType.OK) { // El usuario desea salir de la app
 				Stage stage = (Stage) this.staffStage.getScene().getWindow();
