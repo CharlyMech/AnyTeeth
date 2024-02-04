@@ -27,7 +27,7 @@
 					<children>
 						<ImageView fx:id="staffPhoto" fitHeight="225.0" fitWidth="200.0" layoutX="25.0" layoutY="25.0" pickOnBounds="true" smooth="false">
 							<image>
-								<Image url="@../img/gojo_serious.jpg" />
+								<Image url="@../img/default_photo.png" />
 							</image>
 						</ImageView>
 						<Button fx:id="takePhotoBtn" layoutX="25.0" layoutY="260.0" mnemonicParsing="false" onAction="#takePhoto" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #6096BA;">
