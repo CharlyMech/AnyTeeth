@@ -1,5 +1,6 @@
 package com.charlymech.anyteeth.controller;
 
+import com.charlymech.anyteeth.App;
 import com.charlymech.anyteeth.Enums.Gender;
 import com.charlymech.anyteeth.Enums.Identification;
 import com.charlymech.anyteeth.Enums.MaritalStatus;
@@ -9,7 +10,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -33,7 +37,7 @@ public class StaffController implements Initializable {
 	@FXML
 	private Label fullNameLabel, idTypeLabel, idNumberLabel, staffIdNumberLabel, birthDateLabel, ageLabel, genreLabel, maritalStatusLabel, registrationDateLabel, corporationEmailLabel, personalEmailLabel, telephoneLabel, addressLabel, cpLabel, populationLabel, provinceLabel, countryLabel, personalDataTitle, userDataTitle, roleLabel, passwordLabel, otherTitle, commentsLabel;
 	@FXML
-	private TextField fullNameTextField, idNumberTextField, staffIdNumberTextField, ageTextField, corporationEmailTextField, personalEmailTextField, telephoneTextField, addressTextField, cpTextField, populationTextField, countryTextField, passwordTextField;
+	private TextField fullNameTextField, idNumberTextField, staffIdNumberTextField, ageTextField, corporationEmailTextField, personalEmailTextField, telephoneTextField, addressTextField, cpTextField, populationTextField, countryTextField,passwordTextField;
 	@FXML
 	private PasswordField passwordPasswordField;
 	@FXML
@@ -44,13 +48,16 @@ public class StaffController implements Initializable {
 	private ListView commentsListView;
 	// Variables de clase
 	private Stage staffStage;
+	protected static PasswordField staticPasswordPasswordField;
+	protected static TextField staticPasswordTextField;
 	private final ObservableList<Identification> identifications = FXCollections.observableArrayList(Identification.DNI, Identification.NIE);
 	private final ObservableList<String> genders = FXCollections.observableArrayList(Gender.MALE.toString(), Gender.FEMALE.toString());
 	private final ObservableList<String> maritalStatus = FXCollections.observableArrayList(MaritalStatus.SINGLE.toString(), MaritalStatus.MARRIED_JOINTLY.toString(), MaritalStatus.MARRIED_SEPARATELY.toString(), MaritalStatus.HEAD_FAMILY.toString(), MaritalStatus.WIDOWER_DEPENDENT_CHILD.toString());
 	private final ObservableList<Staff.Role> roles = FXCollections.observableArrayList(Staff.Role.STAFF, Staff.Role.CLINIC_ADMIN, Staff.Role.ADMIN);
 	private final ObservableList<String> provinces = FXCollections.observableArrayList(Province.getProvincesNames());
-	private Staff staff;
-	private static boolean madeChanges = false; // Variable para manejar si el usuario modifica la información del formulario
+	protected static Staff staff;
+	protected static boolean madeChanges = false; // Variable para manejar si el usuario modifica la información del formulario
+	private Stage passwordStage; // Stage para la ventana de asignación de contraseña
 
 	// Método para comprobar los cambios en la ventana emergente y modificar el valor de ventana en ejecución en el cierre
 	public void checkCloseEvent() {
@@ -64,6 +71,9 @@ public class StaffController implements Initializable {
 				Stage stage = (Stage) this.staffStage.getScene().getWindow();
 				stage.close();
 			}
+		} else {
+			Stage stage = (Stage) this.staffStage.getScene().getWindow();
+			stage.close();
 		}
 	}
 
@@ -74,6 +84,23 @@ public class StaffController implements Initializable {
 	}
 
 	public void launchChangePassword(ActionEvent event) {
+		 if(this.passwordStage == null || !this.passwordStage.isShowing()) { // No existe ventana externa abierta -> Ejecutar nueva ventana
+			 try {
+				 NewPasswordController newPassword = new NewPasswordController();
+				 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/charlymech/anyteeth/layout/new-password.fxml"));
+				 Parent root = loader.load();
+				 this.passwordStage = new Stage();
+				 this.passwordStage.setTitle(rb.getString("newPasswordTitle") + "-" + staff.getStaffID()); // TODO -> aplicar propiedad de idioma para el título de la ventana de Nueva Contraseña
+				 this.passwordStage.setScene(new Scene(root));
+				 this.passwordStage.show();
+				 this.passwordStage.setResizable(false);
+			 } catch (Exception e) {
+				 App.showErrorAlert(rb.getString("alertTitle"), rb.getString("openWindowError"), "The new Password window couldn't be opened"); // TODO -> aplicar propiedad de idioma
+				 e.printStackTrace();
+			 }
+		 } else { // Existe una ventana externa en ejecución -> Traerla al frente
+			 this.passwordStage.toFront();
+		 }
 	}
 
 	public void takePhoto(ActionEvent event) {
@@ -93,15 +120,12 @@ public class StaffController implements Initializable {
 		// Tipo de ID ComboBox
 		this.idTypeComboBox.setValue(Identification.DNI);
 		this.idTypeComboBox.setItems(this.identifications);
-		Staff staff = new Staff(); //* Test
 		// Campo de texto para el número de ID
 		this.idNumberTextField.textProperty().addListener((observable, oldValue, newValue) -> {
 			madeChanges = true;
 		});
 		// Staff ID
-		String id = staff.generateStaffID();
-		System.out.println(id);
-		this.staffIdNumberTextField.setText(id);
+		this.staffIdNumberTextField.setText(staff.getStaffID());
 		// DatePicker de la fecha de nacimiento
 		this.birthDateDatePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
 			madeChanges = true;
@@ -176,6 +200,9 @@ public class StaffController implements Initializable {
 	public void initialize(URL url, ResourceBundle resourceBundle) {
 		setLanguage();
 		setGraphics();
+		// Inicializo los campos para la comunicación con la ventana de contraseña
+		staticPasswordPasswordField = this.passwordPasswordField;
+		staticPasswordTextField = this.passwordTextField;
 	}
 
 	// SETTERS //
