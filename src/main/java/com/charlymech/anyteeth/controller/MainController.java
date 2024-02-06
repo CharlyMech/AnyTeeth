@@ -250,12 +250,15 @@ public class MainController implements Initializable {
 		System.out.println("Open create staff window");
 		if (this.staffStage == null || !this.staffStage.isShowing()) { // No existe ventana externa abierta -> Ejecutar nueva ventana
 			try {
+				Staff staff = new Staff();
+				staff.setStaffID(staff.generateStaffID());
 				StaffController staffController = new StaffController();
+				StaffController.staff = staff;
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/charlymech/anyteeth/layout/staff.fxml"));
 				Parent root = fxmlLoader.load();
 				this.staffStage = new Stage();
-				this.staffStage.setTitle("");
 				this.staffStage.setScene(new Scene(root));
+				this.staffStage.setTitle(rb.getString("staffTitle") + "-" + staff.getStaffID());
 				this.staffStage.centerOnScreen();
 				this.staffStage.setOnCloseRequest(evt -> { // Asignar el método de cierre de la ventana
 					evt.consume(); // Si se presiona "Cancelar" no se cierra el Stage
@@ -265,7 +268,7 @@ public class MainController implements Initializable {
 				this.staffStage.show();
 				this.staffStage.setResizable(false);
 			} catch (Exception e) {
-				App.showErrorAlert("ERROR", "Error trying to open the window", "The new Staff window couldn't be opened");
+				App.showErrorAlert(rb.getString("alertTitle"), rb.getString("openWindowError"), rb.getString("staffWindowError"));
 				System.out.println("Cant load new window:");
 				e.printStackTrace();
 			}
