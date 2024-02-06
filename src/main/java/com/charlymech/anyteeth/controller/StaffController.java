@@ -81,6 +81,13 @@ public class StaffController implements Initializable {
 	}
 
 	public void showHidePassword(ActionEvent event) {
+		if(this.showPasswordToggleBtn.isSelected()) { // Toggle seleccionado -> Mostrar contraseña
+			this.passwordPasswordField.setVisible(false);
+			this.passwordTextField.setVisible(true);
+		} else {
+			this.passwordPasswordField.setVisible(true);
+			this.passwordTextField.setVisible(false);
+		}
 	}
 
 	public void launchChangePassword(ActionEvent event) {
