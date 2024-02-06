@@ -74,7 +74,7 @@
 						</Button>
 						<CheckBox fx:id="isActive" layoutX="25.0" layoutY="327.0" mnemonicParsing="false" textFill="#274c77">
 							<font>
-								<Font name="Verdana" size="14.0" />
+								<Font name="Verdana Bold" size="14.0" />
 							</font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
