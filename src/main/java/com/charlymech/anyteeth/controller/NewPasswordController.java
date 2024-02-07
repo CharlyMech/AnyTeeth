@@ -2,7 +2,6 @@ package com.charlymech.anyteeth.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -13,7 +12,7 @@ import java.util.ResourceBundle;
 import static com.charlymech.anyteeth.App.rb;
 import static com.charlymech.anyteeth.App.showWarningAlert;
 
-public class NewPasswordController implements Initializable {
+public class NewPasswordController {
 	// Inyecciones FXML
 	@FXML
 	private AnchorPane pane;
@@ -54,28 +53,20 @@ public class NewPasswordController implements Initializable {
 		} else if (this.password1PasswordField.getText().trim().isEmpty() != this.password2PasswordField.getText().trim().isEmpty()) { // Caso no coinciden
 			showWarningAlert(rb.getString("alertTitle"), rb.getString("newPasswordNotEqualsHeader"), rb.getString("newPasswordNotEqualsBody"));
 		} else { // Ambas son iguales y no están vacías
-			StaffController.staticPasswordPasswordField.setText(this.password1PasswordField.getText().trim());
-			StaffController.staticPasswordTextField.setText(this.password1PasswordField.getText().trim());
-			StaffController.madeChanges = true;
+			// TODO -> Asignar la nueva contraseña a los campos de la pantalla de Staff
 			Stage stage = (Stage) this.pane.getScene().getWindow();
 			stage.close();
 		}
 	}
 
-	private void setGraphics() {
+	protected void setGraphics() {
 	}
 
-	private void setLanguage() {
+	protected void setLanguage() {
 		this.newPasswordTitle.setText(rb.getString("newPasswordTitle"));
 		this.passwordLabel1.setText(rb.getString("newPasswordPassword1"));
 		this.passwordLabel2.setText(rb.getString("newPasswordPassword2"));
 		this.showBothPasswordsCheckBox.setText(rb.getString("newPasswordPasswordShowPasswords"));
 		this.setNewPasswordBtn.setText(rb.getString("newPasswordSetNewPassword"));
-	}
-
-	@Override
-	public void initialize(URL url, ResourceBundle resourceBundle) {
-		this.setGraphics();
-		this.setLanguage();
 	}
 }

@@ -7,14 +7,12 @@ import com.charlymech.anyteeth.gui.LoadApp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -22,7 +20,7 @@ import java.util.ResourceBundle;
 
 import static com.charlymech.anyteeth.App.rb;
 
-public class MainController implements Initializable {
+public class MainController {
 	// Inyecciones FXML
 	@FXML
 	private BorderPane main;
@@ -51,12 +49,6 @@ public class MainController implements Initializable {
 	// Variables de clase
 	public Staff userSession;
 	private Stage staffStage;
-
-	@Override
-	public void initialize(URL url, ResourceBundle resourceBundle) {
-		setLanguage();
-		setGraphics();
-	}
 
 	public void setGraphics() {
 		// STAFF //
@@ -217,12 +209,6 @@ public class MainController implements Initializable {
 		this.bgLogo.setVisible(false);
 	}
 
-	// Método de muestra del error de ventana externa en ejecución
-	private void showExecutingWindowAlert() {
-		// Como este mismo código puede verse repetido (es el mismo mensaje) lo agrupo en la función
-		App.showWarningAlert(rb.getString("executingWindowTitle"), rb.getString("executingWindowHead"), rb.getString("executingWindowContent"));
-	}
-
 	public void addNewAppointment(ActionEvent event) {
 		System.out.println("NEW APPOINTMENT");
 	}
@@ -252,10 +238,13 @@ public class MainController implements Initializable {
 			try {
 				Staff staff = new Staff();
 				staff.setStaffID(staff.generateStaffID());
-				StaffController staffController = new StaffController();
-				StaffController.staff = staff;
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/charlymech/anyteeth/layout/staff.fxml"));
 				Parent root = fxmlLoader.load();
+				StaffController staffController = fxmlLoader.getController();
+				staffController.setStaffStage(this.staffStage);
+				staffController.setStaff(staff);
+				staffController.setLanguage();
+				staffController.setGraphics();
 				this.staffStage = new Stage();
 				this.staffStage.setScene(new Scene(root));
 				this.staffStage.setTitle(rb.getString("staffTitle") + "-" + staff.getStaffID());
@@ -264,7 +253,6 @@ public class MainController implements Initializable {
 					evt.consume(); // Si se presiona "Cancelar" no se cierra el Stage
 					staffController.checkCloseEvent();
 				});
-				staffController.setStaffStage(this.staffStage);
 				this.staffStage.show();
 				this.staffStage.setResizable(false);
 			} catch (Exception e) {

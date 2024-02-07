@@ -3,7 +3,6 @@ package com.charlymech.anyteeth.controller;
 import com.charlymech.anyteeth.App;
 import com.charlymech.anyteeth.Enums.Gender;
 import com.charlymech.anyteeth.db.Conn;
-import com.charlymech.anyteeth.db.Person;
 import com.charlymech.anyteeth.db.Staff;
 import com.charlymech.anyteeth.gui.LoadApp;
 import com.mongodb.client.MongoCollection;
@@ -12,7 +11,6 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -23,16 +21,13 @@ import javafx.stage.Stage;
 import org.bson.Document;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.ResourceBundle;
 
-import static com.charlymech.anyteeth.App.main;
 import static com.charlymech.anyteeth.App.rb;
 
-public class LogInController implements Initializable {
+public class LogInController {
 	// Inyecciones FXML
 	@FXML
 	private Button login;
@@ -106,6 +101,8 @@ public class LogInController implements Initializable {
 				Parent root = loader.load();
 				MainController mainController = loader.getController(); // Cargar el controlador de la vista
 				mainController.setUserSession(userSession); // Asignar el objeto Staff para la sesión de usuario
+				mainController.setGraphics();
+				mainController.setLanguage();
 				Stage stage = loginStage;
 				Scene scene = new Scene(root);
 				stage.setScene(scene);
@@ -157,10 +154,5 @@ public class LogInController implements Initializable {
 			this.passwd.setVisible(true);
 			this.passwdTf.setVisible(false);
 		}
-	}
-
-	@Override
-	public void initialize(URL url, ResourceBundle resourceBundle) {
-
 	}
 }
