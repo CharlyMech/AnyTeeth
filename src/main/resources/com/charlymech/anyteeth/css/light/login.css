@@ -1,0 +1,28 @@
+AnchorPane {
+	-fx-background-color: #E7ECEF;
+}
+
+TextField, PasswordField {
+	-fx-background-color: transparent;
+	-fx-border-color: #358F80;
+	-fx-border-radius: 15px;
+	-fx-border-width: 2px;
+	-fx-font-size: 24px;
+}
+
+Button {
+	-fx-background-color: #358F80;
+	-fx-text-fill: #E7ECEF;
+	-fx-font-weight: bold;
+	-fx-font-size: 28px;
+	-fx-cursor: hand;
+}
+
+Button:hover {
+	-fx-background-color: #4DC5AD;
+}
+
+ToggleButton {
+	-fx-background-color: transparent;
+	-fx-cursor: hand;
+}
