@@ -22,222 +22,259 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="main" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.charlymech.anyteeth.controller.MainController">
+<BorderPane fx:id="main" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+				prefHeight="720.0" prefWidth="1280.0" styleClass="pane" stylesheets="@../css/light/main.css"
+				xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+				fx:controller="com.charlymech.anyteeth.controller.MainController">
 	<top>
 		<MenuBar BorderPane.alignment="CENTER">
 			<menus>
-				<Menu fx:id="menuBarFile" mnemonicParsing="false">
+				<Menu fx:id="menuBarFile" mnemonicParsing="false" id="menuItems">
 					<items>
-						<Menu fx:id="menuBarFileImport" mnemonicParsing="false">
+						<Menu fx:id="menuBarFileImport" mnemonicParsing="false" id="menuItems">
 							<items>
-								<MenuItem fx:id="menuBarFileImportJson" mnemonicParsing="false" />
-								<MenuItem fx:id="menuBarFileImportMongo" mnemonicParsing="false" />
+								<MenuItem fx:id="menuBarFileImportJson" mnemonicParsing="false" id="menuItems"/>
+								<MenuItem fx:id="menuBarFileImportMongo" mnemonicParsing="false" id="menuItems"/>
 							</items>
 						</Menu>
-						<Menu fx:id="menuBarFileExport" mnemonicParsing="false">
+						<Menu fx:id="menuBarFileExport" mnemonicParsing="false" id="menuItems">
 							<items>
-								<MenuItem fx:id="menuBarFileExportJson" mnemonicParsing="false" />
-								<MenuItem fx:id="menuBarFileExportMongo" mnemonicParsing="false" />
+								<MenuItem fx:id="menuBarFileExportJson" mnemonicParsing="false" id="menuItems"/>
+								<MenuItem fx:id="menuBarFileExportMongo" mnemonicParsing="false" id="menuItems"/>
 							</items>
 						</Menu>
-						<SeparatorMenuItem mnemonicParsing="false" />
-						<MenuItem fx:id="menuBarFileSettings" mnemonicParsing="false" />
-						<SeparatorMenuItem mnemonicParsing="false" />
-						<MenuItem fx:id="menuBarFileClose" mnemonicParsing="false" onAction="#logoutActionEvent" />
+						<SeparatorMenuItem mnemonicParsing="false"/>
+						<MenuItem fx:id="menuBarFileSettings" mnemonicParsing="false" id="menuItems"/>
+						<SeparatorMenuItem mnemonicParsing="false"/>
+						<MenuItem fx:id="menuBarFileClose" mnemonicParsing="false" onAction="#logoutActionEvent"
+									 id="menuItems"/>
 					</items>
 				</Menu>
-				<Menu fx:id="menuBarEdit" mnemonicParsing="false" />
-				<Menu fx:id="menuBarWindow" mnemonicParsing="false">
+				<Menu fx:id="menuBarEdit" mnemonicParsing="false" id="menuItems"/>
+				<Menu fx:id="menuBarWindow" mnemonicParsing="false" id="menuItems">
 					<items>
-						<MenuItem fx:id="menuBarWindowFullScreen" mnemonicParsing="false" />
-						<MenuItem fx:id="menuBarWindowWindowed" mnemonicParsing="false" />
-						<SeparatorMenuItem mnemonicParsing="false" />
-						<RadioMenuItem fx:id="menuBarWindowLightTheme" mnemonicParsing="false">
+						<MenuItem fx:id="menuBarWindowFullScreen" mnemonicParsing="false" id="menuItems"/>
+						<MenuItem fx:id="menuBarWindowWindowed" mnemonicParsing="false" id="menuItems"/>
+						<SeparatorMenuItem mnemonicParsing="false"/>
+						<RadioMenuItem fx:id="menuBarWindowLightTheme" mnemonicParsing="false" id="menuItems">
 							<toggleGroup>
-								<ToggleGroup fx:id="theme" />
+								<ToggleGroup fx:id="theme"/>
 							</toggleGroup>
 						</RadioMenuItem>
-						<RadioMenuItem fx:id="menuBarWindowDarkTheme" mnemonicParsing="false" toggleGroup="$theme" />
+						<RadioMenuItem fx:id="menuBarWindowDarkTheme" mnemonicParsing="false" id="menuItems"
+											toggleGroup="$theme"/>
 					</items>
 				</Menu>
-				<Menu fx:id="menuBarSession" mnemonicParsing="false">
+				<Menu fx:id="menuBarSession" mnemonicParsing="false" id="menuItems">
 					<items>
-						<MenuItem fx:id="menuBarSessionUser" mnemonicParsing="false" />
-						<MenuItem fx:id="menuBarSessionClose" mnemonicParsing="false" onAction="#logoutActionEvent" />
+						<MenuItem fx:id="menuBarSessionUser" mnemonicParsing="false" id="menuItems"/>
+						<MenuItem fx:id="menuBarSessionClose" mnemonicParsing="false" onAction="#logoutActionEvent"
+									 id="menuItems"/>
 					</items>
 				</Menu>
-				<Menu fx:id="menuBarCreate" mnemonicParsing="false">
+				<Menu fx:id="menuBarCreate" mnemonicParsing="false" id="menuItems">
 					<items>
-						<MenuItem fx:id="menuBarCreateAppointment" mnemonicParsing="false" />
-						<SeparatorMenuItem mnemonicParsing="false" />
-						<MenuItem fx:id="menuBarCreatePatient" mnemonicParsing="false" />
-						<MenuItem fx:id="menuBarCreateClient" mnemonicParsing="false" />
-						<SeparatorMenuItem mnemonicParsing="false" />
-						<MenuItem fx:id="menuBarCreateBudget" disable="true" mnemonicParsing="false" />
-						<MenuItem fx:id="menuBarCreatePlan" disable="true" mnemonicParsing="false" />
-						<SeparatorMenuItem mnemonicParsing="false" />
-						<MenuItem fx:id="menuBarCreateTicket" disable="true" mnemonicParsing="false" />
-						<MenuItem fx:id="menuBarCreateInvoice" disable="true" mnemonicParsing="false" />
-                  <MenuItem fx:id="menuBarCreateReport" mnemonicParsing="false" />
-						<SeparatorMenuItem mnemonicParsing="false" />
-						<MenuItem fx:id="menuBarCreateStaff" mnemonicParsing="false" onAction="#addNewStaff" visible="false" />
+						<MenuItem fx:id="menuBarCreateAppointment" mnemonicParsing="false" id="menuItems"/>
+						<SeparatorMenuItem mnemonicParsing="false"/>
+						<MenuItem fx:id="menuBarCreatePatient" mnemonicParsing="false" id="menuItems"/>
+						<MenuItem fx:id="menuBarCreateClient" mnemonicParsing="false" id="menuItems"/>
+						<SeparatorMenuItem mnemonicParsing="false"/>
+						<MenuItem fx:id="menuBarCreateBudget" disable="true" mnemonicParsing="false" id="menuItems"/>
+						<MenuItem fx:id="menuBarCreatePlan" disable="true" mnemonicParsing="false" id="menuItems"/>
+						<SeparatorMenuItem mnemonicParsing="false"/>
+						<MenuItem fx:id="menuBarCreateTicket" disable="true" mnemonicParsing="false" id="menuItems"/>
+						<MenuItem fx:id="menuBarCreateInvoice" disable="true" mnemonicParsing="false" id="menuItems"/>
+						<MenuItem fx:id="menuBarCreateReport" mnemonicParsing="false" id="menuItems"/>
+						<SeparatorMenuItem mnemonicParsing="false"/>
+						<MenuItem fx:id="menuBarCreateStaff" mnemonicParsing="false" onAction="#addNewStaff" id="menuItems"
+									 visible="false"/>
 					</items>
 				</Menu>
-				<Menu fx:id="menuBarHelp" mnemonicParsing="false">
+				<Menu fx:id="menuBarHelp" mnemonicParsing="false" id="menuItems">
 					<items>
-						<MenuItem fx:id="menuBarHelpAbout" mnemonicParsing="false" />
-						<MenuItem fx:id="menuBarHelpDocumentation" mnemonicParsing="false" />
-						<SeparatorMenuItem mnemonicParsing="false" />
-						<MenuItem fx:id="menuBarHelpAdmin" mnemonicParsing="false" />
+						<MenuItem fx:id="menuBarHelpAbout" mnemonicParsing="false" id="menuItems"/>
+						<MenuItem fx:id="menuBarHelpDocumentation" mnemonicParsing="false" id="menuItems"/>
+						<SeparatorMenuItem mnemonicParsing="false"/>
+						<MenuItem fx:id="menuBarHelpAdmin" mnemonicParsing="false" id="menuItems"/>
 					</items>
 				</Menu>
 			</menus>
 		</MenuBar>
 	</top>
 	<left>
-		<VBox prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #6096BA;" BorderPane.alignment="CENTER">
+		<VBox prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
 			<children>
-						<Button fx:id="asideAppointments" mnemonicParsing="false" onAction="#showAppointments" prefHeight="50.0" prefWidth="201.0">
-							<font>
-								<Font name="Verdana" size="20.0" />
-							</font>
-						</Button>
-				<Button fx:id="asidePatients" mnemonicParsing="false" onAction="#showPatiens" prefHeight="50.0" prefWidth="721.0">
+				<Button fx:id="asideAppointments" mnemonicParsing="false" onAction="#showAppointments" prefHeight="50.0"
+						  prefWidth="201.0" styleClass="asideBtn">
 					<font>
-						<Font name="Verdana" size="20.0" />
+						<Font name="Verdana" size="20.0"/>
 					</font>
 				</Button>
-				<Button fx:id="asideBudgets" disable="true" mnemonicParsing="false" onAction="#showBudgets" prefHeight="50.0" prefWidth="721.0">
+				<Button fx:id="asidePatients" mnemonicParsing="false" onAction="#showPatiens" prefHeight="50.0"
+						  prefWidth="721.0" styleClass="asideBtn">
 					<font>
-						<Font name="Verdana" size="20.0" />
+						<Font name="Verdana" size="20.0"/>
 					</font>
 				</Button>
-				<Button fx:id="asidePlans" disable="true" mnemonicParsing="false" onAction="#showPlans" prefHeight="50.0" prefWidth="721.0">
+				<Button fx:id="asideBudgets" disable="true" mnemonicParsing="false" onAction="#showBudgets"
+						  prefHeight="50.0" prefWidth="721.0" styleClass="asideBtn">
 					<font>
-						<Font name="Verdana" size="20.0" />
+						<Font name="Verdana" size="20.0"/>
 					</font>
 				</Button>
-				<Button fx:id="asideDocuments" mnemonicParsing="false" onAction="#showDocuments" prefHeight="50.0" prefWidth="721.0">
+				<Button fx:id="asidePlans" disable="true" mnemonicParsing="false" onAction="#showPlans" prefHeight="50.0"
+						  prefWidth="721.0" styleClass="asideBtn">
 					<font>
-						<Font name="Verdana" size="20.0" />
+						<Font name="Verdana" size="20.0"/>
 					</font>
 				</Button>
-				<Button fx:id="asideStaff" mnemonicParsing="false" onAction="#showStaff" prefHeight="50.0" prefWidth="721.0" visible="false">
+				<Button fx:id="asideDocuments" mnemonicParsing="false" onAction="#showDocuments" prefHeight="50.0"
+						  prefWidth="721.0" styleClass="asideBtn">
 					<font>
-						<Font name="Verdana" size="20.0" />
+						<Font name="Verdana" size="20.0"/>
+					</font>
+				</Button>
+				<Button fx:id="asideStaff" mnemonicParsing="false" onAction="#showStaff" prefHeight="50.0" prefWidth="721.0"
+						  styleClass="asideBtn" visible="false">
+					<font>
+						<Font name="Verdana" size="20.0"/>
 					</font>
 				</Button>
 			</children>
 		</VBox>
 	</left>
 	<center>
-		<AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+		<AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="pane" BorderPane.alignment="CENTER">
 			<children>
-				<ImageView fx:id="bgLogo" fitHeight="247.0" fitWidth="239.0" layoutX="429.0" layoutY="223.0" opacity="0.3" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="224.0" AnchorPane.leftAnchor="429.0" AnchorPane.rightAnchor="430.4639129638672" AnchorPane.topAnchor="223.0">
-					<image>
-						<Image url="@../img/light/any_teeth_icon.png" />
-					</image>
-				</ImageView>
-				<CalendarView fx:id="appointmentsPane" prefHeight="744.0" prefWidth="1080.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-				<TabPane fx:id="patientsTabPane" layoutX="-1.0" prefHeight="694.0" prefWidth="1081.0" tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="0.0">
+				<CalendarView fx:id="appointmentsPane" prefHeight="744.0" prefWidth="1080.0" styleClass="pane"
+								  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+								  AnchorPane.topAnchor="0.0"/>
+				<TabPane fx:id="patientsTabPane" layoutX="-1.0" prefHeight="694.0" prefWidth="1080.0" styleClass="pane"
+							tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0"
+							AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="0.0">
 					<tabs>
 						<Tab fx:id="patientsPatients" closable="false">
 							<content>
-								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="639.0" prefWidth="1081.0" />
+								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="639.0" prefWidth="1080.0"
+												styleClass="pane"/>
 							</content>
 						</Tab>
 						<Tab fx:id="patientsClients">
 							<content>
-								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"
+												styleClass="pane"/>
 							</content>
 						</Tab>
 					</tabs>
 				</TabPane>
-				<TabPane fx:id="budgetsTabPane" prefHeight="694.0" prefWidth="1081.0" tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+				<TabPane fx:id="budgetsTabPane" prefHeight="694.0" prefWidth="1080.0" styleClass="pane"
+							tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0"
+							AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 					<tabs>
 						<Tab fx:id="budgetsActive">
 							<content>
-								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="639.0" prefWidth="1081.0" />
+								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="639.0" prefWidth="1080.0"
+												styleClass="pane"/>
 							</content>
 						</Tab>
 						<Tab fx:id="budgetsTemplates">
 							<content>
-								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"
+												styleClass="pane"/>
 							</content>
 						</Tab>
 						<Tab fx:id="budgetsNew">
 							<content>
-								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"
+												styleClass="pane"/>
 							</content>
 						</Tab>
 					</tabs>
 				</TabPane>
-				<TabPane fx:id="plansTabPane" prefHeight="694.0" prefWidth="1081.0" tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+				<TabPane fx:id="plansTabPane" prefHeight="694.0" prefWidth="1080.0" styleClass="pane"
+							tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0"
+							AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 					<tabs>
 						<Tab fx:id="plansActive">
 							<content>
-								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="639.0" prefWidth="1081.0" />
+								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="639.0" prefWidth="1080.0"
+												styleClass="pane"/>
 							</content>
 						</Tab>
 						<Tab fx:id="plansNew">
 							<content>
-								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"
+												styleClass="pane"/>
 							</content>
 						</Tab>
 					</tabs>
 				</TabPane>
-				<TabPane fx:id="documentsTabPane" prefHeight="694.0" prefWidth="1081.0" tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+				<TabPane fx:id="documentsTabPane" prefHeight="694.0" prefWidth="1080.0" styleClass="pane"
+							tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0"
+							AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 					<tabs>
 						<Tab fx:id="documentsTickets" closable="false" disable="true">
 							<content>
-								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="639.0" prefWidth="1081.0" />
+								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="639.0" prefWidth="1080.0"
+												styleClass="pane"/>
 							</content>
 						</Tab>
 						<Tab fx:id="documentsInvoices" closable="false" disable="true">
 							<content>
-								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"
+												styleClass="pane"/>
 							</content>
 						</Tab>
-                  <Tab fx:id="documentsReports" closable="false">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                     </content>
-                  </Tab>
+						<Tab fx:id="documentsReports" closable="false">
+							<content>
+								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"
+												styleClass="pane"/>
+							</content>
+						</Tab>
 						<Tab fx:id="documentsOthers" closable="false">
 							<content>
-								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"
+												styleClass="pane"/>
 							</content>
 						</Tab>
 					</tabs>
 				</TabPane>
-            <BorderPane fx:id="staffPane" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <top>
-                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
-                     <children>
-                        <Button fx:id="addStaffBtn" mnemonicParsing="false" onAction="#addNewStaff" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #6096BA; -fx-border-radius: 20px;">
-                           <graphic>
-                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-radius: 20px;">
-                                 <image>
-                                    <Image url="@../img/light/add_user_light_30.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <TextField fx:id="staffSearchBar" prefHeight="50.0" prefWidth="833.0" style="-fx-border-color: #358F80; -fx-border-width: 2px; -fx-border-radius: 20px; -fx-background-color: transparent;">
-                           <font>
-                              <Font name="Verdana" size="18.0" />
-                           </font></TextField>
-                        <ComboBox fx:id="staffSearchFilter" prefHeight="50.0" prefWidth="117.0" style="-fx-background-color: #6096BA; -fx-border-radius: 20px;" />
-                     </children>
-                     <padding>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                     </padding>
-                  </HBox>
-               </top>
-               <center>
-                  <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-               </center>
-            </BorderPane>
+				<BorderPane fx:id="staffPane" prefHeight="200.0" prefWidth="200.0" styleClass="pane" visible="false"
+								AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+								AnchorPane.topAnchor="0.0">
+					<top>
+						<HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" styleClass="pane"
+								BorderPane.alignment="CENTER">
+							<children>
+								<Button fx:id="addStaffBtn" mnemonicParsing="false" onAction="#addNewStaff" prefHeight="50.0"
+										  prefWidth="50.0" style="-fx-background-color: #6096BA; -fx-border-radius: 20px;">
+									<graphic>
+										<ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true"
+													  style="-fx-border-radius: 20px;">
+											<image>
+												<Image url="@../img/light/add_user_light_30.png"/>
+											</image>
+										</ImageView>
+									</graphic>
+								</Button>
+								<TextField fx:id="staffSearchBar" prefHeight="50.0" prefWidth="833.0"
+											  style="-fx-border-color: #358F80; -fx-border-width: 2px; -fx-border-radius: 20px; -fx-background-color: transparent;">
+									<font>
+										<Font name="Verdana" size="18.0"/>
+									</font>
+								</TextField>
+								<ComboBox fx:id="staffSearchFilter" prefHeight="50.0" prefWidth="117.0"
+											 style="-fx-background-color: #6096BA; -fx-border-radius: 20px;"/>
+							</children>
+							<padding>
+								<Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+							</padding>
+						</HBox>
+					</top>
+					<center>
+						<ScrollPane prefHeight="694.0" prefWidth="1080.0" styleClass="pane" BorderPane.alignment="CENTER"/>
+					</center>
+				</BorderPane>
 			</children>
 		</AnchorPane>
 	</center>

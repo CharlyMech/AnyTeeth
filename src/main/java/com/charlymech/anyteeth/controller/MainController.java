@@ -15,8 +15,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 
 import static com.charlymech.anyteeth.App.rb;
 
@@ -147,7 +145,6 @@ public class MainController {
 		this.plansTabPane.setVisible(false);
 		this.documentsTabPane.setVisible(false);
 		this.staffPane.setVisible(false);
-		this.bgLogo.setVisible(false);
 	}
 
 	// Método para mostrar el panel de Pacientes
@@ -159,7 +156,6 @@ public class MainController {
 		this.plansTabPane.setVisible(false);
 		this.documentsTabPane.setVisible(false);
 		this.staffPane.setVisible(false);
-		this.bgLogo.setVisible(false);
 	}
 
 	// Método para mostrar el panel de Presupuestos
@@ -171,7 +167,6 @@ public class MainController {
 		this.plansTabPane.setVisible(false);
 		this.documentsTabPane.setVisible(false);
 		this.staffPane.setVisible(false);
-		this.bgLogo.setVisible(false);
 	}
 
 	// Método para mostrar el panel de Planes
@@ -183,7 +178,6 @@ public class MainController {
 		this.budgetsTabPane.setVisible(false);
 		this.documentsTabPane.setVisible(false);
 		this.staffPane.setVisible(false);
-		this.bgLogo.setVisible(false);
 	}
 
 	// Método para mostrar el panel de Documentos
@@ -195,7 +189,6 @@ public class MainController {
 		this.budgetsTabPane.setVisible(false);
 		this.plansTabPane.setVisible(false);
 		this.staffPane.setVisible(false);
-		this.bgLogo.setVisible(false);
 	}
 
 	public void showStaff(ActionEvent event) {
@@ -206,7 +199,6 @@ public class MainController {
 		this.patientsTabPane.setVisible(false);
 		this.budgetsTabPane.setVisible(false);
 		this.plansTabPane.setVisible(false);
-		this.bgLogo.setVisible(false);
 	}
 
 	public void addNewAppointment(ActionEvent event) {

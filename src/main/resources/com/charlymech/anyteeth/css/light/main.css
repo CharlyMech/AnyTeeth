@@ -1,0 +1,28 @@
+.pane {
+	-fx-background-color: #E7ECEF;
+}
+
+MenuBar {
+	-fx-background-color: #d0d5d8;
+}
+
+#menuItems:hover{
+	-fx-background-color: #4DC5AD;
+}
+
+VBox {
+	-fx-spacing: 10px;
+	-fx-background-color: #d0d5d8;
+}
+
+.asideBtn {
+	-fx-background-color: #358F80;
+	-fx-text-fill: #E7ECEF;
+   -fx-font-weight: bold;
+   -fx-font-size: 20px;
+   -fx-cursor: hand;
+}
+
+.asideBtn:hover {
+	-fx-background-color: #4DC5AD;
+}
