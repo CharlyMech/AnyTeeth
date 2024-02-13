@@ -257,14 +257,8 @@
 										</ImageView>
 									</graphic>
 								</Button>
-								<TextField fx:id="staffSearchBar" prefHeight="50.0" prefWidth="833.0"
-											  style="-fx-border-color: #358F80; -fx-border-width: 2px; -fx-border-radius: 20px; -fx-background-color: transparent;">
-									<font>
-										<Font name="Verdana" size="18.0"/>
-									</font>
-								</TextField>
-								<ComboBox fx:id="staffSearchFilter" prefHeight="50.0" prefWidth="117.0"
-											 style="-fx-background-color: #6096BA; -fx-border-radius: 20px;"/>
+								<TextField fx:id="staffSearchBar" prefHeight="50.0" prefWidth="833.0"/>
+								<ComboBox fx:id="staffSearchFilter" prefHeight="50.0" prefWidth="117.0"/>
 							</children>
 							<padding>
 								<Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>

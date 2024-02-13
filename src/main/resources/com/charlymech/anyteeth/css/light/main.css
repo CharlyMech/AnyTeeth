@@ -26,3 +26,16 @@ VBox {
 .asideBtn:hover {
 	-fx-background-color: #4DC5AD;
 }
+
+TextField {
+	-fx-background-color: transparent;
+	-fx-border-color: #358F80;
+	-fx-border-radius: 15px;
+	-fx-border-width: 2px;
+	-fx-font-size: 20px;
+}
+
+ComboBox {
+	-fx-background-color: #358F80;
+	-fx-border-radius: 15px;
+}
