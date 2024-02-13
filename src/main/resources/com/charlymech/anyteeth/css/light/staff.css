@@ -1,0 +1,93 @@
+.pane {
+	-fx-background-color: #E7ECEF;
+}
+
+.titleLabel {
+	-fx-background-color: #358F80;
+	-fx-padding: 0 10px;
+	-fx-text-fill: #e7ecef;
+	-fx-font-size: 20px;
+	-fx-font-weight: bold;
+}
+
+.fieldLabel {
+	-fx-text-fill: #274c77;
+	-fx-font-size: 12px;
+}
+
+Button {
+	-fx-background-color: #6096BA;
+	-fx-cursor: hand;
+	-fx-font-size: 14px;
+   -fx-font-weight: bold;
+   -fx-text-fill: #E7ECEF;
+}
+
+Button:hover {
+	-fx-background-color: #73a5c7;
+}
+
+#saveBtn {
+	-fx-font-size: 20px;
+}
+
+CheckBox {
+	-fx-font-size: 14px;
+	-fx-font-weight: bold;
+	-fx-text-fill: #274c77;
+	-fx-cursor: hand;
+}
+
+TextField, PasswordField {
+	-fx-background-color: transparent;
+   -fx-border-color: #358F80;
+   -fx-border-radius: 10px;
+   -fx-border-width: 2px;
+   -fx-font-size: 16px;
+   -fx-cursor: text;
+}
+
+DatePicker {
+	-fx-background-color: transparent;
+   -fx-border-color: #358F80;
+   -fx-border-width: 2px;
+   -fx-font-size: 16px;
+   -fx-cursor: text;
+}
+
+ComboBox {
+	-fx-background-color: #358F80;
+	-fx-cursor: hand;
+}
+
+ComboBox:hover {
+	-fx-background-color: #73a5c7;
+}
+
+/* outer combo-box text */
+.combo-box .list-cell {
+  -fx-text-fill: #E7ECEF;
+}
+
+/* combo-box list view text, not hovered or focused */
+.combo-box .list-view .list-cell {
+  -fx-text-fill: #232323;
+}
+
+/* combo-box selected text */
+.combo-box .list-view .list-cell:focused {
+  -fx-background-color : #358F80;  /* Cadet Blue */
+  -fx-text-fill: #E7ECEF;
+}
+
+/* combo-box hover text */
+.combo-box .list-view .list-cell:hover {
+  -fx-background-color : #358F80;  /* Cadet Blue */
+  -fx-text-fill: #E7ECEF;
+  -fx-cursor: hand;
+}
+
+ToggleButton {
+	-fx-background-color: transparent;
+	-fx-cursor: hand;
+}
