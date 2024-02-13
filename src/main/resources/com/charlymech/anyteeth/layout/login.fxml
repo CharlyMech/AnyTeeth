@@ -19,26 +19,10 @@
          <Font name="Verdana Bold" size="96.0" />
       </font>
    </Label>
-   <TextField fx:id="email" layoutX="50.0" layoutY="400.0" prefHeight="50.0" prefWidth="500.0">
-      <font>
-         <Font name="Verdana" size="24.0" />
-      </font>
-   </TextField>
-   <PasswordField fx:id="passwd" layoutX="50.0" layoutY="500.0" prefHeight="50.0" prefWidth="500.0">
-      <font>
-         <Font name="Verdana" size="24.0" />
-      </font>
-   </PasswordField>
-   <Button fx:id="login" layoutX="225.0" layoutY="615.0" mnemonicParsing="false" onAction="#tryLaunchLogin" prefHeight="50.0" prefWidth="150.0" textAlignment="CENTER">
-      <font>
-         <Font name="Verdana" size="28.0" />
-      </font>
-   </Button>
-   <TextField fx:id="passwdTf" layoutX="50.0" layoutY="500.0" prefHeight="50.0" prefWidth="500.0" visible="false">
-      <font>
-         <Font name="Verdana" size="24.0" />
-      </font>
-   </TextField>
+   <TextField fx:id="email" layoutX="50.0" layoutY="400.0" prefHeight="50.0" prefWidth="500.0"/>
+   <PasswordField fx:id="passwd" layoutX="50.0" layoutY="500.0" prefHeight="50.0" prefWidth="500.0"/>
+   <Button fx:id="login" layoutX="225.0" layoutY="615.0" mnemonicParsing="false" onAction="#tryLaunchLogin" prefHeight="50.0" prefWidth="150.0" textAlignment="CENTER"/>
+   <TextField fx:id="passwdTf" layoutX="50.0" layoutY="500.0" prefHeight="50.0" prefWidth="500.0" visible="false"/>
    <ToggleButton fx:id="showPasswordToggle" layoutX="497.0" layoutY="500.0" mnemonicParsing="false" onAction="#passwordToggle" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: transparent;">
       <graphic>
          <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
