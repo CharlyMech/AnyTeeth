@@ -38,4 +38,11 @@ TextField {
 ComboBox {
 	-fx-background-color: #358F80;
 	-fx-border-radius: 15px;
+	-fx-cursor: hand;
+}
+
+CheckBox, RadioButton {
+	-fx-font-size: 12px;
+   -fx-text-fill: #274c77;
+   -fx-cursor: hand;
 }
