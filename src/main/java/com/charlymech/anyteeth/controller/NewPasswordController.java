@@ -6,11 +6,10 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import static com.charlymech.anyteeth.App.rb;
 import static com.charlymech.anyteeth.App.showWarningAlert;
+import static com.charlymech.anyteeth.controller.StaffController.staticPasswordPasswordField;
+import static com.charlymech.anyteeth.controller.StaffController.staticPasswordTextField;
 
 public class NewPasswordController {
 	// Inyecciones FXML
@@ -48,18 +47,18 @@ public class NewPasswordController {
 	}
 
 	public void setNewPassword(ActionEvent event) {
+		// TODO: check password regex
 		if (this.password1PasswordField.getText().trim().isEmpty() || this.password2PasswordField.getText().trim().isEmpty()) { // Caso que alguno de los campos esté vacío
 			showWarningAlert(rb.getString("alertTitle"), rb.getString("newPasswordNotFilledHeader"), rb.getString("newPasswordNotFilledBody"));
-		} else if (this.password1PasswordField.getText().trim().isEmpty() != this.password2PasswordField.getText().trim().isEmpty()) { // Caso no coinciden
+		} else if (!this.password1PasswordField.getText().trim().equals(this.password2PasswordField.getText().trim())) { // Caso no coinciden
 			showWarningAlert(rb.getString("alertTitle"), rb.getString("newPasswordNotEqualsHeader"), rb.getString("newPasswordNotEqualsBody"));
 		} else { // Ambas son iguales y no están vacías
 			// TODO -> Asignar la nueva contraseña a los campos de la pantalla de Staff
 			Stage stage = (Stage) this.pane.getScene().getWindow();
 			stage.close();
+			staticPasswordPasswordField.setText(this.password1PasswordField.getText().trim());
+			staticPasswordTextField.setText(this.password1PasswordField.getText().trim());
 		}
-	}
-
-	protected void setGraphics() {
 	}
 
 	protected void setLanguage() {
