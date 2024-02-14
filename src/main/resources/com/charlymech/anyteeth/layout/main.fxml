@@ -3,15 +3,18 @@
 <?import com.calendarfx.view.CalendarView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.RadioMenuItem?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
@@ -22,80 +25,73 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="main" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-				prefHeight="720.0" prefWidth="1280.0" styleClass="pane" stylesheets="@../css/light/main.css"
-				xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-				fx:controller="com.charlymech.anyteeth.controller.MainController">
+<BorderPane fx:id="main" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="pane" stylesheets="@../css/light/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.charlymech.anyteeth.controller.MainController">
 	<top>
 		<MenuBar BorderPane.alignment="CENTER">
 			<menus>
-				<Menu fx:id="menuBarFile" mnemonicParsing="false" id="menuItems">
+				<Menu id="menuItems" fx:id="menuBarFile" mnemonicParsing="false">
 					<items>
-						<Menu fx:id="menuBarFileImport" mnemonicParsing="false" id="menuItems">
+						<Menu id="menuItems" fx:id="menuBarFileImport" mnemonicParsing="false">
 							<items>
-								<MenuItem fx:id="menuBarFileImportJson" mnemonicParsing="false" id="menuItems"/>
-								<MenuItem fx:id="menuBarFileImportMongo" mnemonicParsing="false" id="menuItems"/>
+								<MenuItem id="menuItems" fx:id="menuBarFileImportJson" mnemonicParsing="false" />
+								<MenuItem id="menuItems" fx:id="menuBarFileImportMongo" mnemonicParsing="false" />
 							</items>
 						</Menu>
-						<Menu fx:id="menuBarFileExport" mnemonicParsing="false" id="menuItems">
+						<Menu id="menuItems" fx:id="menuBarFileExport" mnemonicParsing="false">
 							<items>
-								<MenuItem fx:id="menuBarFileExportJson" mnemonicParsing="false" id="menuItems"/>
-								<MenuItem fx:id="menuBarFileExportMongo" mnemonicParsing="false" id="menuItems"/>
+								<MenuItem id="menuItems" fx:id="menuBarFileExportJson" mnemonicParsing="false" />
+								<MenuItem id="menuItems" fx:id="menuBarFileExportMongo" mnemonicParsing="false" />
 							</items>
 						</Menu>
-						<SeparatorMenuItem mnemonicParsing="false"/>
-						<MenuItem fx:id="menuBarFileSettings" mnemonicParsing="false" id="menuItems"/>
-						<SeparatorMenuItem mnemonicParsing="false"/>
-						<MenuItem fx:id="menuBarFileClose" mnemonicParsing="false" onAction="#logoutActionEvent"
-									 id="menuItems"/>
+						<SeparatorMenuItem mnemonicParsing="false" />
+						<MenuItem id="menuItems" fx:id="menuBarFileSettings" mnemonicParsing="false" />
+						<SeparatorMenuItem mnemonicParsing="false" />
+						<MenuItem id="menuItems" fx:id="menuBarFileClose" mnemonicParsing="false" onAction="#logoutActionEvent" />
 					</items>
 				</Menu>
-				<Menu fx:id="menuBarEdit" mnemonicParsing="false" id="menuItems"/>
-				<Menu fx:id="menuBarWindow" mnemonicParsing="false" id="menuItems">
+				<Menu id="menuItems" fx:id="menuBarEdit" mnemonicParsing="false" />
+				<Menu id="menuItems" fx:id="menuBarWindow" mnemonicParsing="false">
 					<items>
-						<MenuItem fx:id="menuBarWindowFullScreen" mnemonicParsing="false" id="menuItems"/>
-						<MenuItem fx:id="menuBarWindowWindowed" mnemonicParsing="false" id="menuItems"/>
-						<SeparatorMenuItem mnemonicParsing="false"/>
-						<RadioMenuItem fx:id="menuBarWindowLightTheme" mnemonicParsing="false" id="menuItems">
+						<MenuItem id="menuItems" fx:id="menuBarWindowFullScreen" mnemonicParsing="false" />
+						<MenuItem id="menuItems" fx:id="menuBarWindowWindowed" mnemonicParsing="false" />
+						<SeparatorMenuItem mnemonicParsing="false" />
+						<RadioMenuItem id="menuItems" fx:id="menuBarWindowLightTheme" mnemonicParsing="false">
 							<toggleGroup>
-								<ToggleGroup fx:id="theme"/>
+								<ToggleGroup fx:id="theme" />
 							</toggleGroup>
 						</RadioMenuItem>
-						<RadioMenuItem fx:id="menuBarWindowDarkTheme" mnemonicParsing="false" id="menuItems"
-											toggleGroup="$theme"/>
+						<RadioMenuItem id="menuItems" fx:id="menuBarWindowDarkTheme" mnemonicParsing="false" toggleGroup="$theme" />
 					</items>
 				</Menu>
-				<Menu fx:id="menuBarSession" mnemonicParsing="false" id="menuItems">
+				<Menu id="menuItems" fx:id="menuBarSession" mnemonicParsing="false">
 					<items>
-						<MenuItem fx:id="menuBarSessionUser" mnemonicParsing="false" id="menuItems"/>
-						<MenuItem fx:id="menuBarSessionClose" mnemonicParsing="false" onAction="#logoutActionEvent"
-									 id="menuItems"/>
+						<MenuItem id="menuItems" fx:id="menuBarSessionUser" mnemonicParsing="false" />
+						<MenuItem id="menuItems" fx:id="menuBarSessionClose" mnemonicParsing="false" onAction="#logoutActionEvent" />
 					</items>
 				</Menu>
-				<Menu fx:id="menuBarCreate" mnemonicParsing="false" id="menuItems">
+				<Menu id="menuItems" fx:id="menuBarCreate" mnemonicParsing="false">
 					<items>
-						<MenuItem fx:id="menuBarCreateAppointment" mnemonicParsing="false" id="menuItems"/>
-						<SeparatorMenuItem mnemonicParsing="false"/>
-						<MenuItem fx:id="menuBarCreatePatient" mnemonicParsing="false" id="menuItems"/>
-						<MenuItem fx:id="menuBarCreateClient" mnemonicParsing="false" id="menuItems"/>
-						<SeparatorMenuItem mnemonicParsing="false"/>
-						<MenuItem fx:id="menuBarCreateBudget" disable="true" mnemonicParsing="false" id="menuItems"/>
-						<MenuItem fx:id="menuBarCreatePlan" disable="true" mnemonicParsing="false" id="menuItems"/>
-						<SeparatorMenuItem mnemonicParsing="false"/>
-						<MenuItem fx:id="menuBarCreateTicket" disable="true" mnemonicParsing="false" id="menuItems"/>
-						<MenuItem fx:id="menuBarCreateInvoice" disable="true" mnemonicParsing="false" id="menuItems"/>
-						<MenuItem fx:id="menuBarCreateReport" mnemonicParsing="false" id="menuItems"/>
-						<SeparatorMenuItem mnemonicParsing="false"/>
-						<MenuItem fx:id="menuBarCreateStaff" mnemonicParsing="false" onAction="#addNewStaff" id="menuItems"
-									 visible="false"/>
+						<MenuItem id="menuItems" fx:id="menuBarCreateAppointment" mnemonicParsing="false" />
+						<SeparatorMenuItem mnemonicParsing="false" />
+						<MenuItem id="menuItems" fx:id="menuBarCreatePatient" mnemonicParsing="false" />
+						<MenuItem id="menuItems" fx:id="menuBarCreateClient" mnemonicParsing="false" />
+						<SeparatorMenuItem mnemonicParsing="false" />
+						<MenuItem id="menuItems" fx:id="menuBarCreateBudget" disable="true" mnemonicParsing="false" />
+						<MenuItem id="menuItems" fx:id="menuBarCreatePlan" disable="true" mnemonicParsing="false" />
+						<SeparatorMenuItem mnemonicParsing="false" />
+						<MenuItem id="menuItems" fx:id="menuBarCreateTicket" disable="true" mnemonicParsing="false" />
+						<MenuItem id="menuItems" fx:id="menuBarCreateInvoice" disable="true" mnemonicParsing="false" />
+						<MenuItem id="menuItems" fx:id="menuBarCreateReport" mnemonicParsing="false" />
+						<SeparatorMenuItem mnemonicParsing="false" />
+						<MenuItem id="menuItems" fx:id="menuBarCreateStaff" mnemonicParsing="false" onAction="#addNewStaff" visible="false" />
 					</items>
 				</Menu>
-				<Menu fx:id="menuBarHelp" mnemonicParsing="false" id="menuItems">
+				<Menu id="menuItems" fx:id="menuBarHelp" mnemonicParsing="false">
 					<items>
-						<MenuItem fx:id="menuBarHelpAbout" mnemonicParsing="false" id="menuItems"/>
-						<MenuItem fx:id="menuBarHelpDocumentation" mnemonicParsing="false" id="menuItems"/>
-						<SeparatorMenuItem mnemonicParsing="false"/>
-						<MenuItem fx:id="menuBarHelpAdmin" mnemonicParsing="false" id="menuItems"/>
+						<MenuItem id="menuItems" fx:id="menuBarHelpAbout" mnemonicParsing="false" />
+						<MenuItem id="menuItems" fx:id="menuBarHelpDocumentation" mnemonicParsing="false" />
+						<SeparatorMenuItem mnemonicParsing="false" />
+						<MenuItem id="menuItems" fx:id="menuBarHelpAdmin" mnemonicParsing="false" />
 					</items>
 				</Menu>
 			</menus>
@@ -104,40 +100,34 @@
 	<left>
 		<VBox prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
 			<children>
-				<Button fx:id="asideAppointments" mnemonicParsing="false" onAction="#showAppointments" prefHeight="50.0"
-						  prefWidth="201.0" styleClass="asideBtn">
+				<Button fx:id="asideAppointments" mnemonicParsing="false" onAction="#showAppointments" prefHeight="50.0" prefWidth="201.0" styleClass="asideBtn">
 					<font>
-						<Font name="Verdana" size="20.0"/>
+						<Font name="Verdana" size="20.0" />
 					</font>
 				</Button>
-				<Button fx:id="asidePatients" mnemonicParsing="false" onAction="#showPatiens" prefHeight="50.0"
-						  prefWidth="721.0" styleClass="asideBtn">
+				<Button fx:id="asidePatients" mnemonicParsing="false" onAction="#showPatiens" prefHeight="50.0" prefWidth="721.0" styleClass="asideBtn">
 					<font>
-						<Font name="Verdana" size="20.0"/>
+						<Font name="Verdana" size="20.0" />
 					</font>
 				</Button>
-				<Button fx:id="asideBudgets" disable="true" mnemonicParsing="false" onAction="#showBudgets"
-						  prefHeight="50.0" prefWidth="721.0" styleClass="asideBtn">
+				<Button fx:id="asideBudgets" disable="true" mnemonicParsing="false" onAction="#showBudgets" prefHeight="50.0" prefWidth="721.0" styleClass="asideBtn">
 					<font>
-						<Font name="Verdana" size="20.0"/>
+						<Font name="Verdana" size="20.0" />
 					</font>
 				</Button>
-				<Button fx:id="asidePlans" disable="true" mnemonicParsing="false" onAction="#showPlans" prefHeight="50.0"
-						  prefWidth="721.0" styleClass="asideBtn">
+				<Button fx:id="asidePlans" disable="true" mnemonicParsing="false" onAction="#showPlans" prefHeight="50.0" prefWidth="721.0" styleClass="asideBtn">
 					<font>
-						<Font name="Verdana" size="20.0"/>
+						<Font name="Verdana" size="20.0" />
 					</font>
 				</Button>
-				<Button fx:id="asideDocuments" mnemonicParsing="false" onAction="#showDocuments" prefHeight="50.0"
-						  prefWidth="721.0" styleClass="asideBtn">
+				<Button fx:id="asideDocuments" mnemonicParsing="false" onAction="#showDocuments" prefHeight="50.0" prefWidth="721.0" styleClass="asideBtn">
 					<font>
-						<Font name="Verdana" size="20.0"/>
+						<Font name="Verdana" size="20.0" />
 					</font>
 				</Button>
-				<Button fx:id="asideStaff" mnemonicParsing="false" onAction="#showStaff" prefHeight="50.0" prefWidth="721.0"
-						  styleClass="asideBtn" visible="false">
+				<Button fx:id="asideStaff" mnemonicParsing="false" onAction="#showStaff" prefHeight="50.0" prefWidth="721.0" styleClass="asideBtn" visible="false">
 					<font>
-						<Font name="Verdana" size="20.0"/>
+						<Font name="Verdana" size="20.0" />
 					</font>
 				</Button>
 			</children>
@@ -146,128 +136,138 @@
 	<center>
 		<AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="pane" BorderPane.alignment="CENTER">
 			<children>
-				<CalendarView fx:id="appointmentsPane" prefHeight="744.0" prefWidth="1080.0" styleClass="pane"
-								  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-								  AnchorPane.topAnchor="0.0"/>
-				<TabPane fx:id="patientsTabPane" layoutX="-1.0" prefHeight="694.0" prefWidth="1080.0" styleClass="pane"
-							tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0"
-							AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="0.0">
+				<CalendarView fx:id="appointmentsPane" prefHeight="744.0" prefWidth="1080.0" styleClass="pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+				<TabPane fx:id="patientsTabPane" layoutX="-1.0" prefHeight="694.0" prefWidth="1080.0" styleClass="pane" tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="0.0">
 					<tabs>
 						<Tab fx:id="patientsPatients" closable="false">
 							<content>
-								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="639.0" prefWidth="1080.0"
-												styleClass="pane"/>
+								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="639.0" prefWidth="1080.0" styleClass="pane" />
 							</content>
 						</Tab>
 						<Tab fx:id="patientsClients">
 							<content>
-								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"
-												styleClass="pane"/>
+								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="pane" />
 							</content>
 						</Tab>
 					</tabs>
 				</TabPane>
-				<TabPane fx:id="budgetsTabPane" prefHeight="694.0" prefWidth="1080.0" styleClass="pane"
-							tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0"
-							AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+				<TabPane fx:id="budgetsTabPane" prefHeight="694.0" prefWidth="1080.0" styleClass="pane" tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 					<tabs>
 						<Tab fx:id="budgetsActive">
 							<content>
-								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="639.0" prefWidth="1080.0"
-												styleClass="pane"/>
+								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="639.0" prefWidth="1080.0" styleClass="pane" />
 							</content>
 						</Tab>
 						<Tab fx:id="budgetsTemplates">
 							<content>
-								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"
-												styleClass="pane"/>
+								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="pane" />
 							</content>
 						</Tab>
 						<Tab fx:id="budgetsNew">
 							<content>
-								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"
-												styleClass="pane"/>
+								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="pane" />
 							</content>
 						</Tab>
 					</tabs>
 				</TabPane>
-				<TabPane fx:id="plansTabPane" prefHeight="694.0" prefWidth="1080.0" styleClass="pane"
-							tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0"
-							AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+				<TabPane fx:id="plansTabPane" prefHeight="694.0" prefWidth="1080.0" styleClass="pane" tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 					<tabs>
 						<Tab fx:id="plansActive">
 							<content>
-								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="639.0" prefWidth="1080.0"
-												styleClass="pane"/>
+								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="639.0" prefWidth="1080.0" styleClass="pane" />
 							</content>
 						</Tab>
 						<Tab fx:id="plansNew">
 							<content>
-								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"
-												styleClass="pane"/>
+								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="pane" />
 							</content>
 						</Tab>
 					</tabs>
 				</TabPane>
-				<TabPane fx:id="documentsTabPane" prefHeight="694.0" prefWidth="1080.0" styleClass="pane"
-							tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0"
-							AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+				<TabPane fx:id="documentsTabPane" prefHeight="694.0" prefWidth="1080.0" styleClass="pane" tabClosingPolicy="UNAVAILABLE" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 					<tabs>
 						<Tab fx:id="documentsTickets" closable="false" disable="true">
 							<content>
-								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="639.0" prefWidth="1080.0"
-												styleClass="pane"/>
+								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="639.0" prefWidth="1080.0" styleClass="pane" />
 							</content>
 						</Tab>
 						<Tab fx:id="documentsInvoices" closable="false" disable="true">
 							<content>
-								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"
-												styleClass="pane"/>
+								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="pane" />
 							</content>
 						</Tab>
 						<Tab fx:id="documentsReports" closable="false">
 							<content>
-								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"
-												styleClass="pane"/>
+								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="pane" />
 							</content>
 						</Tab>
 						<Tab fx:id="documentsOthers" closable="false">
 							<content>
-								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"
-												styleClass="pane"/>
+								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="pane" />
 							</content>
 						</Tab>
 					</tabs>
 				</TabPane>
-				<BorderPane fx:id="staffPane" prefHeight="200.0" prefWidth="200.0" styleClass="pane" visible="false"
-								AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-								AnchorPane.topAnchor="0.0">
+				<BorderPane fx:id="staffPane" prefHeight="200.0" prefWidth="200.0" styleClass="pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 					<top>
-						<HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" styleClass="pane"
-								BorderPane.alignment="CENTER">
-							<children>
-								<Button fx:id="addStaffBtn" mnemonicParsing="false" onAction="#addNewStaff" prefHeight="50.0"
-										  prefWidth="50.0" style="-fx-background-color: #6096BA; -fx-border-radius: 20px;">
-									<graphic>
-										<ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true"
-													  style="-fx-border-radius: 20px;">
-											<image>
-												<Image url="@../img/light/add_user_light_30.png"/>
-											</image>
-										</ImageView>
-									</graphic>
-								</Button>
-								<TextField fx:id="staffSearchBar" prefHeight="50.0" prefWidth="833.0"/>
-								<ComboBox fx:id="staffSearchFilter" prefHeight="50.0" prefWidth="117.0"/>
-							</children>
-							<padding>
-								<Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-							</padding>
-						</HBox>
+						<VBox prefWidth="200.0" spacing="20.0" styleClass="pane" BorderPane.alignment="CENTER">
+							<HBox spacing="20.0">
+								<children>
+									<Button fx:id="addStaffBtn" mnemonicParsing="false" onAction="#addNewStaff" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #6096BA; -fx-border-radius: 20px;">
+										<graphic>
+											<ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-radius: 20px;">
+												<image>
+													<Image url="@../img/light/add_user_light_30.png" />
+												</image>
+											</ImageView>
+										</graphic>
+									</Button>
+									<TextField fx:id="staffSearchBar" prefHeight="50.0" prefWidth="833.0" />
+									<ComboBox fx:id="staffSearchFilter" prefHeight="50.0" prefWidth="117.0" />
+								</children>
+								<padding>
+									<Insets left="20.0" right="20.0" top="10.0" />
+								</padding>
+							</HBox>
+                     <HBox fillHeight="false" prefHeight="30.0" spacing="20.0">
+                        <padding>
+                           <Insets bottom="20.0" left="20.0" />
+                        </padding>
+                        <children>
+                           <CheckBox fx:id="activeUsers" mnemonicParsing="false" onAction="#setStaffActiveQuery" prefHeight="30.0" selected="true" />
+                           <HBox prefHeight="30.0" spacing="20.0">
+                              <children>
+                                 <RadioButton fx:id="genderMale" mnemonicParsing="false" onAction="#changeGenderQuery" prefHeight="30.0">
+                                    <toggleGroup>
+                                       <ToggleGroup fx:id="gender" />
+                                    </toggleGroup>
+                                 </RadioButton>
+                                 <RadioButton fx:id="genderFemale" mnemonicParsing="false" onAction="#changeGenderQuery" prefHeight="30.0" toggleGroup="$gender" />
+                              </children>
+                           </HBox>
+                           <ComboBox fx:id="staffFilterByType" prefHeight="30.0" prefWidth="100.0" />
+                        </children>
+                        <opaqueInsets>
+                           <Insets />
+                        </opaqueInsets>
+                     </HBox>
+						</VBox>
 					</top>
-					<center>
-						<ScrollPane prefHeight="694.0" prefWidth="1080.0" styleClass="pane" BorderPane.alignment="CENTER"/>
-					</center>
+               <center>
+                  <TableView BorderPane.alignment="CENTER">
+                    <columns>
+                      <TableColumn fx:id="staffStfIDCol" editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" />
+                      <TableColumn fx:id="staffIDCol" editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" />
+                        <TableColumn fx:id="staffNameCol" editable="false" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" resizable="false" />
+                        <TableColumn fx:id="staffSurnameCol" editable="false" maxWidth="250.0" minWidth="250.0" prefWidth="250.0" resizable="false" />
+                        <TableColumn fx:id="staffCorpEmailCol" editable="false" maxWidth="1.7976931348623157E308" minWidth="200.0" prefWidth="324.0" />
+                        <TableColumn fx:id="staffRegDateCol" editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </center>
 				</BorderPane>
 			</children>
 		</AnchorPane>

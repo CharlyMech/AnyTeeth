@@ -11,7 +11,6 @@ import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -31,8 +30,6 @@ public class MainController {
 	@FXML
 	private Button asideAppointments, asidePatients, asideBudgets, asidePlans, asideDocuments, asideStaff, addStaffBtn;
 	@FXML
-	private ImageView bgLogo;
-	@FXML
 	private BorderPane staffPane;
 	@FXML
 	private TabPane patientsTabPane, budgetsTabPane, plansTabPane, documentsTabPane;
@@ -41,7 +38,11 @@ public class MainController {
 	@FXML
 	private TextField staffSearchBar;
 	@FXML
-	private ComboBox staffSearchFilter;
+	private ComboBox staffSearchFilter, staffFilterByType;
+	@FXML
+	private CheckBox activeUsers;
+	@FXML
+	private RadioButton genderMale, genderFemale;
 	@FXML
 	private CalendarView appointmentsPane;
 	// Variables de clase
@@ -123,6 +124,14 @@ public class MainController {
 		this.documentsInvoices.setText(rb.getString("documentsInvoicesTab"));
 		this.documentsReports.setText(rb.getString("documentsReportsTab"));
 		this.documentsOthers.setText(rb.getString("documentsOthersTab"));
+
+		// Empleados / Staff BorderPane
+		this.staffSearchBar.setPromptText(rb.getString("mainStaffSearchPlaceholder"));
+		//TODO -> Añadir opciones para el ComboBox de filtrado
+		this.activeUsers.setText(rb.getString("mainStaffCheckIsActive"));
+		this.genderMale.setText(rb.getString("mainStaffRadioMale"));
+		this.genderFemale.setText(rb.getString("mainStaffRadioFemale"));
+		// TODO -> Añadir opciones para el ComboBox de tipos de usuarios
 
 		//- Contenido principal //
 	}
@@ -233,11 +242,11 @@ public class MainController {
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/charlymech/anyteeth/layout/staff.fxml"));
 				Parent root = fxmlLoader.load();
 				StaffController staffController = fxmlLoader.getController();
+				this.staffStage = new Stage();
 				staffController.setStaffStage(this.staffStage);
 				staffController.setStaff(staff);
 				staffController.setLanguage();
 				staffController.setGraphics();
-				this.staffStage = new Stage();
 				this.staffStage.setScene(new Scene(root));
 				this.staffStage.setTitle(rb.getString("staffTitle") + "-" + staff.getStaffID());
 				this.staffStage.centerOnScreen();
@@ -261,5 +270,10 @@ public class MainController {
 	public void setUserSession(Staff staff) {
 		this.userSession = staff;
 	}
+
+	public void setStaffActiveQuery(ActionEvent event) {
+	}
+
+	public void changeGenderQuery(ActionEvent event) {
+	}
 }
-// TODO -> center bg logo
