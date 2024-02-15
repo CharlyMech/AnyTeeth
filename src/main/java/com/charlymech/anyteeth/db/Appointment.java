@@ -25,7 +25,7 @@ public class Appointment {
 		this.appointmentID = this.generateAppointmentID();
 		this.patient = patient;
 		this.staff = staff;
-		this.title = this.patient.getFullName() + " - " + this.staff.getFullName(); // Título a mostrar en el elemento gráfico de la cita
+		this.title = this.patient.getName() + " - " + this.staff.getName(); // Título a mostrar en el elemento gráfico de la cita
 		this.date = date;
 		this.hStart = hStart;
 		this.hEnd = hEnd;

@@ -9,7 +9,8 @@ public class Person {
 	// Variables de clase
 	protected String identification;
 	protected Identification identificationType;
-	protected String fullName;
+	protected String name;
+	protected String surnames;
 	protected Gender gender;
 	protected Date birthDate;
 	protected String telephoneNumber;
@@ -26,10 +27,11 @@ public class Person {
 	protected boolean active;
 
 	// Constructores
-	public Person(String identification, Identification identificationType, String fullName, Gender gender, Date birthDate , String telephoneNumber, String email, String address, int cp, String population, Province province, MaritalStatus maritalStatus, Date registrationDate) {
+	public Person(String identification, Identification identificationType, String name, String surnames, Gender gender, Date birthDate , String telephoneNumber, String email, String address, int cp, String population, Province province, MaritalStatus maritalStatus, Date registrationDate) {
 		this.identification = identification;
 		this.identificationType = identificationType;
-		this.fullName = fullName;
+		this.name = name;
+		this.surnames = surnames;
 		this.gender = gender;
 		this.birthDate = birthDate;
 		this.telephoneNumber = telephoneNumber;
@@ -63,8 +65,12 @@ public class Person {
 		return this.identificationType;
 	}
 
-	public String getFullName() {
-		return fullName;
+	public String getName() {
+		return this.name;
+	}
+
+	public String getSurnames() {
+		return this.surnames;
 	}
 
 	public Gender getGender() {
@@ -124,8 +130,12 @@ public class Person {
 		this.identificationType = identificationType;
 	}
 
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setSurnames(String surnames) {
+		this.surnames = surnames;
 	}
 
 	public void setGender(Gender gender) {

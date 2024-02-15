@@ -76,7 +76,8 @@ public class LogInController {
 				Document identificationDocument = result.get("identification", Document.class);
 				userSession.setIdentification(identificationDocument.getString("type"));
 				userSession.setIdentification(identificationDocument.getString("idNumber"));
-				userSession.setFullName(result.getString("name"));
+				userSession.setName(result.getString("name"));
+//				userSession.setSurnames(result.getString("surnames")); //! Not implemented in DB TODO
 				userSession.setGender(Gender.valueOf(result.getString("gender")));
 // 			userSession.setBirthDate(result.getDate("birthDate")); //! Not implemented in DB TODO
 				userSession.setEmail(result.getString("email"));
@@ -93,7 +94,7 @@ public class LogInController {
 				userSession.setComments((ArrayList<String>) comments);
 				// TODO -> Mirar que la cuenta esté activa
 
-				System.out.println(rb.getString("welcome") + " " + userSession.getFullName());
+				System.out.println(rb.getString("welcome") + " " + userSession.getName());
 				// Ejecutar la pantalla principal y asignar el email de usuario
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/charlymech/anyteeth/layout/main.fxml"));
 				Parent root = loader.load();

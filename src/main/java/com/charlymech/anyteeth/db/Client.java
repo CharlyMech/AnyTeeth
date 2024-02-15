@@ -14,8 +14,8 @@ public class Client extends Person {
 	private String bankAcc; // IBAN
 
 	// Constructores
-	public Client(String identification, Identification identificationType, String fullName, Gender gender, Date birthDate, String telephoneNumber, String email, String address, int cp, String population, Province province, MaritalStatus maritalStatus, Date registrationDate, String bankAcc) {
-		super(identification, identificationType, fullName, gender, birthDate, telephoneNumber, email, address, cp, population, province, maritalStatus, registrationDate); // Llamar al constructor de la clase padre
+	public Client(String identification, Identification identificationType, String name, String surnames, Gender gender, Date birthDate, String telephoneNumber, String email, String address, int cp, String population, Province province, MaritalStatus maritalStatus, Date registrationDate, String bankAcc) {
+		super(identification, identificationType, name, surnames, gender, birthDate, telephoneNumber, email, address, cp, population, province, maritalStatus, registrationDate); // Llamar al constructor de la clase padre
 		this.clientID = this.generateClientID();
 		this.bankAcc = bankAcc;
 	}
