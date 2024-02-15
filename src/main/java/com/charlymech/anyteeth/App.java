@@ -9,6 +9,9 @@ import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.Properties;
@@ -84,6 +87,22 @@ public class App {
 			Locale.setDefault(new Locale("en"));
 		}
 		rb = ResourceBundle.getBundle("com/charlymech/anyteeth/lang/language");
+	}
+
+	// Método para aplicar el hash SHA-256
+	public static String hash(String passwd) {
+		// Hash Password in SHA-256
+		// ? https://www.youtube.com/watch?v=ef3kenC4xa0&ab_channel=Randomcode
+
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-256");
+			byte[] message = md.digest(passwd.getBytes());
+			BigInteger bigInt = new BigInteger(1, message);
+			return bigInt.toString(16);
+		} catch (NoSuchAlgorithmException e) {
+			System.out.println("ERROR: " + e);
+			return null;
+		}
 	}
 
 	// GETTERS
