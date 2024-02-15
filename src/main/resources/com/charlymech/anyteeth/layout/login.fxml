@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
@@ -10,20 +9,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="500.0" stylesheets="@../css/light/login.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.charlymech.anyteeth.controller.LogInController">
-   <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="225.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
-      <Image url="@../img/dark/any_teeth_tray_icon.png" />
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="500.0" stylesheets="@../css/light/login.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.charlymech.anyteeth.controller.LogInController">
+   <ImageView id="loginLogo" fitHeight="300.0" fitWidth="350.0" layoutX="75.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../img/light/any_teeth_logo.png" />
    </ImageView>
-   <Label alignment="CENTER" layoutY="225.0" prefHeight="116.0" prefWidth="600.0" text="AnyTeeth" textFill="#368f80">
+   <TextField fx:id="email" layoutX="50.0" layoutY="375.0" prefHeight="50.0" prefWidth="400.0" />
+   <PasswordField fx:id="passwd" layoutX="50.0" layoutY="475.0" prefHeight="50.0" prefWidth="400.0">
       <font>
-         <Font name="Verdana Bold" size="96.0" />
-      </font>
-   </Label>
-   <TextField fx:id="email" layoutX="50.0" layoutY="400.0" prefHeight="50.0" prefWidth="500.0"/>
-   <PasswordField fx:id="passwd" layoutX="50.0" layoutY="500.0" prefHeight="50.0" prefWidth="500.0"/>
-   <Button fx:id="login" layoutX="225.0" layoutY="615.0" mnemonicParsing="false" onAction="#tryLaunchLogin" prefHeight="50.0" prefWidth="150.0" textAlignment="CENTER"/>
-   <TextField fx:id="passwdTf" layoutX="50.0" layoutY="500.0" prefHeight="50.0" prefWidth="500.0" visible="false"/>
-   <ToggleButton fx:id="showPasswordToggle" layoutX="497.0" layoutY="500.0" mnemonicParsing="false" onAction="#passwordToggle" prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: transparent;">
+         <Font size="10.0" />
+      </font></PasswordField>
+   <Button fx:id="login" layoutX="175.0" layoutY="572.0" mnemonicParsing="false" onAction="#tryLaunchLogin" prefHeight="50.0" prefWidth="150.0" textAlignment="CENTER" />
+   <TextField fx:id="passwdTf" layoutX="50.0" layoutY="475.0" prefHeight="50.0" prefWidth="400.0" visible="false" />
+   <ToggleButton fx:id="showPasswordToggle" layoutX="397.0" layoutY="475.0" mnemonicParsing="false" onAction="#passwordToggle" prefHeight="50.0" prefWidth="50.0">
       <graphic>
          <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
             <image>
