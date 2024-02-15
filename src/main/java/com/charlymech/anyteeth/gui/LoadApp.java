@@ -44,8 +44,8 @@ public class LoadApp extends Application {
 				boolean connected = Conn.connectDB(App.getServerIP(), App.getPort()); // Llamar al método para la conexión y verificar que se ha conectado o no
 				if(connected) {
 					Platform.runLater(() -> {
-						launchLogIn();
 						stage.close();
+						launchLogIn();
 					});
 				} else {
 					Platform.runLater(() -> {
@@ -79,7 +79,6 @@ public class LoadApp extends Application {
 
 			LogInController loginController = loader.getController();
 			loginController.setLanguage();
-			loginController.setGraphics();
 			loginScene.setOnKeyPressed(new EventHandler<KeyEvent>() { // Añadir una escucha a la tecla de "ENTER" para ejecutar el método de login
 				@Override
 				public void handle(KeyEvent ke) {
@@ -92,8 +91,6 @@ public class LoadApp extends Application {
 					}
 				}
 			});
-
-//			stage.close(); // Cerrar el stage de la pantalla de carga
 		} catch (IOException e) {
 			System.err.println("Error intentando abrir el LogIn");
 			System.out.println(e.getMessage());
