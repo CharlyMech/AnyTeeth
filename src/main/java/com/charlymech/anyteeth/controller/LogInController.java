@@ -4,14 +4,12 @@ import com.charlymech.anyteeth.App;
 import com.charlymech.anyteeth.Enums.Gender;
 import com.charlymech.anyteeth.db.Conn;
 import com.charlymech.anyteeth.db.Staff;
-import com.charlymech.anyteeth.gui.LoadApp;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -124,13 +122,6 @@ public class LogInController {
 		}
 	}
 
-	public void setGraphics() {
-		// Login Button
-		this.login.setCursor(Cursor.HAND);
-		// ToggleButton contraseña
-		this.showPasswordToggle.setCursor(Cursor.HAND);
-	}
-
 	public void setLanguage() {
 		email.setPromptText(rb.getString("loginEmailPrompt"));
 		passwd.setPromptText(rb.getString("loginPasswdPrompt"));
@@ -139,8 +130,8 @@ public class LogInController {
 
 	public void passwordToggle(ActionEvent event) {
 		// Crear ImageView para cada uno de los iconos
-		ImageView show = new ImageView(String.valueOf(LoadApp.class.getResource("/com/charlymech/anyteeth/img/light/show_password_light_30.png")));
-		ImageView hide = new ImageView(String.valueOf(LoadApp.class.getResource("/com/charlymech/anyteeth/img/light/show_password_active_light_30.png")));
+		ImageView show = new ImageView(String.valueOf(getClass().getResource("/com/charlymech/anyteeth/img/light/show_password_light_30.png")));
+		ImageView hide = new ImageView(String.valueOf(getClass().getResource("/com/charlymech/anyteeth/img/light/show_password_active_light_30.png")));
 		String passwdString;
 		// Cuando suceda el evento -> Comprobar el estado y asignar el icono pertinente
 		if (this.showPasswordToggle.isSelected()) { // Toggle seleccionado -> Mostrar contraseña
