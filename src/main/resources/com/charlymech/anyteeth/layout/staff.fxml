@@ -55,7 +55,7 @@
 								</ImageView>
 							</graphic>
 						</Button>
-						<CheckBox fx:id="isActive" layoutX="25.0" layoutY="327.0" mnemonicParsing="false" onAction="#setStaffActive" />
+						<CheckBox fx:id="isActive" layoutX="25.0" layoutY="327.0" mnemonicParsing="false" onAction="#setStaffActive" selected="true" />
 					</children>
 				</Pane>
 				<Pane layoutX="250.0" prefHeight="350.0" prefWidth="750.0" styleClass="pane" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
