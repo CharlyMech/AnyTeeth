@@ -5,6 +5,7 @@ import com.charlymech.anyteeth.Enums.Gender;
 import com.charlymech.anyteeth.Enums.Identification;
 import com.charlymech.anyteeth.Enums.MaritalStatus;
 import com.charlymech.anyteeth.Enums.Province;
+import com.charlymech.anyteeth.db.Person;
 import com.charlymech.anyteeth.db.Staff;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,6 +24,7 @@ import java.time.ZoneId;
 import java.util.Date;
 
 import static com.charlymech.anyteeth.App.rb;
+//import static com.charlymech.anyteeth.db.Staff.insertStaff;
 
 public class StaffController {
 	// Inyecciones FXML
@@ -62,35 +64,34 @@ public class StaffController {
 	private boolean hasMadeChanges = false; // Esta variable se usará para detectar cualquier cambio en el formulario
 
 	// Método de comprobación que todos los campos estén rellenados
-	private boolean checkAllFields() {
-		// TODO: Check corporate email regex and general mail regex, telephone regex (with extension), CP 5 numbers
+	private boolean checkAllFieldsFilled() {
 		// Comprobar que todos los campos han sido rellenados
-		if (this.nameTextField.getText().trim().isEmpty()
-				|| this.surnameTextField.getText().trim().isEmpty()
-				|| this.idTypeComboBox.getValue() == null
-				|| this.idNumberTextField.getText().trim().isEmpty()
-				|| this.birthDateDatePicker.getValue() == null
-				|| this.genreComboBox.getValue() == null
-				|| this.maritalStatusComboBox.getValue() == null
-				|| this.corporationEmailTextField.getText().trim().isEmpty()
-				|| this.personalEmailTextField.getText().trim().isEmpty()
-				|| this.telephoneTextField.getText().trim().isEmpty()
-				|| this.addressTextField.getText().trim().isEmpty()
-				|| this.cpTextField.getText().trim().isEmpty()
-				|| this.populationTextField.getText().trim().isEmpty()
-				|| this.provinceComboBox.getValue() == null
-				|| this.roleComboBox.getValue() == null
-				|| this.passwordPasswordField.getText().trim().isEmpty()
-				|| this.passwordTextField.getText().trim().isEmpty() // Por si acaso
-		) {
-			return false;
+		if (!this.nameTextField.getText().trim().isEmpty()
+				&& !this.surnameTextField.getText().trim().isEmpty()
+				&& this.idTypeComboBox.getValue() != null
+				&& !this.idNumberTextField.getText().trim().isEmpty()
+				&& this.birthDateDatePicker.getValue() != null
+				&& this.genreComboBox.getValue() != null
+				&& this.maritalStatusComboBox.getValue() != null
+				&& !this.corporationEmailTextField.getText().trim().isEmpty()
+				&& !this.personalEmailTextField.getText().trim().isEmpty()
+				&& !this.telephoneTextField.getText().trim().isEmpty()
+				&& !this.addressTextField.getText().trim().isEmpty()
+				&& !this.cpTextField.getText().trim().isEmpty()
+				&& !this.populationTextField.getText().trim().isEmpty()
+				&& this.provinceComboBox.getValue() != null
+				&& this.roleComboBox.getValue() != null
+				&& !this.passwordPasswordField.getText().trim().isEmpty()
+				&& !this.passwordTextField.getText().trim().isEmpty() // Por si acaso
+		) { // Todos los campos han sido rellenados
+			return true;
 		}
-		return true; // Todos los campos han sido rellenados
+		return false; // Faltan campos a rellenar
 	}
 
 	// Método para comprobar los cambios en la ventana emergente y modificar el valor de ventana en ejecución en el cierre
 	public void checkCloseEvent() {
-		if (!checkAllFields() && this.hasMadeChanges) {
+		if (!checkAllFieldsFilled() && this.hasMadeChanges) {
 			Alert alert = new Alert(Alert.AlertType.CONFIRMATION); // Crear la alerta de tipo confirmación
 			alert.setTitle(rb.getString("staffChangesTitle"));
 			alert.setHeaderText(rb.getString("staffChangesHeader"));
@@ -108,12 +109,64 @@ public class StaffController {
 
 	// Método de comprobación de campos y creación de usuarios
 	public void saveChanges(ActionEvent event) {
-		if (checkAllFields()) { // Todos los campos han sido rellenados
-			// TODO -> Database method to create new user
-			// TODO -> hash passwd
-		} else { // Faltan campos por rellenar
-			// TODO -> Mensaje de alerta
+		if (checkAllFieldsFilled()) { // Todos los campos han sido rellenados
+			// Comprobar el formato del identificador personal
+			boolean idFormat;
+			if (this.idTypeComboBox.getValue() == Identification.DNI) idFormat = Identification.checkDNI(this.idNumberTextField.getText().trim());
+			// La única opción que queda es que sea NIE, ya que todos los campos se han comprobado que están rellenados
+			else idFormat = Identification.checkNIE(this.idNumberTextField.getText().trim());
+			// Comprobar las expresiones de campos que requieren de comprobación de formato
+			if (!idFormat) { // La expresión para el tipo de ID no es correcta
+				App.showWarningAlert(rb.getString("alertTitle"), rb.getString("staffBadIDHeader"), rb.getString("staffBadIDBody"));
+			} else if (!this.corporationEmailTextField.getText().trim().matches(Staff.corporationEmailRegex)) { // Email de empresa incorrecto
+				App.showWarningAlert(rb.getString("alertTitle"), rb.getString("staffBadEmailHeader"), rb.getString("staffBadCorporationEmailBody"));
+			} else if (!this.personalEmailTextField.getText().trim().matches(Person.genericEmailRegex)) { // Email personal incorrecto
+				App.showWarningAlert(rb.getString("alertTitle"), rb.getString("staffBadEmailHeader"), rb.getString("staffBadPersonalEmailBody"));
+			} else if (!this.telephoneTextField.getText().trim().matches(Person.telephoneNumberRegex)) { // Formato de teléfono incorrecto
+				App.showWarningAlert(rb.getString("alertTitle"), rb.getString("staffBadTelephoneHeader"), rb.getString("staffBadTelephoneBody"));
+			} else if (!this.cpTextField.getText().trim().matches("\\d{5}")) { // Formato de CP incorrecto
+				App.showWarningAlert(rb.getString("alertTitle"), rb.getString("staffBadCPHeader"), rb.getString("staffBadCPBody"));
+			} else { // Todos los formatos son correctos
+				// Identificar los valores de los ComboBox mediante el índice
+				Gender[] genderList = Gender.class.getEnumConstants();
+				Gender staffGender = genderList[this.genreComboBox.getSelectionModel().getSelectedIndex()];
+				MaritalStatus[] statusList = MaritalStatus.class.getEnumConstants();
+				MaritalStatus staffStatus = statusList[this.maritalStatusComboBox.getSelectionModel().getSelectedIndex()];
+				Province[] provinceList = Province.class.getEnumConstants();
+				Province selectedProvince = provinceList[this.provinceComboBox.getSelectionModel().getSelectedIndex()];
+				Staff createStaff = new Staff(this.staffIdNumberTextField.getText().trim(), // Crear el objeto Staff para que lo lea el método de inserción en la BD
+						this.idNumberTextField.getText().trim(),
+						Identification.valueOf(this.idTypeComboBox.getValue().toString()),
+						this.nameTextField.getText().trim(),
+						this.surnameTextField.getText().trim(),
+						staffGender,
+						Date.from(this.birthDateDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()),
+						this.telephoneTextField.getText(),
+						this.personalEmailTextField.getText(),
+						this.addressTextField.getText(),
+						this.cpTextField.getText(),
+						this.populationTextField.getText(),
+						selectedProvince,
+						staffStatus,
+						Date.from(this.registrationDateDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()),
+						this.corporationEmailTextField.getText().trim(),
+						App.hash(this.passwordPasswordField.getText()), // Contraseña pasada por un hash
+						Staff.Role.valueOf(this.roleComboBox.getValue().toString())
+				);
+				// Comprobar que no existe un usuario con el mismo email corporativo en la DB
+				if (createStaff.getStaffLogin(createStaff.getCorporationEmail()) == null) { // No existe usuario en el sistema
+					createStaff.insertStaff(createStaff);
+					// TODO -> Actualizar en tiempo real la tabla (TableView)
+					// TODO -> ? Mostrar mensaje informativo ?
+					this.staffStage.close();
+				} else { // Existe usuario con el mismo mail en el sistema
+					App.showWarningAlert(rb.getString("alertTitle"), rb.getString("staffCorporationMailAlreadyStoredHeader"), rb.getString("staffCorporationMailAlreadyStoredBody"));
+				}
+			}
+		} else {
+			App.showWarningAlert(rb.getString("staffMissingFieldsTitle"), rb.getString("staffMissingFieldsHeader"), rb.getString("staffMissingFieldsBody"));
 		}
+		// TODO -> Cuando están todos los campos rellenados me deja cerrar sin preguntar si desea guardar los cambios
 	}
 
 	// Método para mostrar y esconder la contraseña de la pantalla
@@ -170,15 +223,31 @@ public class StaffController {
 				this.hasMadeChanges = true;
 			}
 		});
-		// TODO ID Type ComboBox
+		this.idTypeComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+			if (newValue != null) {
+				this.hasMadeChanges = true;
+			}
+		});
 		this.idNumberTextField.textProperty().addListener((observable, oldValue, newValue) -> {
 			if(!newValue.isEmpty()) {
 				this.hasMadeChanges = true;
 			}
 		});
-		// TODO BirthDate DatePicker
-		// TODO Genre ComboBox
-		// TODO MaritalStatus ComboBox
+		this.birthDateDatePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
+			if (newValue != null) {
+				this.hasMadeChanges = true;
+			}
+		});
+		this.genreComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+			if (newValue != null) {
+				this.hasMadeChanges = true;
+			}
+		});
+		this.maritalStatusComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+			if (newValue != null) {
+				this.hasMadeChanges = true;
+			}
+		});
 		this.corporationEmailTextField.textProperty().addListener((observable, oldValue, newValue) -> {
 			if(!newValue.isEmpty()) {
 				this.hasMadeChanges = true;
@@ -204,13 +273,21 @@ public class StaffController {
 				this.hasMadeChanges = true;
 			}
 		});
-		// TODO province
+		this.provinceComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+			if (newValue != null) {
+				this.hasMadeChanges = true;
+			}
+		});
 		this.populationTextField.textProperty().addListener((observable, oldValue, newValue) -> {
 			if(!newValue.isEmpty()) {
 				this.hasMadeChanges = true;
 			}
 		});
-		// TODO Role ComboBox
+		this.roleComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
+			if (newValue != null) {
+				this.hasMadeChanges = true;
+			}
+		});
 		this.passwordPasswordField.textProperty().addListener((observable, oldValue, newValue) -> {
 			if(!newValue.isEmpty()) {
 				this.hasMadeChanges = true;
@@ -234,12 +311,11 @@ public class StaffController {
 		this.maritalStatusComboBox.setItems(this.maritalStatus);
 		// Día de Registro
 		LocalDate registration;
-		if ((new Staff()).searchStaffByID(staff.getStaffID()) == null) { // No existe el ID en el sistema, el origen es añadir nuevo Staff
+		if ((new Staff()).getStaffByID(staff.getStaffID()) == null) { // No existe el ID en el sistema, el origen es añadir nuevo Staff
 			registration = LocalDate.now();
 		} else {
 			Date registrationDate = staff.getRegistrationDate();
 			registration = registrationDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-			;
 		}
 		this.registrationDateDatePicker.setValue(registration);
 		// Provincias ComboBox
