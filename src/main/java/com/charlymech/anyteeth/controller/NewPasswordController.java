@@ -38,17 +38,19 @@ public class NewPasswordController {
 		if(this.showBothPasswordsCheckBox.isSelected()) { // Mostrar las contraseñas
 			// Password 1
 			this.password1PasswordField.setVisible(false);
-			this.password1TextField.setText(this.password1PasswordField.getText());
+			this.password1TextField.setText(this.password1PasswordField.getText().trim());
 			this.password1TextField.setVisible(true);
 			// Password 2
 			this.password2PasswordField.setVisible(false);
-			this.password2TextField.setText(this.password2PasswordField.getText());
+			this.password2TextField.setText(this.password2PasswordField.getText().trim());
 			this.password2TextField.setVisible(true);
 		} else {
 			// Password 1
+			this.password1PasswordField.setText(this.password1TextField.getText().trim());
 			this.password1PasswordField.setVisible(true);
 			this.password1TextField.setVisible(false);
 			// Password 2
+			this.password2PasswordField.setText(this.password2TextField.getText().trim());
 			this.password2PasswordField.setVisible(true);
 			this.password2TextField.setVisible(false);
 		}
