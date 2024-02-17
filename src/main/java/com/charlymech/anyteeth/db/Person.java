@@ -14,7 +14,7 @@ public class Person {
 	protected Gender gender;
 	protected Date birthDate;
 	protected String telephoneNumber;
-	protected String telephoneNumberRegex = "^(\\+\\d{1,3})? (\\d ?){1,14}$";
+	public static final String telephoneNumberRegex = "^\\d{3}[-\\s]?\\d{3}[-\\s]?\\d{3}$";
 	protected String email;
 	public static final String genericEmailRegex = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
 	protected String address;
