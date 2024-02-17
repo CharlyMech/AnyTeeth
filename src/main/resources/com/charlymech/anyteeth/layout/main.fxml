@@ -208,7 +208,7 @@
 						</Tab>
 					</tabs>
 				</TabPane>
-				<BorderPane fx:id="staffPane" prefHeight="200.0" prefWidth="200.0" styleClass="pane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+				<BorderPane fx:id="staffPane" prefHeight="200.0" prefWidth="200.0" styleClass="pane" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 					<top>
 						<VBox prefWidth="200.0" spacing="20.0" styleClass="pane" BorderPane.alignment="CENTER">
 							<HBox spacing="20.0">
