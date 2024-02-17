@@ -50,14 +50,9 @@ public class LogInController {
 		} else if (!email.getText().trim().matches(Staff.corporationEmailRegex)) { // Comprobar que el email corporativo es válido mediante una expresión regular
 			App.showWarningAlert(rb.getString("alertTitle"), rb.getString("warningLogin"), rb.getString("warningLoginBadEmail"));
 		} else { // Los parámetros son correctos
-			// Verificar los datos con la Base de Datos
-			MongoDatabase db = Conn.mongo.getDatabase(App.getDatabase()); // Especificar la base de datos a usar
-			MongoCollection<Document> collection = db.getCollection("staff"); // Especificar la colección
-
-			// Crear un filtro para encontrar documentos con los valores deseados
-			Document query = new Document("email", new Document("$eq", email.getText()))
-					.append("password", new Document("$eq", passwd.getText())); // TODO -> Falta hacer el hash de la contraseña
-			Document result = collection.find(query).first(); // Documento resultado
+			// Crear el objeto Staff para acceder al método de retorno del Documento
+			Staff userSession = new Staff();
+			Document result = userSession.getStaffLogin(email.getText(), passwd.getText());
 
 			// Verificar si se encontró un usuario
 			if (result != null) {
@@ -70,8 +65,7 @@ public class LogInController {
 						}
 					});
 				}
-				// Crear el objeto Staff y cargar toda la información necesaria
-				Staff userSession = new Staff();
+				// Cargar toda la información necesaria
 				userSession.setStaffID(result.getString("_id"));
 				Document identificationDocument = result.get("identification", Document.class);
 				userSession.setIdentification(identificationDocument.getString("type"));
@@ -115,6 +109,7 @@ public class LogInController {
 				stage.show();
 				mainController.setUserSessionPermissions();
 			} else {
+				userSession = null; // No es necesario pero para acelerar al garbage collector
 				App.showWarningAlert(rb.getString("alertTitle"), rb.getString("warningLogin"), rb.getString("warningLoginBadUserEmail"));
 				// Reset text fields
 				email.setText("");
