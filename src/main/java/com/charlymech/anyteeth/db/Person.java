@@ -18,7 +18,7 @@ public class Person {
 	protected String email;
 	public static final String genericEmailRegex = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
 	protected String address;
-	protected int cp;
+	protected String cp;
 	protected String population;
 	protected Province province;
 	protected MaritalStatus maritalStatus;
@@ -27,7 +27,7 @@ public class Person {
 	protected boolean active;
 
 	// Constructores
-	public Person(String identification, Identification identificationType, String name, String surnames, Gender gender, Date birthDate , String telephoneNumber, String email, String address, int cp, String population, Province province, MaritalStatus maritalStatus, Date registrationDate) {
+	public Person(String identification, Identification identificationType, String name, String surnames, Gender gender, Date birthDate , String telephoneNumber, String email, String address, String cp, String population, Province province, MaritalStatus maritalStatus, Date registrationDate) {
 		this.identification = identification;
 		this.identificationType = identificationType;
 		this.name = name;
@@ -93,7 +93,7 @@ public class Person {
 		return this.address;
 	}
 
-	public int getCp() {
+	public String getCp() {
 		return this.cp;
 	}
 
@@ -158,7 +158,7 @@ public class Person {
 		this.address = address;
 	}
 
-	public void setCp(int cp) {
+	public void setCp(String cp) {
 		this.cp = cp;
 	}
 
