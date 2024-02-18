@@ -43,7 +43,7 @@ TextField, PasswordField {
    -fx-border-color: #358F80;
    -fx-border-radius: 10px;
    -fx-border-width: 2px;
-   -fx-font-size: 16px;
+   -fx-font-size: 14px;
    -fx-cursor: text;
 }
 
@@ -51,7 +51,7 @@ DatePicker {
 	-fx-background-color: transparent;
    -fx-border-color: #358F80;
    -fx-border-width: 2px;
-   -fx-font-size: 16px;
+   -fx-font-size: 14px;
    -fx-cursor: text;
 }
 
