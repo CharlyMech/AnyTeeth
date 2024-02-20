@@ -53,4 +53,10 @@ CheckBox, RadioButton {
 	-fx-font-size: 16px;
 	-fx-font-weight: bold;
 	-fx-cursor: hand;
+	-fx-border-width: 0 0 2px 0;
+	-fx-border-color: transparent;
+}
+
+.sessionButton:hover {
+	-fx-border-color: #666666;
 }
