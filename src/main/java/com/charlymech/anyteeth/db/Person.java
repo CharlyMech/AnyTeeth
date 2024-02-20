@@ -20,14 +20,14 @@ public class Person {
 	protected String address;
 	protected String cp;
 	protected String population;
-	protected Province province;
+	protected String province;
 	protected MaritalStatus maritalStatus;
 	protected Date registrationDate;
 	protected ArrayList<String> comments;
 	protected boolean active;
 
 	// Constructores
-	public Person(String identification, Identification identificationType, String name, String surnames, Gender gender, Date birthDate , String telephoneNumber, String email, String address, String cp, String population, Province province, MaritalStatus maritalStatus, Date registrationDate) {
+	public Person(String identification, Identification identificationType, String name, String surnames, Gender gender, Date birthDate , String telephoneNumber, String email, String address, String cp, String population, String province, MaritalStatus maritalStatus, Date registrationDate) {
 		this.identification = identification;
 		this.identificationType = identificationType;
 		this.name = name;
@@ -101,7 +101,7 @@ public class Person {
 		return this.population;
 	}
 
-	public Province getProvince() {
+	public String getProvince() {
 		return this.province;
 	}
 
@@ -166,7 +166,7 @@ public class Person {
 		this.population = population;
 	}
 
-	public void setProvince(Province province) {
+	public void setProvince(String province) {
 		this.province = province;
 	}
 

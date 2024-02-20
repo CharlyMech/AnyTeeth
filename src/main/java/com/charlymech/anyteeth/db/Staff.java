@@ -4,7 +4,6 @@ import com.charlymech.anyteeth.App;
 import com.charlymech.anyteeth.Enums.Gender;
 import com.charlymech.anyteeth.Enums.Identification;
 import com.charlymech.anyteeth.Enums.MaritalStatus;
-import com.charlymech.anyteeth.Enums.Province;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
@@ -21,7 +20,7 @@ public class Staff extends Person {
 	private Role role;
 
 	// Constructores
-	public Staff(String staffID, String identification, Identification identificationType, String name, String surnames, Gender gender, Date birthDate, String telephoneNumber, String email, String address, String cp, String population, Province province, MaritalStatus maritalStatus, Date registrationDate, String corporationEmail, String password, Role role) {
+	public Staff(String staffID, String identification, Identification identificationType, String name, String surnames, Gender gender, Date birthDate, String telephoneNumber, String email, String address, String cp, String population, String province, MaritalStatus maritalStatus, Date registrationDate, String corporationEmail, String password, Role role) {
 		super(identification, identificationType, name, surnames, gender, birthDate, telephoneNumber, email, address, cp, population, province, maritalStatus, registrationDate); // Llamar al constructor de la clase padre
 		this.staffID = staffID;
 		this.corporationEmail = corporationEmail;
@@ -84,8 +83,8 @@ public class Staff extends Person {
 		MongoDatabase db = Conn.mongo.getDatabase(App.getDatabase()); // Especificar la base de datos a usar
 		MongoCollection<Document> collection = db.getCollection("staff"); // Especificar la colección
 		// Crear un filtro para encontrar documentos con los valores deseados
-		Document query = new Document("email", new Document("$eq", corporationEmail))
-				.append("password", new Document("$eq", password)); // TODO -> Falta hacer el hash de la contraseña
+		Document query = new Document("corporationEmail", new Document("$eq", corporationEmail))
+				.append("password", new Document("$eq", password));
 		// Retornar la primera coincidencia en la DB (solo habrá una, ya que el mail corporativo es único)
 		return collection.find(query).first();
 	}
@@ -106,7 +105,7 @@ public class Staff extends Person {
 		doc.append("address", staff.getAddress()); // Dirección
 		doc.append("cp", staff.getCp()); // Código postal
 		doc.append("population", staff.getPopulation()); // Población
-		doc.append("province", staff.getProvince().getProvince()); // Provincia
+		doc.append("province", staff.getProvince()); // Provincia
 		doc.append("maritalStatus", staff.getMaritalStatus().toString()); // Estado civil
 		doc.append("registrationDate", staff.getRegistrationDate()); // Fecha de registro del usuario
 		doc.append("comments", staff.getComments()); // Comentarios sobre el usuario
