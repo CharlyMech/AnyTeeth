@@ -101,17 +101,20 @@ public class LogInController {
 				mainController.setUserSession(userSession); // Asignar el objeto Staff para la sesión de usuario
 				mainController.setGraphics();
 				mainController.setLanguage();
-				Stage stage = loginStage;
+				Stage stage = new Stage(); // Crear nuevo Stage para el panel principal
 				Scene scene = new Scene(root);
 				stage.setScene(scene);
 				stage.setTitle("AnyTeeth");
 				stage.setResizable(true);
+				stage.setMinHeight(750);
+				stage.setMinWidth(1280);
 				stage.setOnCloseRequest(event -> { // Asignar el método de cierre -> Cerrar sesión
 					event.consume(); // Si se presiona "Cancelar" no se cierra el Stage
 					mainController.logout(); // Llamar al método para salir de la sesión de usuario
 				});
-				stage.centerOnScreen();
+				loginStage.close(); // Cerrar el stage del Login
 				stage.show();
+				stage.setMaximized(true);
 				mainController.setUserSessionPermissions();
 			} else {
 				userSession = null; // No es necesario pero para acelerar al garbage collector
