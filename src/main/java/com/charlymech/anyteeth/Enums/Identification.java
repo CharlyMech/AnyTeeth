@@ -1,8 +1,11 @@
 package com.charlymech.anyteeth.Enums;
 
-public enum Identification {
-	DNI, NIE;
+import static com.charlymech.anyteeth.App.rb;
 
+public enum Identification {
+	DNI, NIE, PASSPORT;
+
+	// Método de comprobación de formato de DNI y cálculo de letra
 	public static boolean checkDNI(String dni) { // Método para verificar el DNI
 		String dniRegex = "\\d{8}[A-Z]";
 		char[] chars = {'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'};
@@ -20,7 +23,9 @@ public enum Identification {
 		return true;
 	}
 
+	// Método de comprobación de formato de NIE y cálculo de letra
 	public static boolean checkNIE(String nie) { // Método para verificar el NIE
+		//! BUG: Caused by: java.lang.NumberFormatException: For input string: "0X1234567"
 		String nieRegex = "[XYZ]\\d{7}[A-Z]";
 		char[] chars = {'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'};
 		if (!nie.matches(nieRegex)) { // Comprobar si cumple la expresión regular
@@ -42,5 +47,15 @@ public enum Identification {
 		}
 		// A este punto está bien el nie
 		return true;
+	}
+
+	// Método de comprobación de formato de PASSPORT y cálculo
+	public static boolean checkPassport(String passport) {
+		return false; // TODO!!
+	}
+
+	// Método para retornar una lista de los tipos de identificación dependiendo del idioma del OS
+	public static String[] getIdentifications() {
+		return rb.getString("identifications").split(";");
 	}
 }
