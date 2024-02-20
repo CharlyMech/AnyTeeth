@@ -2,10 +2,8 @@ package com.charlymech.anyteeth.controller;
 
 import com.charlymech.anyteeth.App;
 import com.charlymech.anyteeth.Enums.Gender;
-import com.charlymech.anyteeth.db.Conn;
+import com.charlymech.anyteeth.Enums.MaritalStatus;
 import com.charlymech.anyteeth.db.Staff;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static com.charlymech.anyteeth.App.hash;
 import static com.charlymech.anyteeth.App.rb;
 
 public class LogInController {
@@ -50,9 +49,11 @@ public class LogInController {
 		} else if (!email.getText().trim().matches(Staff.corporationEmailRegex)) { // Comprobar que el email corporativo es válido mediante una expresión regular
 			App.showWarningAlert(rb.getString("alertTitle"), rb.getString("warningLogin"), rb.getString("warningLoginBadEmail"));
 		} else { // Los parámetros son correctos
+			// Pasar la contraseña por el hash para realizar la comparación
+			String passwdHash = hash(passwd.getText());
 			// Crear el objeto Staff para acceder al método de retorno del Documento
 			Staff userSession = new Staff();
-			Document result = userSession.getStaffLogin(email.getText(), passwd.getText());
+			Document result = userSession.getStaffLogin(email.getText(), passwdHash);
 
 			// Verificar si se encontró un usuario
 			if (result != null) {
@@ -65,23 +66,25 @@ public class LogInController {
 						}
 					});
 				}
+				System.out.println(result.toJson());
 				// Cargar toda la información necesaria
 				userSession.setStaffID(result.getString("_id"));
 				Document identificationDocument = result.get("identification", Document.class);
 				userSession.setIdentification(identificationDocument.getString("type"));
 				userSession.setIdentification(identificationDocument.getString("idNumber"));
 				userSession.setName(result.getString("name"));
-//				userSession.setSurnames(result.getString("surnames")); //! Not implemented in DB TODO
-				userSession.setGender(Gender.valueOf(result.getString("gender")));
-// 			userSession.setBirthDate(result.getDate("birthDate")); //! Not implemented in DB TODO
+				userSession.setSurnames(result.getString("surnames"));
+				userSession.setGender(Gender.valueOf(result.getString("genre")));
+ 				userSession.setBirthDate(result.getDate("birthDate"));
 				userSession.setEmail(result.getString("email"));
 				userSession.setTelephoneNumber(result.getString("phone"));
 				userSession.setAddress(result.getString("address"));
-//				userSession.setCp(result.getInteger("cp")); //! Not implemented in DB TODO
-//				userSession.setCp(result.getString("population")); //! Not implemented in DB TODO
-//				userSession.setCp(result.getString("province")); //! Not implemented in DB TODO
-// 			userSession.setCp(result.getString("maritalStatus")); //! Not implemented in DB TODO
-//				userSession.setBirthDate(result.getDate("registrationDate")); //! Not implemented in DB TODO
+				userSession.setCp(result.getString("cp"));
+				userSession.setPopulation(result.getString("population"));
+				userSession.setProvince(result.getString("province"));
+ 				userSession.setMaritalStatus(MaritalStatus.valueOf(result.getString("maritalStatus")));
+				userSession.setBirthDate(result.getDate("registrationDate"));
+				userSession.setCorporationEmail(result.getString("corporationEmail"));
 				userSession.setRole(Staff.Role.valueOf(result.getString("role")));
 				userSession.setPassword(result.getString("password"));
 				List<String> comments = result.getList("comments", String.class);
