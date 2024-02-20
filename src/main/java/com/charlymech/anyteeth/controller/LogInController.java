@@ -2,6 +2,7 @@ package com.charlymech.anyteeth.controller;
 
 import com.charlymech.anyteeth.App;
 import com.charlymech.anyteeth.Enums.Gender;
+import com.charlymech.anyteeth.Enums.Identification;
 import com.charlymech.anyteeth.Enums.MaritalStatus;
 import com.charlymech.anyteeth.db.Staff;
 import javafx.application.Platform;
@@ -70,14 +71,14 @@ public class LogInController {
 				// Cargar toda la información necesaria
 				userSession.setStaffID(result.getString("_id"));
 				Document identificationDocument = result.get("identification", Document.class);
-				userSession.setIdentification(identificationDocument.getString("type"));
-				userSession.setIdentification(identificationDocument.getString("idNumber"));
+				userSession.setIdentificationType(Identification.valueOf(identificationDocument.getString("type")));
+				userSession.setIdentification(identificationDocument.getString("number"));
 				userSession.setName(result.getString("name"));
 				userSession.setSurnames(result.getString("surnames"));
 				userSession.setGender(Gender.valueOf(result.getString("genre")));
  				userSession.setBirthDate(result.getDate("birthDate"));
 				userSession.setEmail(result.getString("email"));
-				userSession.setTelephoneNumber(result.getString("phone"));
+				userSession.setTelephoneNumber(result.getString("telephone"));
 				userSession.setAddress(result.getString("address"));
 				userSession.setCp(result.getString("cp"));
 				userSession.setPopulation(result.getString("population"));
@@ -87,6 +88,7 @@ public class LogInController {
 				userSession.setCorporationEmail(result.getString("corporationEmail"));
 				userSession.setRole(Staff.Role.valueOf(result.getString("role")));
 				userSession.setPassword(result.getString("password"));
+				userSession.setRegistrationDate(result.getDate("registrationDate"));
 				List<String> comments = result.getList("comments", String.class);
 				userSession.setComments((ArrayList<String>) comments);
 				// TODO -> Mirar que la cuenta esté activa
