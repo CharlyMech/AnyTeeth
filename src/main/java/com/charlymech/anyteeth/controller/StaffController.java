@@ -4,7 +4,6 @@ import com.charlymech.anyteeth.App;
 import com.charlymech.anyteeth.Enums.Gender;
 import com.charlymech.anyteeth.Enums.Identification;
 import com.charlymech.anyteeth.Enums.MaritalStatus;
-import com.charlymech.anyteeth.Enums.Province;
 import com.charlymech.anyteeth.db.Person;
 import com.charlymech.anyteeth.db.Staff;
 import javafx.collections.FXCollections;
@@ -24,6 +23,7 @@ import java.time.ZoneId;
 import java.util.Date;
 
 import static com.charlymech.anyteeth.App.rb;
+import static com.charlymech.anyteeth.Enums.Identification.*;
 //import static com.charlymech.anyteeth.db.Staff.insertStaff;
 
 public class StaffController {
@@ -41,22 +41,21 @@ public class StaffController {
 	@FXML
 	private Label nameLabel, surnameLabel, idTypeLabel, idNumberLabel, staffIdNumberLabel, birthDateLabel, ageLabel, genreLabel, maritalStatusLabel, registrationDateLabel, corporationEmailLabel, personalEmailLabel, telephoneLabel, addressLabel, cpLabel, populationLabel, provinceLabel, countryLabel, personalDataTitle, userDataTitle, roleLabel, passwordLabel, otherTitle, commentsLabel;
 	@FXML
-	public TextField nameTextField, surnameTextField, idNumberTextField, staffIdNumberTextField, ageTextField, corporationEmailTextField, personalEmailTextField, telephoneTextField, addressTextField, cpTextField, populationTextField, countryTextField, passwordTextField;
+	public TextField nameTextField, surnameTextField, idNumberTextField, staffIdNumberTextField, ageTextField, corporationEmailTextField, personalEmailTextField, telephoneTextField, addressTextField, cpTextField, populationTextField, provinceTextField, countryTextField, passwordTextField;
 	@FXML
 	private PasswordField passwordPasswordField;
 	@FXML
-	private ComboBox idTypeComboBox, genreComboBox, maritalStatusComboBox, roleComboBox, provinceComboBox;
+	private ComboBox idTypeComboBox, genreComboBox, maritalStatusComboBox, roleComboBox;
 	@FXML
 	private DatePicker birthDateDatePicker, registrationDateDatePicker;
 	@FXML
 	private ListView commentsListView;
 	// Variables de clase
 	private Stage staffStage;
-	private final ObservableList<Identification> identifications = FXCollections.observableArrayList(Identification.DNI, Identification.NIE);
-	private final ObservableList<String> genders = FXCollections.observableArrayList(Gender.MALE.toString(), Gender.FEMALE.toString());
-	private final ObservableList<String> maritalStatus = FXCollections.observableArrayList(MaritalStatus.SINGLE.toString(), MaritalStatus.MARRIED_JOINTLY.toString(), MaritalStatus.MARRIED_SEPARATELY.toString(), MaritalStatus.HEAD_FAMILY.toString(), MaritalStatus.WIDOWER_DEPENDENT_CHILD.toString());
+	private final ObservableList<String> identifications = FXCollections.observableArrayList(Identification.getIdentifications());
+	private final ObservableList<String> genders = FXCollections.observableArrayList(Gender.getGenders());
+	private final ObservableList<String> maritalStatus = FXCollections.observableArrayList(MaritalStatus.getMaritalStatus());
 	private final ObservableList<Staff.Role> roles = FXCollections.observableArrayList(Staff.Role.STAFF, Staff.Role.CLINIC_ADMIN, Staff.Role.ADMIN);
-	private final ObservableList<String> provinces = FXCollections.observableArrayList(Province.getProvincesNames());
 	protected Staff staff;
 	protected static PasswordField staticPasswordPasswordField;
 	protected static TextField staticPasswordTextField;
@@ -79,7 +78,7 @@ public class StaffController {
 				&& !this.addressTextField.getText().trim().isEmpty()
 				&& !this.cpTextField.getText().trim().isEmpty()
 				&& !this.populationTextField.getText().trim().isEmpty()
-				&& this.provinceComboBox.getValue() != null
+				&& !this.provinceTextField.getText().trim().isEmpty()
 				&& this.roleComboBox.getValue() != null
 				&& !this.passwordPasswordField.getText().trim().isEmpty()
 				&& !this.passwordTextField.getText().trim().isEmpty() // Por si acaso
@@ -109,12 +108,19 @@ public class StaffController {
 
 	// Método de comprobación de campos y creación de usuarios
 	public void saveChanges(ActionEvent event) {
+		// TODO -> Listener para presionar el enter
 		if (checkAllFieldsFilled()) { // Todos los campos han sido rellenados
 			// Comprobar el formato del identificador personal
-			boolean idFormat;
-			if (this.idTypeComboBox.getValue() == Identification.DNI) idFormat = Identification.checkDNI(this.idNumberTextField.getText().trim());
-			// La única opción que queda es que sea NIE, ya que todos los campos se han comprobado que están rellenados
-			else idFormat = Identification.checkNIE(this.idNumberTextField.getText().trim());
+			boolean idFormat = false;
+			Identification[] identificationList = Identification.values();
+			Identification identification = identificationList[this.idTypeComboBox.getSelectionModel().getSelectedIndex()];
+			if (identification == DNI) {
+				idFormat = checkDNI(this.idNumberTextField.getText().trim().toUpperCase());
+			} else if (identification == NIE) {
+				idFormat = checkNIE(this.idNumberTextField.getText().trim().toUpperCase());
+			} else {
+				System.out.println("Pasaporte no implementado aún");
+			}
 			// Comprobar las expresiones de campos que requieren de comprobación de formato
 			if (!idFormat) { // La expresión para el tipo de ID no es correcta
 				App.showWarningAlert(rb.getString("alertTitle"), rb.getString("staffBadIDHeader"), rb.getString("staffBadIDBody"));
@@ -132,8 +138,6 @@ public class StaffController {
 				Gender staffGender = genderList[this.genreComboBox.getSelectionModel().getSelectedIndex()];
 				MaritalStatus[] statusList = MaritalStatus.class.getEnumConstants();
 				MaritalStatus staffStatus = statusList[this.maritalStatusComboBox.getSelectionModel().getSelectedIndex()];
-				Province[] provinceList = Province.class.getEnumConstants();
-				Province selectedProvince = provinceList[this.provinceComboBox.getSelectionModel().getSelectedIndex()];
 				Staff createStaff = new Staff(this.staffIdNumberTextField.getText().trim(), // Crear el objeto Staff para que lo lea el método de inserción en la BD
 						this.idNumberTextField.getText().trim(),
 						Identification.valueOf(this.idTypeComboBox.getValue().toString()),
@@ -146,7 +150,7 @@ public class StaffController {
 						this.addressTextField.getText(),
 						this.cpTextField.getText(),
 						this.populationTextField.getText(),
-						selectedProvince,
+						this.provinceTextField.getText(),
 						staffStatus,
 						Date.from(this.registrationDateDatePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()),
 						this.corporationEmailTextField.getText().trim(),
@@ -166,6 +170,7 @@ public class StaffController {
 		} else {
 			App.showWarningAlert(rb.getString("staffMissingFieldsTitle"), rb.getString("staffMissingFieldsHeader"), rb.getString("staffMissingFieldsBody"));
 		}
+		//! BUG
 		// TODO -> Cuando están todos los campos rellenados me deja cerrar sin preguntar si desea guardar los cambios
 	}
 
@@ -273,8 +278,8 @@ public class StaffController {
 				this.hasMadeChanges = true;
 			}
 		});
-		this.provinceComboBox.valueProperty().addListener((observable, oldValue, newValue) -> {
-			if (newValue != null) {
+		this.provinceTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+			if (!newValue.isEmpty()) {
 				this.hasMadeChanges = true;
 			}
 		});
@@ -318,8 +323,6 @@ public class StaffController {
 			registration = registrationDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		}
 		this.registrationDateDatePicker.setValue(registration);
-		// Provincias ComboBox
-		this.provinceComboBox.setItems(this.provinces);
 		// Roles ComboBox
 		this.roleComboBox.setItems(this.roles);
 		// Campos para la contraseña; Asignar los objetos FXML a los estáticos para la comunicación con la ventana de nueva contraseña
