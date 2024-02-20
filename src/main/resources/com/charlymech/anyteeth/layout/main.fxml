@@ -130,6 +130,35 @@
 						<Font name="Verdana" size="20.0" />
 					</font>
 				</Button>
+				<VBox alignment="BOTTOM_CENTER" prefHeight="325.0" prefWidth="200.0">
+					<children>
+						<HBox prefHeight="50.0" prefWidth="200.0" spacing="10.0">
+							<children>
+								<Button fx:id="userSessionBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showUserSession" prefHeight="40.0" prefWidth="160.0" styleClass="sessionButton">
+									<graphic>
+										<ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+											<image>
+												<Image url="@../img/light/user_session_icon_light.png" />
+											</image>
+										</ImageView>
+									</graphic>
+								</Button>
+								<Button mnemonicParsing="false" onAction="#logoutActionEvent" prefHeight="50.0" prefWidth="35.0" styleClass="sessionButton">
+									<graphic>
+										<ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" styleClass="sessionBtn">
+											<image>
+												<Image url="@../img/light/logout_icon_light.png" />
+											</image>
+										</ImageView>
+									</graphic>
+								</Button>
+							</children>
+							<padding>
+								<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+							</padding>
+						</HBox>
+					</children>
+				</VBox>
 			</children>
 		</VBox>
 	</left>
@@ -229,45 +258,45 @@
 									<Insets left="20.0" right="20.0" top="10.0" />
 								</padding>
 							</HBox>
-                     <HBox fillHeight="false" prefHeight="30.0" spacing="20.0">
-                        <padding>
-                           <Insets bottom="20.0" left="20.0" />
-                        </padding>
-                        <children>
-                           <CheckBox fx:id="activeUsers" mnemonicParsing="false" onAction="#setStaffActiveQuery" prefHeight="30.0" selected="true" />
-                           <HBox prefHeight="30.0" spacing="20.0">
-                              <children>
-                                 <RadioButton fx:id="genderMale" mnemonicParsing="false" onAction="#changeGenderQuery" prefHeight="30.0">
-                                    <toggleGroup>
-                                       <ToggleGroup fx:id="gender" />
-                                    </toggleGroup>
-                                 </RadioButton>
-                                 <RadioButton fx:id="genderFemale" mnemonicParsing="false" onAction="#changeGenderQuery" prefHeight="30.0" toggleGroup="$gender" />
-                              </children>
-                           </HBox>
-                           <ComboBox fx:id="staffFilterByType" prefHeight="30.0" prefWidth="100.0" />
-                        </children>
-                        <opaqueInsets>
-                           <Insets />
-                        </opaqueInsets>
-                     </HBox>
+							<HBox fillHeight="false" prefHeight="30.0" spacing="20.0">
+								<padding>
+									<Insets bottom="20.0" left="20.0" />
+								</padding>
+								<children>
+									<CheckBox fx:id="activeUsers" mnemonicParsing="false" onAction="#setStaffActiveQuery" prefHeight="30.0" selected="true" />
+									<HBox prefHeight="30.0" spacing="20.0">
+										<children>
+											<RadioButton fx:id="genderMale" mnemonicParsing="false" onAction="#changeGenderQuery" prefHeight="30.0">
+												<toggleGroup>
+													<ToggleGroup fx:id="gender" />
+												</toggleGroup>
+											</RadioButton>
+											<RadioButton fx:id="genderFemale" mnemonicParsing="false" onAction="#changeGenderQuery" prefHeight="30.0" toggleGroup="$gender" />
+										</children>
+									</HBox>
+									<ComboBox fx:id="staffFilterByType" prefHeight="30.0" prefWidth="100.0" />
+								</children>
+								<opaqueInsets>
+									<Insets />
+								</opaqueInsets>
+							</HBox>
 						</VBox>
 					</top>
-               <center>
-                  <TableView BorderPane.alignment="CENTER">
-                    <columns>
-                      <TableColumn fx:id="staffStfIDCol" editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" />
-                      <TableColumn fx:id="staffIDCol" editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" />
-                        <TableColumn fx:id="staffNameCol" editable="false" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" resizable="false" />
-                        <TableColumn fx:id="staffSurnameCol" editable="false" maxWidth="250.0" minWidth="250.0" prefWidth="250.0" resizable="false" />
-                        <TableColumn fx:id="staffCorpEmailCol" editable="false" maxWidth="1.7976931348623157E308" minWidth="200.0" prefWidth="324.0" />
-                        <TableColumn fx:id="staffRegDateCol" editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" />
-                    </columns>
-                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                     </columnResizePolicy>
-                  </TableView>
-               </center>
+					<center>
+						<TableView BorderPane.alignment="CENTER">
+							<columns>
+								<TableColumn fx:id="staffStfIDCol" editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" />
+								<TableColumn fx:id="staffIDCol" editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" />
+								<TableColumn fx:id="staffNameCol" editable="false" maxWidth="200.0" minWidth="200.0" prefWidth="200.0" resizable="false" />
+								<TableColumn fx:id="staffSurnameCol" editable="false" maxWidth="250.0" minWidth="250.0" prefWidth="250.0" resizable="false" />
+								<TableColumn fx:id="staffCorpEmailCol" editable="false" maxWidth="1.7976931348623157E308" minWidth="200.0" prefWidth="324.0" />
+								<TableColumn fx:id="staffRegDateCol" editable="false" maxWidth="100.0" minWidth="100.0" prefWidth="100.0" resizable="false" />
+							</columns>
+							<columnResizePolicy>
+								<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+							</columnResizePolicy>
+						</TableView>
+					</center>
 				</BorderPane>
 			</children>
 		</AnchorPane>
