@@ -10,8 +10,7 @@ MenuBar {
 	-fx-background-color: #4DC5AD;
 }
 
-VBox {
-	-fx-spacing: 10px;
+#asideMenu {
 	-fx-background-color: #d0d5d8;
 }
 

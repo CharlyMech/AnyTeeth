@@ -98,69 +98,68 @@
 		</MenuBar>
 	</top>
 	<left>
-		<VBox prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-			<children>
-				<Button fx:id="asideAppointments" mnemonicParsing="false" onAction="#showAppointments" prefHeight="50.0" prefWidth="201.0" styleClass="asideBtn">
-					<font>
-						<Font name="Verdana" size="20.0" />
-					</font>
-				</Button>
-				<Button fx:id="asidePatients" mnemonicParsing="false" onAction="#showPatiens" prefHeight="50.0" prefWidth="721.0" styleClass="asideBtn">
-					<font>
-						<Font name="Verdana" size="20.0" />
-					</font>
-				</Button>
-				<Button fx:id="asideBudgets" disable="true" mnemonicParsing="false" onAction="#showBudgets" prefHeight="50.0" prefWidth="721.0" styleClass="asideBtn">
-					<font>
-						<Font name="Verdana" size="20.0" />
-					</font>
-				</Button>
-				<Button fx:id="asidePlans" disable="true" mnemonicParsing="false" onAction="#showPlans" prefHeight="50.0" prefWidth="721.0" styleClass="asideBtn">
-					<font>
-						<Font name="Verdana" size="20.0" />
-					</font>
-				</Button>
-				<Button fx:id="asideDocuments" mnemonicParsing="false" onAction="#showDocuments" prefHeight="50.0" prefWidth="721.0" styleClass="asideBtn">
-					<font>
-						<Font name="Verdana" size="20.0" />
-					</font>
-				</Button>
-				<Button fx:id="asideStaff" mnemonicParsing="false" onAction="#showStaff" prefHeight="50.0" prefWidth="721.0" styleClass="asideBtn" visible="false">
-					<font>
-						<Font name="Verdana" size="20.0" />
-					</font>
-				</Button>
-				<VBox alignment="BOTTOM_CENTER" prefHeight="325.0" prefWidth="200.0">
-					<children>
-						<HBox prefHeight="50.0" prefWidth="200.0" spacing="10.0">
-							<children>
-								<Button fx:id="userSessionBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showUserSession" prefHeight="40.0" prefWidth="160.0" styleClass="sessionButton">
-									<graphic>
-										<ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-											<image>
-												<Image url="@../img/light/user_session_icon_light.png" />
-											</image>
-										</ImageView>
-									</graphic>
-								</Button>
-								<Button mnemonicParsing="false" onAction="#logoutActionEvent" prefHeight="50.0" prefWidth="35.0" styleClass="sessionButton">
-									<graphic>
-										<ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" styleClass="sessionBtn">
-											<image>
-												<Image url="@../img/light/logout_icon_light.png" />
-											</image>
-										</ImageView>
-									</graphic>
-								</Button>
-							</children>
-							<padding>
-								<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-							</padding>
-						</HBox>
-					</children>
-				</VBox>
-			</children>
-		</VBox>
+		<AnchorPane id="asideMenu" prefHeight="200.0" prefWidth="200.0">
+			<VBox prefHeight="650.0" prefWidth="200.0" spacing="10.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" BorderPane.alignment="CENTER">
+				<children>
+					<Button fx:id="asideAppointments" mnemonicParsing="false" onAction="#showAppointments" prefHeight="50.0" prefWidth="201.0" styleClass="asideBtn">
+						<font>
+							<Font name="Verdana" size="20.0" />
+						</font>
+					</Button>
+					<Button fx:id="asidePatients" mnemonicParsing="false" onAction="#showPatiens" prefHeight="50.0" prefWidth="721.0" styleClass="asideBtn">
+						<font>
+							<Font name="Verdana" size="20.0" />
+						</font>
+					</Button>
+					<Button fx:id="asideBudgets" disable="true" mnemonicParsing="false" onAction="#showBudgets" prefHeight="50.0" prefWidth="721.0" styleClass="asideBtn">
+						<font>
+							<Font name="Verdana" size="20.0" />
+						</font>
+					</Button>
+					<Button fx:id="asidePlans" disable="true" mnemonicParsing="false" onAction="#showPlans" prefHeight="50.0" prefWidth="721.0" styleClass="asideBtn">
+						<font>
+							<Font name="Verdana" size="20.0" />
+						</font>
+					</Button>
+					<Button fx:id="asideDocuments" mnemonicParsing="false" onAction="#showDocuments" prefHeight="50.0" prefWidth="721.0" styleClass="asideBtn">
+						<font>
+							<Font name="Verdana" size="20.0" />
+						</font>
+					</Button>
+					<Button fx:id="asideStaff" mnemonicParsing="false" onAction="#showStaff" prefHeight="50.0" prefWidth="721.0" styleClass="asideBtn" visible="false">
+						<font>
+							<Font name="Verdana" size="20.0" />
+						</font>
+					</Button>
+				</children>
+
+			</VBox>
+					<HBox alignment="CENTER" layoutY="643.0" prefHeight="50.0" prefWidth="200.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+						<children>
+							<Button fx:id="userSessionBtn" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showUserSession" prefHeight="40.0" prefWidth="160.0" styleClass="sessionButton">
+								<graphic>
+									<ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+										<image>
+											<Image url="@../img/light/user_session_icon_light.png" />
+										</image>
+									</ImageView>
+								</graphic>
+							</Button>
+							<Button mnemonicParsing="false" onAction="#logoutActionEvent" prefHeight="50.0" prefWidth="35.0" styleClass="sessionButton">
+								<graphic>
+									<ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" styleClass="sessionBtn">
+										<image>
+											<Image url="@../img/light/logout_icon_light.png" />
+										</image>
+									</ImageView>
+								</graphic>
+							</Button>
+						</children>
+						<padding>
+							<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+						</padding>
+					</HBox>
+		</AnchorPane>
 	</left>
 	<center>
 		<AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="pane" BorderPane.alignment="CENTER">
@@ -251,7 +250,7 @@
 											</ImageView>
 										</graphic>
 									</Button>
-									<TextField fx:id="staffSearchBar" prefHeight="50.0" prefWidth="833.0" />
+									<TextField fx:id="staffSearchBar" prefHeight="50.0" prefWidth="833.0" HBox.hgrow="ALWAYS" />
 									<ComboBox fx:id="staffSearchFilter" prefHeight="50.0" prefWidth="117.0" />
 								</children>
 								<padding>
