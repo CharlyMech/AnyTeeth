@@ -22,12 +22,15 @@ import static com.charlymech.anyteeth.App.rb;
 import static com.charlymech.anyteeth.controller.ScreenController.*;
 
 public class LoadApp extends Application {
+	// Variables de clase
+	private static Stage loadStage;
 	public static void main(String[] args) {
 		launch(args);
 	}
 	@Override
 	public void start(Stage stage) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("/com/charlymech/anyteeth/layout/load-app.fxml")); // Cargar la vista
+		loadStage = stage;
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.setTitle("AnyTeeth");
@@ -77,8 +80,7 @@ public class LoadApp extends Application {
 			});
 			loginStage.setWidth(500);
 			loginStage.setHeight(700);
-			int currentScreen = getScreenNumber(loginStage);
-			System.out.println(currentScreen);
+			int currentScreen = getScreenNumber(loadStage);
 			manageScreen(loginStage, currentScreen, false);
 			loginStage.show();
 
