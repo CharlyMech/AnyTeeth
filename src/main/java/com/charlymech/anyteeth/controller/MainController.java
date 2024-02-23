@@ -16,6 +16,8 @@ import javafx.stage.Stage;
 
 
 import static com.charlymech.anyteeth.App.rb;
+import static com.charlymech.anyteeth.controller.ScreenController.getScreenNumber;
+import static com.charlymech.anyteeth.controller.ScreenController.manageScreen;
 
 public class MainController {
 	// Inyecciones FXML
@@ -28,7 +30,7 @@ public class MainController {
 	@FXML
 	private RadioMenuItem menuBarWindowLightTheme, menuBarWindowDarkTheme;
 	@FXML
-	private Button asideAppointments, asidePatients, asideBudgets, asidePlans, asideDocuments, asideStaff, addStaffBtn;
+	private Button asideAppointments, asidePatients, asideBudgets, asidePlans, asideDocuments, asideStaff, addStaffBtn, userSessionBtn;
 	@FXML
 	private BorderPane staffPane;
 	@FXML
@@ -50,7 +52,10 @@ public class MainController {
 	private Stage staffStage;
 
 	public void setGraphics() {
+		// ASIDE //
+		this.userSessionBtn.setText(this.userSession.getName());
 		// STAFF //
+		// TODO -> Remove this and use CSS instead
 		this.addStaffBtn.setCursor(Cursor.HAND);
 		this.staffSearchFilter.setCursor(Cursor.HAND);
 	}
@@ -233,6 +238,10 @@ public class MainController {
 		}
 	}
 
+//	private void showStaffStage(Staff staff) {
+//		this.staffStage = new Stage();
+//	}
+
 	public void addNewStaff(ActionEvent event) {
 		System.out.println("Open create staff window");
 		if (this.staffStage == null || !this.staffStage.isShowing()) { // No existe ventana externa abierta -> Ejecutar nueva ventana
@@ -249,7 +258,46 @@ public class MainController {
 				staffController.setGraphics();
 				this.staffStage.setScene(new Scene(root));
 				this.staffStage.setTitle(rb.getString("staffTitle") + "-" + staff.getStaffID());
-				this.staffStage.centerOnScreen();
+				this.staffStage.setOnCloseRequest(evt -> { // Asignar el método de cierre de la ventana
+					evt.consume(); // Si se presiona "Cancelar" no se cierra el Stage
+					staffController.checkCloseEvent();
+				});
+				int currentScreen = getScreenNumber((Stage) this.main.getScene().getWindow());
+				this.staffStage.setWidth(1000);
+				this.staffStage.setHeight(750);
+				manageScreen(this.staffStage, currentScreen, false);
+				this.staffStage.show();
+				this.staffStage.setResizable(false);
+			} catch (Exception e) {
+				App.showErrorAlert(rb.getString("alertTitle"), rb.getString("openWindowError"), rb.getString("staffWindowError"));
+				System.out.println("Cant load new window:");
+				e.printStackTrace();
+			}
+		} else { // Existe una ventana externa en ejecución -> Traerla al frente
+			this.staffStage.toFront();
+		}
+	}
+
+	public void setStaffActiveQuery(ActionEvent event) {
+	}
+
+	public void changeGenderQuery(ActionEvent event) {
+	}
+
+	public void showUserSession(ActionEvent event) {
+		if (this.staffStage == null || !this.staffStage.isShowing()) { // No existe ventana externa abierta -> Ejecutar nueva ventana
+			try {
+				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/charlymech/anyteeth/layout/staff.fxml"));
+				Parent root = fxmlLoader.load();
+				StaffController staffController = fxmlLoader.getController();
+				this.staffStage = new Stage();
+				staffController.setStaffStage(this.staffStage);
+				staffController.setStaff(this.userSession);
+				staffController.setLanguage();
+				staffController.setGraphics();
+				staffController.setUserData();
+				this.staffStage.setScene(new Scene(root));
+				this.staffStage.setTitle(rb.getString("staffTitle") + "-" + userSession.getStaffID());
 				this.staffStage.setOnCloseRequest(evt -> { // Asignar el método de cierre de la ventana
 					evt.consume(); // Si se presiona "Cancelar" no se cierra el Stage
 					staffController.checkCloseEvent();
@@ -271,9 +319,4 @@ public class MainController {
 		this.userSession = staff;
 	}
 
-	public void setStaffActiveQuery(ActionEvent event) {
-	}
-
-	public void changeGenderQuery(ActionEvent event) {
-	}
 }

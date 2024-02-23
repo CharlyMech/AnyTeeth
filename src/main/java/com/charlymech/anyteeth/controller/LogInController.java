@@ -24,6 +24,8 @@ import java.util.Optional;
 
 import static com.charlymech.anyteeth.App.hash;
 import static com.charlymech.anyteeth.App.rb;
+import static com.charlymech.anyteeth.controller.ScreenController.getScreenNumber;
+import static com.charlymech.anyteeth.controller.ScreenController.manageScreen;
 
 public class LogInController {
 	// Inyecciones FXML
@@ -106,15 +108,18 @@ public class LogInController {
 				stage.setScene(scene);
 				stage.setTitle("AnyTeeth");
 				stage.setResizable(true);
-				stage.setMinHeight(750);
-				stage.setMinWidth(1280);
+//				stage.setMinHeight(740);
+//				stage.setMinWidth(1280);
+				stage.setMaximized(true);
 				stage.setOnCloseRequest(event -> { // Asignar el método de cierre -> Cerrar sesión
 					event.consume(); // Si se presiona "Cancelar" no se cierra el Stage
 					mainController.logout(); // Llamar al método para salir de la sesión de usuario
 				});
-				loginStage.close(); // Cerrar el stage del Login
+				int currentScreen = getScreenNumber(loginStage);
+				// Hacer que la pantalla principal se ejecute maximizada en el monitor principal (en caso de tener varios)
+				manageScreen(stage, currentScreen, true);
 				stage.show();
-				stage.setMaximized(true);
+				loginStage.close(); // Cerrar el stage del Login
 				mainController.setUserSessionPermissions();
 			} else {
 				userSession = null; // No es necesario pero para acelerar al garbage collector

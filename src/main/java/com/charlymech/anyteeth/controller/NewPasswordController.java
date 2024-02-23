@@ -57,6 +57,7 @@ public class NewPasswordController {
 	}
 
 	public void setNewPassword(ActionEvent event) {
+		// TODO -> Listener para la tecla de enter
 		if (this.password1PasswordField.getText().trim().isEmpty() || this.password2PasswordField.getText().trim().isEmpty()) { // Caso que alguno de los campos esté vacío
 			showWarningAlert(rb.getString("alertTitle"), rb.getString("newPasswordNotFilledHeader"), rb.getString("newPasswordNotFilledBody"));
 		} else if (!this.password1PasswordField.getText().trim().equals(this.password2PasswordField.getText().trim())) { // Caso no coinciden

@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.util.Optional;
 
 import static com.charlymech.anyteeth.App.rb;
+import static com.charlymech.anyteeth.controller.ScreenController.*;
 
 public class LoadApp extends Application {
 	public static void main(String[] args) {
@@ -74,7 +75,11 @@ public class LoadApp extends Application {
 					App.closeApp(loginStage);
 				}
 			});
-			loginStage.centerOnScreen();
+			loginStage.setWidth(500);
+			loginStage.setHeight(700);
+			int currentScreen = getScreenNumber(loginStage);
+			System.out.println(currentScreen);
+			manageScreen(loginStage, currentScreen, false);
 			loginStage.show();
 
 			LogInController loginController = loader.getController();

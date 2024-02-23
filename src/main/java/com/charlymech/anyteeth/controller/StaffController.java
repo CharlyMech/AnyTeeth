@@ -24,7 +24,8 @@ import java.util.Date;
 
 import static com.charlymech.anyteeth.App.rb;
 import static com.charlymech.anyteeth.Enums.Identification.*;
-//import static com.charlymech.anyteeth.db.Staff.insertStaff;
+import static com.charlymech.anyteeth.controller.ScreenController.getScreenNumber;
+import static com.charlymech.anyteeth.controller.ScreenController.manageScreen;
 
 public class StaffController {
 	// Inyecciones FXML
@@ -194,12 +195,16 @@ public class StaffController {
 				NewPasswordController newPasswordController = loader.getController();
 				newPasswordController.setLanguage();
 				this.passwordStage = new Stage();
-				this.passwordStage.setTitle(rb.getString("newPasswordTitle") + "-" + staff.getStaffID()); // TODO -> aplicar propiedad de idioma para el título de la ventana de Nueva Contraseña
+				this.passwordStage.setTitle(rb.getString("newPasswordTitle") + "-" + staff.getStaffID());
 				this.passwordStage.setScene(new Scene(root));
+				this.passwordStage.setWidth(400);
+				this.passwordStage.setHeight(350);
+				int currentScreen = getScreenNumber(this.staffStage);
+				manageScreen(this.staffStage, currentScreen, false);
 				this.passwordStage.show();
 				this.passwordStage.setResizable(false);
 			} catch (Exception e) {
-				App.showErrorAlert(rb.getString("alertTitle"), rb.getString("openWindowError"), "The new Password window couldn't be opened"); // TODO -> aplicar propiedad de idioma
+				App.showErrorAlert(rb.getString("alertTitle"), rb.getString("openWindowError"), rb.getString("staffNewPasswordError"));
 				e.printStackTrace();
 			}
 		} else { // Existe una ventana externa en ejecución -> Traerla al frente
@@ -314,15 +319,8 @@ public class StaffController {
 		this.genreComboBox.setItems(this.genders);
 		// Estado civil ComboBox
 		this.maritalStatusComboBox.setItems(this.maritalStatus);
-		// Día de Registro
-		LocalDate registration;
-		if ((new Staff()).getStaffByID(staff.getStaffID()) == null) { // No existe el ID en el sistema, el origen es añadir nuevo Staff
-			registration = LocalDate.now();
-		} else {
-			Date registrationDate = staff.getRegistrationDate();
-			registration = registrationDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		}
-		this.registrationDateDatePicker.setValue(registration);
+		// Día de Registro -> En caso de que se acceda desde addUser se mostrará esta fecha
+		this.registrationDateDatePicker.setValue(LocalDate.now());
 		// Roles ComboBox
 		this.roleComboBox.setItems(this.roles);
 		// Campos para la contraseña; Asignar los objetos FXML a los estáticos para la comunicación con la ventana de nueva contraseña
@@ -362,6 +360,31 @@ public class StaffController {
 		this.commentsLabel.setText(rb.getString("staffOtherComments"));
 		// Save //
 		this.saveChanges.setText(rb.getString("staffSave"));
+	}
+
+	// Método para rellenar todos los campos de un usuario dado
+	public void setUserData() {
+		this.isActive.setSelected(staff.isActive());
+		this.nameTextField.setText(staff.getName());
+		this.surnameTextField.setText(staff.getSurnames());
+		// TODO -> ID Type ComboBox
+		this.idNumberTextField.setText(staff.getIdentification());
+		this.staffIdNumberTextField.setText(staff.getStaffID());
+		this.birthDateDatePicker.setValue(staff.getBirthDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+		// TODO -> Calcular edad
+		// TODO -> Genre ComboBox
+		// TODO -> MaritalStatus ComboBox
+		this.registrationDateDatePicker.setValue(staff.getRegistrationDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+		this.corporationEmailTextField.setText(staff.getCorporationEmail());
+		this.personalEmailTextField.setText(staff.getEmail());
+		this.telephoneTextField.setText(staff.getTelephoneNumber());
+		this.addressTextField.setText(staff.getAddress());
+		this.cpTextField.setText(staff.getCp());
+		this.populationTextField.setText(staff.getPopulation());
+		this.provinceTextField.setText(staff.getProvince());
+		// TODO -> Country
+		// TODO -> Staff Role ComboBox
+		// TODO Comments
 	}
 
 	// SETTERS //
