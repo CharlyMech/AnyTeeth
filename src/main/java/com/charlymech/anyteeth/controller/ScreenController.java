@@ -53,34 +53,13 @@ public class ScreenController {
 
 	// Método para conseguir el número de pantalla en la que se encuentra el Stage dado
 	public static int getScreenNumber(Stage stage) {
-		/*
-		// Instanciar los objetos necesarios para obtener el número de la pantalla
-		Rectangle2D stageBounds = new Rectangle2D(stage.getX(), stage.getY(), stage.getWidth(), stage.getWidth()); // Bound con las propiedades de la pantalla en la que se encuentra el stage
-		ObservableList<Screen> screens = Screen.getScreens(); // Listado de las pantallas disponibles
-		// Iterar sobre la lista de pantallas para buscar la intersección con el bound de la pantalla del stage
-		for(Screen screen : screens) {
-			Rectangle2D screenBounds = screen.getScreensForRectangle();
-			if (screenBounds.intersects(stageBounds)) {
-				return screens.indexOf(screen)+1; // Normalmente la numeración de las pantallas empieza por 1
-			}
-		}
-		// En caso de que algo vaya mal
-		return -1;
-		*/
-		Point2D mouseLocation = new Point2D( // Assuming the cursor location is (0, 0)
-				Screen.getPrimary().getBounds().getMinX(),
-				Screen.getPrimary().getBounds().getMinY()
-		);
+		Rectangle2D stageBounds = new Rectangle2D(stage.getX(), stage.getY(), stage.getWidth(), stage.getHeight());
+		Screen[] screens = Screen.getScreensForRectangle(stageBounds).toArray(new Screen[0]); // Buscar la intersección del stage con las pantallas
 
-		// Iterate over available screens and find the screen with an intersection
-		Screen[] screens = Screen.getScreensForRectangle(mouseLocation.getX(), mouseLocation.getY(), 1, 1).toArray(new Screen[0]);
-		for (int i = 0; i < screens.length; i++) {
-			Rectangle2D screenBounds = screens[i].getBounds();
-			if (screenBounds.contains(mouseLocation)) {
-				return i + 1; // Screen numbers are typically 1-indexed
-			}
+		if (screens.length > 0) {
+			return Screen.getScreens().indexOf(screens[0]); // Retornar el número de la pantalla
+		} else {
+			return -1;
 		}
-
-		return -1; // Not found
 	}
 }
