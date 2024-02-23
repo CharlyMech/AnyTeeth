@@ -69,7 +69,6 @@ public class LogInController {
 						}
 					});
 				}
-				System.out.println(result.toJson());
 				// Cargar toda la información necesaria
 				userSession.setStaffID(result.getString("_id"));
 				Document identificationDocument = result.get("identification", Document.class);
@@ -95,7 +94,6 @@ public class LogInController {
 				userSession.setComments((ArrayList<String>) comments);
 				// TODO -> Mirar que la cuenta esté activa
 
-				System.out.println(rb.getString("welcome") + " " + userSession.getName());
 				// Ejecutar la pantalla principal y asignar el email de usuario
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/charlymech/anyteeth/layout/main.fxml"));
 				Parent root = loader.load();
@@ -108,8 +106,6 @@ public class LogInController {
 				stage.setScene(scene);
 				stage.setTitle("AnyTeeth");
 				stage.setResizable(true);
-//				stage.setMinHeight(740);
-//				stage.setMinWidth(1280);
 				stage.setMaximized(true);
 				stage.setOnCloseRequest(event -> { // Asignar el método de cierre -> Cerrar sesión
 					event.consume(); // Si se presiona "Cancelar" no se cierra el Stage
