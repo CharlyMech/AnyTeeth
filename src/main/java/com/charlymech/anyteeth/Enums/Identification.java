@@ -25,7 +25,6 @@ public enum Identification {
 
 	// Método de comprobación de formato de NIE y cálculo de letra
 	public static boolean checkNIE(String nie) { // Método para verificar el NIE
-		//! BUG: Caused by: java.lang.NumberFormatException: For input string: "0X1234567"
 		String nieRegex = "[XYZ]\\d{7}[A-Z]";
 		char[] chars = {'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E'};
 		if (!nie.matches(nieRegex)) { // Comprobar si cumple la expresión regular
@@ -38,7 +37,7 @@ public enum Identification {
 				case 'Y' -> transformedChar = "1";
 				case 'Z' -> transformedChar = "2";
 			}
-			int nieNums = Integer.parseInt(transformedChar + nie.substring(0, nie.length() - 1));
+			int nieNums = Integer.parseInt(transformedChar + nie.substring(1, nie.length() - 1));
 			char nieChar = nie.charAt(nie.length() - 1);
 			char calculatedNieLetter = chars[nieNums % 23];
 			if (nieChar != calculatedNieLetter) { // La letra no es correcta
