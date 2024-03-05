@@ -5,9 +5,11 @@ import com.charlymech.anyteeth.Enums.Gender;
 import com.charlymech.anyteeth.Enums.Identification;
 import com.charlymech.anyteeth.Enums.MaritalStatus;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
@@ -87,6 +89,47 @@ public class Staff extends Person {
 				.append("password", new Document("$eq", password));
 		// Retornar la primera coincidencia en la DB (solo habrá una, ya que el mail corporativo es único)
 		return collection.find(query).first();
+	}
+
+	public ArrayList<Staff> findAllStaff() {
+		ArrayList<Staff> staffList = new ArrayList<>();
+		MongoDatabase db = Conn.mongo.getDatabase(App.getDatabase()); // Especificar la base de datos a usar
+		MongoCollection<Document> collection = db.getCollection("staff"); // Especificar la colección
+		try (MongoCursor<Document> cursor = collection.find().iterator();) {
+			while(cursor.hasNext()) {
+				Document doc = cursor.next();
+				Staff stf = this.fromDocumentToStaff(doc);
+				staffList.add(stf);
+			}
+		}
+
+		return staffList;
+	}
+
+	public Staff fromDocumentToStaff(Document doc) {
+		Staff staff = new Staff();
+		staff.setStaffID(doc.getString("_id"));
+		Document identificationDocument = doc.get("identification", Document.class);
+		staff.setIdentificationType(Identification.valueOf(identificationDocument.getString("type")));
+		staff.setIdentification(identificationDocument.getString("number"));
+		staff.setName(doc.getString("name"));
+		staff.setSurnames(doc.getString("surnames"));
+		staff.setGender(Gender.valueOf(doc.getString("genre")));
+		staff.setBirthDate(doc.getDate("birthDate"));
+		staff.setEmail(doc.getString("email"));
+		staff.setTelephoneNumber(doc.getString("telephone"));
+		staff.setAddress(doc.getString("address"));
+		staff.setCp(doc.getString("cp"));
+		staff.setPopulation(doc.getString("population"));
+		staff.setProvince(doc.getString("province"));
+		staff.setMaritalStatus(MaritalStatus.valueOf(doc.getString("maritalStatus")));
+		staff.setRegistrationDate(doc.getDate("registrationDate"));
+		staff.setCorporationEmail(doc.getString("corporationEmail"));
+		staff.setRole(Role.valueOf(doc.getString("role")));
+		staff.setActive(doc.getBoolean("active"));
+		// TODO -> Get all comments
+
+		return staff;
 	}
 
 	// Método para crear un nuevo usuario en la DB

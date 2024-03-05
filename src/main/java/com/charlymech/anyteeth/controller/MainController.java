@@ -15,6 +15,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static com.charlymech.anyteeth.App.rb;
 import static com.charlymech.anyteeth.controller.ScreenController.getScreenNumber;
 import static com.charlymech.anyteeth.controller.ScreenController.manageScreen;
@@ -213,6 +216,9 @@ public class MainController {
 		this.patientsTabPane.setVisible(false);
 		this.budgetsTabPane.setVisible(false);
 		this.plansTabPane.setVisible(false);
+		// Llamar al método para que se cargue la información de todos los Staff
+		ArrayList<Staff> staffList = this.loadStaff();
+		System.out.println(staffList);
 	}
 
 	public void addNewAppointment(ActionEvent event) {
@@ -282,6 +288,10 @@ public class MainController {
 	}
 
 	public void changeGenderQuery(ActionEvent event) {
+	}
+
+	private ArrayList<Staff> loadStaff() {
+		return (new Staff()).findAllStaff();
 	}
 
 	public void showUserSession(ActionEvent event) {
